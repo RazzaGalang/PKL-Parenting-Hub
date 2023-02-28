@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        replaceFragment(ProfileFragment())
+        replaceFragment(FragmentProfile())
     }
 
     private fun replaceFragment(profileFragment: Fragment) {
@@ -22,16 +22,4 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frame_layout,profileFragment)
         fragmentTransaction.commit()
     }
-
-//    private lateinit var binding: FragmentProfileBinding
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        binding = FragmentProfileBinding.inflate(layoutInflater)
-//        val view = binding.root
-//        setContentView(R.layout.activity_main)
-//
-//        supportFragmentManager.beginTransaction().replace(R.id.frame_layout, FragmentProfile()).commit()
-//
-//    }
 }
