@@ -18,8 +18,7 @@
         android:src="@drawable/img_prof"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/circleImage"
-        app:strokeWidth="3dp" />
+        app:shapeAppearanceOverlay="@style/circleImage"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvUser"
@@ -39,6 +38,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/img_default"
+        style="@style/cornerImage"
         android:layout_marginHorizontal="@dimen/screen_margin"
         app:layout_constraintTop_toTopOf="@id/ivProf"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -75,7 +75,7 @@
         android:layout_marginHorizontal="20dp"
         android:text="178 Suka"
         android:textColor="#A9A9A9"
-        android:textSize="10dp"
+        android:textSize="10sp"
         app:fontFamily="@font/roboto_regular"
         android:layout_marginBottom="@dimen/medium_margin"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +89,7 @@
         android:layout_marginHorizontal="110dp"
         android:text="10 Agustus 2021"
         android:textColor="#A9A9A9"
-        android:textSize="10dp"
+        android:textSize="10sp"
         app:fontFamily="@font/roboto_regular"
         android:layout_marginBottom="@dimen/medium_margin"
         app:layout_constraintBottom_toBottomOf="parent"
