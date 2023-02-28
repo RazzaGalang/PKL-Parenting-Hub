@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -11,7 +11,7 @@
         android:layout_height="35dp"
         android:layout_marginHorizontal="@dimen/screen_margin"
         android:layout_marginVertical="18dp"
-        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginStart="16dp"
         android:background="@drawable/style_rounded"
         android:padding="3dp"
         android:scaleType="centerCrop"
@@ -30,7 +30,7 @@
         android:layout_marginVertical="8dp"
         android:text="Razza Galang Adzan"
         android:textColor="#1C1B1F"
-        android:textSize="12sp"
+        android:textSize="12dp"
         app:layout_constraintStart_toEndOf="@+id/ivProf"
         app:layout_constraintTop_toTopOf="@+id/ivProf"/>
 
@@ -51,9 +51,8 @@
         android:textColor="#1C1B1F"
         android:gravity="start"
         app:fontFamily="@font/roboto_bold"
-        android:textSize="14sp"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginVertical="@dimen/screen_margin"
+        android:textSize="15dp"
+        android:layout_marginVertical="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvUser"
         app:layout_constraintEnd_toStartOf="@id/ivDefault"/>
@@ -62,39 +61,34 @@
         android:id="@+id/icLike"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="@dimen/medium_margin"
         android:src="@drawable/ic_like"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDesc" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="@dimen/medium_margin"
         android:text="178 Suka"
-        android:textColor="#A9A9A9"
-        android:textSize="11sp"
         app:fontFamily="@font/roboto_regular"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/icLike"
-        app:layout_constraintTop_toTopOf="@id/icLike" />
+        android:textColor="#A9A9A9"
+        android:textSize="10dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toTopOf="@id/icLike"
+        app:layout_constraintStart_toStartOf="@id/icLike"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="130dp"
-        android:layout_marginBottom="@dimen/medium_margin"
         android:text="10 Agustus 2021"
         android:textColor="#A9A9A9"
-        android:textSize="11sp"
         app:fontFamily="@font/roboto_regular"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/ivDefault"
-        app:layout_constraintTop_toTopOf="@id/icLike" />
+        android:textSize="10dp"
+        android:layout_marginHorizontal="110dp"
+        app:layout_constraintTop_toTopOf="@id/icLike"
+        app:layout_constraintEnd_toEndOf="@id/ivDefault"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
