@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Main Color -->
     <color name="primary10">#AEADF0</color>
     <color name="primary20">#9D9CD8</color>
     <color name="primary30">#8B8AC0</color>
@@ -26,8 +25,8 @@
     <color name="info30">#1F4497</color>
     <color name="info40">#193679</color>
     <color name="info50">#13295B</color>
-
-    <color name="white">#FFF</color>
     <color name="grey">#A9A9A9</color>
     <color name="black">#000</color>
+    <color name="white">#FFF</color>
+    <color name="shimmer_color">#D5D5D5</color>
 </resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/loginHeaderIllustration"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_wave_illustration"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageView"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_login_main_illustration"
+            android:adjustViewBounds="true"
+            android:paddingHorizontal="@dimen/huge_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginHeaderIllustration" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/loginMainText"
+            style="@style/TextAppearance.Title1"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:text="Masuk"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/loginEmail"
+            style="@style/Widget.ParentingHub.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/normal_margin"
+            android:hint="Email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginMainText"
+            app:passwordToggleEnabled="true"
+            app:placeholderText="Masukan Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginInputEmail"
+                style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/loginInputPassword"
+            style="@style/Widget.ParentingHub.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/normal_margin"
+            android:hint="Password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginEmail"
+            app:passwordToggleEnabled="true"
+            app:placeholderText="Masukan Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tvPassword"
+                style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/loginButton"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_margin"
+            android:text="Masuk"
+            style="@style/TextAppearance.AppCompat.Button"
+            android:textAllCaps="false"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginInputPassword" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
