@@ -5,29 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var adapter: ProfileAdapter
+    private lateinit var profileArrayList: ArrayList<ProfileModel>
+    private lateinit var recyclerView: RecyclerView
+
+    lateinit var profile : Array<Int>
+    lateinit var username : Array<String>
+    lateinit var desc : Array<String>
+    lateinit var icLike : Array<Int>
+    lateinit var like : Array<String>
+    lateinit var date : Array<String>
+    lateinit var default : Array<Int>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,23 +30,74 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataInitialize()
+        val layoutManager = LinearLayoutManager(context)
+        recyclerView = view.findViewById(R.id.rvArtichle)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.setHasFixedSize(true)
+        adapter = ProfileAdapter(profileArrayList)
+        recyclerView.adapter = adapter
+    }
+
+    private fun dataInitialize(){
+
+        profileArrayList = arrayListOf<ProfileModel>()
+
+        profile = arrayOf(
+            R.drawable.img_profile,
+            R.drawable.img_prof,
+            R.drawable.img_profile,
+            R.drawable.img_prof
+        )
+
+        username = arrayOf(
+            getString(R.string.User),
+            getString(R.string.User),
+            getString(R.string.User),
+            getString(R.string.User)
+        )
+
+        desc = arrayOf(
+            getString(R.string.desc_art),
+            getString(R.string.desc_art),
+            getString(R.string.desc_art),
+            getString(R.string.desc_art)
+        )
+
+        icLike = arrayOf(
+            R.drawable.ic_like,
+            R.drawable.ic_like,
+            R.drawable.ic_like,
+            R.drawable.ic_like
+        )
+
+        like = arrayOf(
+            getString(R.string.Like),
+            getString(R.string.Like),
+            getString(R.string.Like),
+            getString(R.string.Like),
+        )
+
+        date = arrayOf(
+            getString(R.string.Date),
+            getString(R.string.Date),
+            getString(R.string.Date),
+            getString(R.string.Date)
+        )
+
+        default = arrayOf(
+            R.drawable.img_default,
+            R.drawable.img_default,
+            R.drawable.img_default,
+            R.drawable.img_default
+        )
+
+        for (i in profile.indices){
+
+            val profile = ProfileModel(profile[i], username[i], desc[i], icLike[i], like[i], date[i], default[i])
+            profileArrayList.add(profile)
+        }
     }
 }
