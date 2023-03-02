@@ -29,4 +29,5 @@
     <color name="black">#000</color>
     <color name="white">#FFF</color>
     <color name="shimmer_color">#D5D5D5</color>
+    <color name="transparant">#ff</color>
 </resources>

@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.example.pklparentinghub.data.model.user.Article
 import com.example.pklparentinghub.databinding.ItemArticleProfileBinding
 
-
 class ArticleProfileAdapter : RecyclerView.Adapter<ArticleProfileAdapter.ViewHolder>() {
 
     inner class ViewHolder (private val binding: ItemArticleProfileBinding) : RecyclerView.ViewHolder(binding.root) {
