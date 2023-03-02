@@ -1,13 +1,9 @@
-package com.example.pklparentinghub
+package com.example.pklparentinghub.ui.main.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.pklparentinghub.shimmer.ShimmerProfileFragment
-import com.example.pklparentinghub.ui.main.view.MainEventFragment
-import com.example.pklparentinghub.ui.main.view.MainHomeFragment
-import com.example.pklparentinghub.ui.main.view.MainNotificationFragment
-import com.example.pklparentinghub.ui.main.view.MainProfileFragment
+import com.example.pklparentinghub.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
