@@ -12,14 +12,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        replaceFragment(FragmentProfile())
+        replaceFragment(FragmentEditProfile())
     }
 
-    private fun replaceFragment(profileFragment: Fragment) {
+    private fun replaceFragment(editProfileFragment: Fragment) {
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout,profileFragment)
+        fragmentTransaction.replace(R.id.frame_layout,editProfileFragment)
         fragmentTransaction.commit()
     }
 }
