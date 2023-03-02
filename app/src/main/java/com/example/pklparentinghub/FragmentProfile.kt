@@ -11,9 +11,11 @@ import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -41,8 +43,16 @@ class FragmentProfile : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         view()
         setupPager()
+        btnEditProfile()
+    }
+
+    private fun btnEditProfile(){
+        view?.findViewById<Button>(R.id.btnProfile)?.setOnClickListener{
+            findNavController().navigate(R.id.action_fragmentProfile_to_fragmentEditProfile)
+        }
     }
 
     private inner class MyPagerAdapter(fragmentActivity: FragmentActivity) :

@@ -101,26 +101,13 @@
         app:layout_constraintTop_toBottomOf="@id/ivProfile"
         app:layout_constraintStart_toStartOf="@id/ivProfile"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputNamaEditProfile"
+    <EditText
+        android:id="@+id/etNameEditProfile"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_margin"
         app:layout_constraintTop_toBottomOf="@id/tvNamaEditProfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="12dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEditNamaProfile"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/white"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="18sp"
-            android:layout_marginHorizontal="0dp"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="@id/tvNamaEditProfil"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvUserEditProfil"
@@ -132,29 +119,16 @@
         android:textSize="16sp"
         android:layout_marginVertical="12dp"
         android:layout_marginStart="6dp"
-        app:layout_constraintTop_toBottomOf="@id/inputNamaEditProfile"
+        app:layout_constraintTop_toBottomOf="@id/etNameEditProfile"
         app:layout_constraintStart_toStartOf="@id/ivProfile"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputUsernameEditProfile"
+    <EditText
+        android:id="@+id/etUsernameEditProfile"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_margin"
         app:layout_constraintTop_toBottomOf="@id/tvUserEditProfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="12dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etUsernameEditProfile"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/white"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="18sp"
-            android:layout_marginHorizontal="0dp"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="@id/tvNamaEditProfil"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvBioEditProfil"
@@ -166,29 +140,31 @@
         android:textSize="16sp"
         android:layout_marginVertical="12dp"
         android:layout_marginStart="6dp"
-        app:layout_constraintTop_toBottomOf="@id/inputUsernameEditProfile"
+        app:layout_constraintTop_toBottomOf="@id/etUsernameEditProfile"
         app:layout_constraintStart_toStartOf="@id/ivProfile"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputBionameEditProfile"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="120dp"
         app:layout_constraintTop_toBottomOf="@id/tvBioEditProfil"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="12dp"
+        android:layout_marginHorizontal="20dp"
         app:counterEnabled="true"
-        app:counterMaxLength="150">
+        app:counterMaxLength="150"
+        android:paddingTop="0dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etBionameEditProfile"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="100dp"
+            android:paddingStart="0dp"
             android:background="@color/white"
+            android:inputType="textMultiLine"
             android:fontFamily="@font/roboto_regular"
             android:textSize="18sp"
-            android:layout_marginHorizontal="0dp"/>
+            android:maxLength="150" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -219,6 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/medium_margin"
             android:text="Laki - laki"
+            android:textSize="14sp"
             android:layout_marginLeft="@dimen/screen_margin"
             android:checked="true"
             android:textAppearance="@style/TextAppearance.Body2"/>
@@ -228,6 +205,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Perempuan"
+            android:textSize="14dp"
             android:layout_marginLeft="@dimen/screen_margin"
             android:layout_margin="@dimen/medium_margin"
             android:textAppearance="@style/TextAppearance.Body2"/>
@@ -235,7 +213,7 @@
     </RadioGroup>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvTanggalEditProfil"
+        android:id="@+id/tvDateEditProfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tanggal Lahir"
@@ -246,5 +224,67 @@
         android:layout_marginStart="6dp"
         app:layout_constraintTop_toBottomOf="@id/rgJenisKelamin"
         app:layout_constraintStart_toStartOf="@id/ivProfile"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivCalendarEditProfile"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_calendar"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDateEditProfil"
+        app:layout_constraintStart_toStartOf="@id/tvDateEditProfil"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvShowDateEditProfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected Date :"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="14dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDateEditProfil"
+        app:layout_constraintStart_toEndOf="@id/ivCalendarEditProfile"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dividerEditProfile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        app:layout_constraintTop_toBottomOf="@id/ivCalendarEditProfile"
+        app:layout_constraintStart_toStartOf="@id/ivCalendarEditProfile"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDateEditProfile"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_margin"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Pilih Tanggal"
+        android:textColor="@color/primary50"
+        android:textSize="12sp"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDateEditProfil"
+        app:layout_constraintBottom_toBottomOf="@id/dividerEditProfile"
+        app:strokeColor="@color/primary50"
+        app:strokeWidth="1dp"
+        tools:ignore="TextSizeCheck"
+        android:textAllCaps="false"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Simpan"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        app:cornerRadius="8dp"
+        android:layout_marginVertical="@dimen/screen_margin"
+        android:layout_marginHorizontal="@dimen/screen_margin"
+        app:layout_constraintTop_toBottomOf="@id/btnDateEditProfile"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

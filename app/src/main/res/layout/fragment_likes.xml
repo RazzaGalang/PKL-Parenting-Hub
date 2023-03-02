@@ -6,29 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FragmentLikes">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvArtichle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imgEmpty"
-            android:layout_width="250dp"
-            android:layout_height="200dp"
-            android:src="@drawable/img_empty"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Belum Ada yang Menyukai Anda :)"
-            android:textSize="15dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/imgEmpty"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/view_large_height"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        tools:listitem="@layout/list_artichle_likes" />
 </FrameLayout>
