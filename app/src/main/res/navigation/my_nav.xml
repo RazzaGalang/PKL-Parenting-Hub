@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragmentProfile_to_fragmentEditProfile"
             app:destination="@id/fragmentEditProfile" />
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentConnection"
+            app:destination="@id/fragmentConnection" />
     </fragment>
     <fragment
         android:id="@+id/fragmentEditProfile"
@@ -24,5 +27,14 @@
             app:destination="@id/fragmentProfile"
             app:popUpTo="@id/fragmentProfile"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentConnection"
+        android:name="com.example.pklparentinghub.FragmentConnection"
+        android:label="fragment_connection"
+        tools:layout="@layout/fragment_connection" >
+        <action
+            android:id="@+id/action_fragmentConnection_to_fragmentProfile"
+            app:destination="@id/fragmentProfile" />
     </fragment>
 </navigation>

@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.pklparentinghub.databinding.FragmentConnectionBinding
-import com.example.pklparentinghub.databinding.FragmentProfileBinding
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -32,6 +33,13 @@ class FragmentConnection : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPager()
+        btnBack()
+    }
+
+    private fun btnBack(){
+        view?.findViewById<ShapeableImageView>(R.id.icBack)?.setOnClickListener{
+            findNavController().navigate(R.id.action_fragmentConnection_to_fragmentProfile)
+        }
     }
 
     private inner class MyPagerAdapter(fragmentActivity: FragmentActivity) :

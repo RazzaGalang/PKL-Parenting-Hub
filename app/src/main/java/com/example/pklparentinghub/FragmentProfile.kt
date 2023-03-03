@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -47,11 +48,25 @@ class FragmentProfile : Fragment() {
         view()
         setupPager()
         btnEditProfile()
+        tvFollowers()
+        tvFollowing()
     }
 
     private fun btnEditProfile(){
         view?.findViewById<Button>(R.id.btnProfile)?.setOnClickListener{
             findNavController().navigate(R.id.action_fragmentProfile_to_fragmentEditProfile)
+        }
+    }
+
+    private fun tvFollowers(){
+        view?.findViewById<TextView>(R.id.tvFollowing)?.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentProfile_to_fragmentConnection)
+        }
+    }
+
+    private fun tvFollowing(){
+        view?.findViewById<TextView>(R.id.tvFollowers)?.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentProfile_to_fragmentConnection)
         }
     }
 

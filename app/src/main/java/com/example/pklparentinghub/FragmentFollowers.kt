@@ -5,55 +5,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.pklparentinghub.databinding.FragmentConnectionBinding
+import com.example.pklparentinghub.databinding.FragmentFollowersBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentFollowers.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentFollowers : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentFollowersBinding? = null
+    private val binding get() = _binding!!
+    private val connectionAdapter = ConnectionAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_followers, container, false)
+        _binding = FragmentFollowersBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentFollowers.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentFollowers().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setRecyclerViewAdapter()
+    }
+
+    private fun setRecyclerViewAdapter(){
+        connectionAdapter.differ.submitList(loadData())
+
+        binding.rvConnection.layoutManager = LinearLayoutManager(this.context)
+        binding.rvConnection.adapter = connectionAdapter
+        binding.rvConnection.addItemDecoration(
+            DividerItemDecoration(
+                binding.rvConnection.context,
+                (binding.rvConnection.layoutManager as LinearLayoutManager).orientation
+            )
+        )
+    }
+
+    private fun loadData(): MutableList<ConnectionModel>{
+        val data : MutableList<ConnectionModel> = mutableListOf()
+
+        data.add(
+            ConnectionModel(
+            R.drawable.img_profile,
+            "Razza Galang Adzan",
+            "@rzzagalangs"
+        ))
+
+        data.add(ConnectionModel(
+            R.drawable.img_profile,
+            "Razza Galang Adzan",
+            "@rzzagalangs"
+        ))
+
+        data.add(ConnectionModel(
+            R.drawable.img_profile,
+            "Razza Galang Adzan",
+            "@rzzagalangs"
+        ))
+
+        return data
     }
 }
