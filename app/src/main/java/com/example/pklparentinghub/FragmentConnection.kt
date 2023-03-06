@@ -37,7 +37,7 @@ class FragmentConnection : Fragment() {
     }
 
     private fun btnBack(){
-        view?.findViewById<ShapeableImageView>(R.id.icBack)?.setOnClickListener{
+        binding.topAppBar.setNavigationOnClickListener{
             findNavController().navigate(R.id.action_fragmentConnection_to_fragmentProfile)
         }
     }

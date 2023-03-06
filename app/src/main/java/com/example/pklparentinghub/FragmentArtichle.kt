@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.pklparentinghub.databinding.FragmentArtichleBinding
 import com.example.pklparentinghub.databinding.FragmentProfileBinding
 
@@ -16,6 +17,8 @@ class FragmentArtichle : Fragment() {
     private var _binding: FragmentArtichleBinding? = null
     private val binding get() = _binding!!
     private val profileAdapter = ProfileAdapter()
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,12 +27,23 @@ class FragmentArtichle : Fragment() {
         _binding = FragmentArtichleBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        swipeRefreshLayout = view.findViewById(R.id.refreshArthicle)
+        recyclerView = view.findViewById(R.id.rvArtichle)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            refreshData()
+        }
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerViewAdapter()
+    }
+
+    private fun refreshData() {
+        swipeRefreshLayout.isRefreshing = false
     }
 
     private fun setRecyclerViewAdapter(){
