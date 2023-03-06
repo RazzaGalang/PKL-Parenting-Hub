@@ -10,7 +10,7 @@
         android:id="@+id/shimmerRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/fragment_shimmer_article_profile_item"
+        tools:listitem="@layout/item_shimmer_article_profile"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </FrameLayout>

@@ -13,7 +13,7 @@
         android:layout_margin="@dimen/screen_margin"
         android:padding="3dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/img_profile_default_picture"
+        android:src="@drawable/img_auth_profile_default_picture"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/circleImage" />
@@ -56,7 +56,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/itemCover"
-        android:src="@drawable/img_profile_default_banner"
+        android:src="@drawable/img_auth_profile_default_banner"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"

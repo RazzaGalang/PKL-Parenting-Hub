@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.view.AuthRegisterFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/onBoardingTitleText"
+            style="@style/TextAppearance.Title1"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/screen_margin"
+            android:paddingTop="@dimen/huge_margin"
+            android:text="Daftar"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/onBoardingContentText"
+            style="@style/TextAppearance.Body1"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/screen_margin"
+            android:paddingVertical="@dimen/screen_margin"
+            android:text="Hai, Parents! Ayo bergabung dengan Parenting Hub dan mulai kenali dunia parenting!"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingTitleText" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registerFullName"
+            style="@style/Widget.ParentingHub.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:hint="Nama Lengkap"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingContentText"
+            app:placeholderText="Masukkan Nama Lengkap Anda"
+            app:startIconDrawable="@drawable/ic_home">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registerInputFullName"
+                style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registerUsername"
+            style="@style/Widget.ParentingHub.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:hint="Nama Pengguna"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerFullName"
+            app:placeholderText="Masukkan Nama Pengguna"
+            app:startIconDrawable="@drawable/ic_home">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registerInputUserName"
+                style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registerEmail"
+            style="@style/Widget.ParentingHub.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:hint="Surel"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerUsername"
+            app:placeholderText="Masukkan Surel Anda"
+            app:startIconDrawable="@drawable/ic_home">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registerInputEmail"
+                style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registerPassword"
+            style="@style/Widget.ParentingHub.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:hint="Kata Sandi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerEmail"
+            app:passwordToggleEnabled="true"
+            app:placeholderText="Masukkan Kata Sandi"
+            app:startIconDrawable="@drawable/ic_home">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registerInputPassword"
+                style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/registerConfirmPassword"
+            style="@style/Widget.ParentingHub.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:hint="Konfirmasi Password"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerPassword"
+            app:placeholderText="Masukkan Ulang Kata Sandi"
+            app:startIconDrawable="@drawable/ic_home">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registerInputConfirmPassword"
+                style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/onBoardingButtonContinue"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_margin"
+            android:paddingVertical="12dp"
+            android:text="Daftar"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.Button"
+            android:textColor="@color/white"
+            app:cornerRadius="@dimen/small_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerConfirmPassword" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/loginNavigateToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:text="Sudah punya akun? Masuk"
+            android:textAppearance="@style/TextAppearance.Caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingButtonContinue" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

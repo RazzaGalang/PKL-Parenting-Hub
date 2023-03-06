@@ -1,5 +1,6 @@
 package com.example.pklparentinghub.data.api
 
+import com.example.pklparentinghub.utils.CONST_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -7,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
 
-    private const val BASE_URL = "https://59f5-125-164-20-166.ap.ngrok.io/"
+    private const val BASE_URL = CONST_URL.CONST_BASE_URL
 
     fun getRetrofit(): ApiService{
         val loggingInterceptor =
@@ -25,5 +26,4 @@ object RetrofitBuilder {
 
         return retrofit.create(ApiService::class.java)
     }
-
 }

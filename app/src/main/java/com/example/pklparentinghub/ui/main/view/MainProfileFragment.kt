@@ -122,7 +122,7 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> ShimmerArticleProfileRecyclerFragment()
+                0 -> ProfileArticleFragment()
                 1 -> ShimmerArticleProfileRecyclerFragment()
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }
