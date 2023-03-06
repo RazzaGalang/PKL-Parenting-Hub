@@ -42,6 +42,10 @@ android {
 }
 
 dependencies {
+
+    //Text Editor
+    //implementation 'com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:v1.3.41'
+
     //Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 

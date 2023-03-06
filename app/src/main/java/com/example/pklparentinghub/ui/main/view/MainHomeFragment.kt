@@ -1,37 +1,88 @@
 package com.example.pklparentinghub.ui.main.view
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
+import android.text.Html
+import android.view.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.pklparentinghub.R
+import com.example.pklparentinghub.data.model.ImageData
+import com.example.pklparentinghub.databinding.FragmentMainHomeBinding
 import com.example.pklparentinghub.shimmer.ShimmerArticleHomeRecyclerFragment
-import com.example.pklparentinghub.ui.main.adapter.ArticleHomeHorizontalAdapter
+import com.example.pklparentinghub.shimmer.ShimmerArticleProfileRecyclerFragment
+import com.example.pklparentinghub.ui.main.adapter.ArticleHomeArticleSliderAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
 
+    private var _binding: FragmentMainHomeBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var adapter: ArticleHomeArticleSliderAdapter
+    private val list = ArrayList<ImageData>()
+    private lateinit var dots: ArrayList<TextView>
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMainHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpViewPager()
+        setUpArticleSlider()
+    }
 
-        val activity = requireActivity() as AppCompatActivity
-        val toolbar : Toolbar = view.findViewById(R.id.topAppBar)
-        activity.setSupportActionBar(toolbar)
+    private fun setUpArticleSlider(){
+        list.add(ImageData(R.drawable.img_rv_horizontal, getString(R.string.example_title_article)))
+        list.add(ImageData(R.drawable.img_rv_horizontal, getString(R.string.example_title_article)))
+        list.add(ImageData(R.drawable.img_rv_horizontal, getString(R.string.example_title_article)))
 
-        val viewPagerHorizontal: ViewPager = view.findViewById(R.id.articlePager)
-        setArticlePager(viewPagerHorizontal)
+        adapter = ArticleHomeArticleSliderAdapter(list)
+        binding.articleSlider.adapter = adapter
+        dots = ArrayList()
+        setIndicator()
 
-        val viewPager: ViewPager2 = view.findViewById(R.id.homeViewPager)
-        val tabLayout: TabLayout = view.findViewById(R.id.homeTabLayout)
+        binding.articleSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                selectedDot(position)
+                super.onPageSelected(position)
+            }
+        })
+    }
+
+    private fun selectedDot(position: Int) {
+        for(i in 0 until list.size){
+            if(i == position)
+                dots[i].setTextColor(ContextCompat.getColor(this.requireContext(), R.color.primary50))
+            else
+                dots[i].setTextColor(ContextCompat.getColor(this.requireContext(), R.color.grey))
+        }
+    }
+
+    private fun setIndicator() {
+        for(i in 0 until list.size){
+            dots.add(TextView(this.context))
+            dots[i].text = Html.fromHtml("&#9679", Html.FROM_HTML_MODE_LEGACY).toString()
+            dots[i].textSize = 16f
+            binding.indicatorSlider.addView(dots[i])
+        }
+    }
+
+    private fun setUpViewPager(){
+        val viewPager: ViewPager2 = binding.homeViewPager
+        val tabLayout: TabLayout = binding.homeTabLayout
 
         MyPagerAdapter(requireActivity()).also { viewPager.adapter = it }
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -40,15 +91,6 @@ class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
                 1 -> tab.text = "Terpopuler"
             }
         }.attach()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_bottom_navigation, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-        searchView.queryHint = "Cari di sini..."
-
-        // Handle search query submission and change callbacks here
     }
 
     private inner class MyPagerAdapter(fragmentActivity: FragmentActivity) :
@@ -64,18 +106,4 @@ class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
             }
         }
         }
-
-    private fun setArticlePager(viewPager: ViewPager){
-        val imageUrls = listOf(
-            R.drawable.img_rv_horizontal,
-            R.drawable.img_rv_horizontal,
-            R.drawable.img_rv_horizontal
-        )
-        val titleArticle = listOf(
-            getString(R.string.example_title_article),
-            getString(R.string.example_title_article),
-            getString(R.string.example_title_article)
-        )
-        viewPager.adapter = ArticleHomeHorizontalAdapter(requireContext(), imageUrls, titleArticle)
-    }
 }

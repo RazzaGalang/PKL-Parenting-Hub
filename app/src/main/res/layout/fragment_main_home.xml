@@ -26,45 +26,33 @@
                 app:navigationIcon="@drawable/ic_logo_m"/>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
-            android:id="@+id/articleSliderContainer"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/articleSlider"
             android:layout_width="match_parent"
             android:layout_height="@dimen/article_horizontal_height"
-            android:layout_marginVertical="@dimen/medium_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/articlePager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:id="@+id/gradientOverlay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/style_article_slider" />
-
-            <TextView
-                android:id="@+id/imageDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="@dimen/screen_margin"
-                android:textColor="@color/white"
-                android:textAppearance="@style/TextAppearance.Body1"
-                android:textStyle="bold"/>
-        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/indicatorSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/articleSlider"
+            android:gravity="center"
+            android:orientation="horizontal" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/homeTabLayout"
             android:layout_width="@dimen/zero_dp"
             android:layout_height="48dp"
+            android:layout_marginTop="@dimen/small_margin"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/articleSliderContainer"
+            app:layout_constraintTop_toBottomOf="@+id/indicatorSlider"
             app:tabGravity="fill"
             app:tabMode="fixed" />
 

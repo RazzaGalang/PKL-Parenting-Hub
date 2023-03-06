@@ -36,8 +36,11 @@
     <dimen name="button_height">40dp</dimen>
     <dimen name="profile_size">64dp</dimen>
     <dimen name="article_size">100dp</dimen>
-    <dimen name="article_horizontal_height">160dp</dimen>
+    <dimen name="bottom_navigation_height">72dp</dimen>
     <dimen name="article_favorite_height">130dp</dimen>
+    <dimen name="article_horizontal_height">160dp</dimen>
+    <dimen name="add_article_height">190dp</dimen>
+    <dimen name="add_article_description_height">450dp</dimen>
 
     <!-- Text Appearance line height -->
     <dimen name="large_title_1_line_height">38sp</dimen>
