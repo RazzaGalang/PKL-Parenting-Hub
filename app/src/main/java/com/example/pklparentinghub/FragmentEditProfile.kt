@@ -20,6 +20,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.databinding.FragmentEditProfileBinding
 import com.example.pklparentinghub.databinding.FragmentProfileBinding
@@ -35,6 +36,14 @@ class FragmentEditProfile : Fragment() {
     private val REQUEST_CODE_PERMISSIONS = 101
     private val REQUEST_CODE_SELECT_IMAGE = 102
     private val REQUEST_CODE_SELECT_PROFILE = 103
+
+    private var isNullName = false
+    private var isNullUsername = false
+    private var isNullDate = false
+
+    var validName = false
+    var validUsername = false
+    var validDate = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
@@ -55,6 +64,9 @@ class FragmentEditProfile : Fragment() {
         btnBack()
         uploadImage()
         uploadProfile()
+        username()
+        name()
+        submit()
     }
 
     private fun uploadImage() {
@@ -142,5 +154,37 @@ class FragmentEditProfile : Fragment() {
         day
         )
         datePickerDialog.show()
+    }
+
+    private fun username(){
+        binding.etUsernameEditProfile.addTextChangedListener (object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (!(s?.length ?: 0 >= 1)){
+                    nullUsername()
+                } else {
+                    clearUsername()
+                }
+            }
+        })
+    }
+
+    private fun name(){
+        binding.etNameEditProfile.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (!(s?.length ?: 0 >= 1)){
+                    nullName()
+                } else {
+                    clearName()
+                }
+            }
+        })
+    }
+
+    private fun submit(){
+
     }
 }
