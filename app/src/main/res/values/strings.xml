@@ -5,6 +5,14 @@
     <string name="menu_title_event">Event</string>
     <string name="menu_title_notification">Notifikasi</string>
     <string name="menu_title_profile">Profile</string>
-    <string name="error_text_null_fullname">*</string>
-    <string name="error_text_null_username"></string>
+
+    <string name="error_text_null_fullname">* Nama Lengkap harus diisi</string>
+    <string name="error_text_null_username">* Nama Pengguna harus diisi</string>
+    <string name="error_text_null_email">* Surel harus diisi</string>
+    <string name="error_text_null_password">* Kata Sandi harus diisi</string>
+    <string name="error_text_null_confirm_password">* Konfirmasi Kata Sandi harus diisi</string>
+    <string name="error_text_min_fullname">* Nama Lengkap minimal berisi 3 Karakter</string>
+    <string name="error_text_min_username">* Nama Pengguna minimal berisi 6 Karakter</string>
+    <string name="error_text_password">* Password minimal berisi 6 Huruf dan 1 Angka</string>
+    <string name="error_text_only_character">* Tidak boleh mengandung unsur angka dan simbol</string>
 </resources>

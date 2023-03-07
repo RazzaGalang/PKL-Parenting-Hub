@@ -48,8 +48,7 @@
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/onBoardingContentText"
-            app:placeholderText="Masukkan Nama Lengkap Anda"
-            app:startIconDrawable="@drawable/ic_home">
+            app:placeholderText="Masukkan Nama Lengkap Anda">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerInputFullName"
@@ -71,8 +70,7 @@
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerFullName"
-            app:placeholderText="Masukkan Nama Pengguna"
-            app:startIconDrawable="@drawable/ic_home">
+            app:placeholderText="Masukkan Nama Pengguna">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerInputUserName"
@@ -94,8 +92,7 @@
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerUsername"
-            app:placeholderText="Masukkan Surel Anda"
-            app:startIconDrawable="@drawable/ic_home">
+            app:placeholderText="Masukkan Surel Anda">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerInputEmail"
@@ -117,8 +114,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerEmail"
             app:passwordToggleEnabled="true"
-            app:placeholderText="Masukkan Kata Sandi"
-            app:startIconDrawable="@drawable/ic_home">
+            app:placeholderText="Masukkan Kata Sandi">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerInputPassword"
@@ -140,8 +136,7 @@
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerPassword"
-            app:placeholderText="Masukkan Ulang Kata Sandi"
-            app:startIconDrawable="@drawable/ic_home">
+            app:placeholderText="Masukkan Ulang Kata Sandi">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerInputConfirmPassword"
@@ -153,7 +148,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/onBoardingButtonContinue"
+            android:id="@+id/registerButtonContinue"
             android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/screen_margin"
@@ -168,7 +163,7 @@
             app:layout_constraintTop_toBottomOf="@+id/registerConfirmPassword" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/loginNavigateToLogin"
+            android:id="@+id/registerNavigateToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/screen_margin"
@@ -176,7 +171,7 @@
             android:textAppearance="@style/TextAppearance.Caption"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/onBoardingButtonContinue" />
+            app:layout_constraintTop_toBottomOf="@+id/registerButtonContinue" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -27,8 +27,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menuBottomNavigationCreateArticle -> {
-                    loadFragment(MainEventFragment())
-                    true
+                    false
                 }
                 R.id.menuBottomNavigationNotification -> {
                     loadFragment(MainNotificationFragment())
