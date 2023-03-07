@@ -45,6 +45,11 @@ class FragmentEditProfile : Fragment() {
     var validUsername = false
     var validDate = false
 
+    val fullNameRegex = "[A-Za-z '-]+"
+    val minThreeCharRegex = "^.{3,}$"
+    val minSixCharRegex = "^.{6,}$"
+    val usernameRegex ="[a-zA-Z0-9._]+"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -163,9 +168,14 @@ class FragmentEditProfile : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if (!(s?.length ?: 0 >= 1)){
                     nullUsername()
+                } else if (!(s.toString().matches(usernameRegex.toRegex()))){
+                    regexFullUsername()
+                } else if (!(s.toString().matches(minSixCharRegex.toRegex()))){
+                    regexMinFullUsername()
                 } else {
                     clearUsername()
                 }
+
             }
         })
     }
@@ -177,6 +187,10 @@ class FragmentEditProfile : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if (!(s?.length ?: 0 >= 1)){
                     nullName()
+                } else if (!(s.toString().matches(fullNameRegex.toRegex()))){
+                    regexFullName()
+                } else if (!(s.toString().matches(minThreeCharRegex.toRegex()))){
+                    regexMinFullName()
                 } else {
                     clearName()
                 }
@@ -185,6 +199,89 @@ class FragmentEditProfile : Fragment() {
     }
 
     private fun submit(){
+        binding.btnSaveEditProfile.setOnClickListener {
+            validation()
+        }
+    }
 
+    private fun validation() {
+        nullCheck()
+        validationTrue()
+    }
+
+    private fun validationTrue() {
+        if(isNullName() && isNullUsername() && validName==true && validUsername==true)
+            binding()
+    }
+
+    private fun binding(){
+        view?.findViewById<Button>(R.id.btnSaveEditProfile)?.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentEditProfile_to_fragmentProfile)
+        }
+    }
+    private fun nullCheck(){
+        isNullName()
+        isNullUsername()
+    }
+
+    private fun isNullName(): Boolean{
+        isNullName = if (binding.etNameEditProfile.length() == 0){
+            nullName()
+            false
+        } else {
+            true
+        }
+        return isNullName
+    }
+
+    private fun isNullUsername(): Boolean{
+        isNullUsername = if (binding.etUsernameEditProfile.length() == 0){
+            nullUsername()
+            false
+        } else {
+            true
+        }
+
+        return isNullUsername
+    }
+
+    private fun regexMinFullName(){
+        binding.inputNameEditText.error = getString(R.string.RegexFullName)
+        validName = false
+    }
+
+    private fun regexFullName(){
+        binding.inputNameEditText.error = getString(R.string.RegexName)
+        validName = false
+    }
+
+    private fun regexFullUsername(){
+        binding.inputUserEditProfile.error = getString(R.string.RegexUsername)
+        validUsername = false
+    }
+
+    private fun regexMinFullUsername(){
+        binding.inputUserEditProfile.error = getString(R.string.RegexFullUsername)
+        validUsername = false
+    }
+
+    private fun nullName(): Boolean{
+        binding.inputNameEditText.error = getString(R.string.ErrorName)
+        return false
+    }
+
+    private fun nullUsername(): Boolean{
+        binding.inputUserEditProfile.error = getString(R.string.ErrorUsername)
+        return false
+    }
+
+    private fun clearName(){
+        binding.inputNameEditText.isErrorEnabled = false
+        validName = true
+    }
+
+    private fun clearUsername(){
+        binding.inputUserEditProfile.isErrorEnabled = false
+        validUsername = true
     }
 }

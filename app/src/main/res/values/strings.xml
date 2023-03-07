@@ -8,4 +8,13 @@
     <string name="User">Razza Galang Adzan</string>
     <string name="Like">178 Suka</string>
     <string name="Date">10 Agustus 2021</string>
+    <string name="Username">"@SekarAfiaturrahman</string>
+
+    <string name="ErrorName">* Nama Wajib Diisi</string>
+    <string name="ErrorUsername">* Nama Pengguna Wajib Diisi</string>
+    <string name="ErrorDate">* Tanggal Lahir Wajib Diisi</string>
+    <string name="RegexFullName">Nama lengkap minimal 3 karakter</string>
+    <string name="RegexName">Nama lengkap tidak bisa berisi simbol dan angka</string>
+    <string name="RegexFullUsername">Username minimal 6 karakter</string>
+    <string name="RegexUsername">Username tidak bisa menggunakan simbol selain . dan _</string>
 </resources>
