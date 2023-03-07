@@ -7,18 +7,18 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivProfile"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/custom_height_button"
+        android:layout_height="@dimen/custom_height_button"
         android:src="@drawable/img_profile"
         android:background="@drawable/style_rounded"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginHorizontal="@dimen/normal_margin"
-        android:layout_marginVertical="8dp"
+        android:layout_marginVertical="@dimen/normal_margin"
         app:shapeAppearanceOverlay="@style/circleImage"
         android:scaleType="centerCrop"
-        app:strokeWidth="3dp"
-        android:padding="3dp"
+        app:strokeWidth="@dimen/extra_small_margin"
+        android:padding="@dimen/extra_small_margin"
         app:strokeColor="@color/white"/>
 
     <com.google.android.material.textview.MaterialTextView
@@ -27,21 +27,19 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/normal_margin"
         android:layout_marginVertical="@dimen/normal_margin"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Sekar Affiaturrahmah A"
-        android:textColor="@color/black"
-        android:textSize="14dp"
+        android:textAppearance="@style/TextAppearance.Body4"
+        android:text="@string/connec_name"
         app:layout_constraintStart_toEndOf="@id/ivProfile"
         app:layout_constraintTop_toTopOf="@id/ivProfile"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="@dimen/custom_margin_20dp"
         android:layout_marginHorizontal="@dimen/normal_margin"
-        android:fontFamily="@font/roboto_regular"
-        android:text=".@sekarrafiaturrahmah128"
-        android:textSize="10dp"
+        android:textAppearance="@style/TextAppearance.Caption"
+        android:text="@string/connec_username"
+        android:textColor="@color/grey"
         app:layout_constraintStart_toEndOf="@id/ivProfile"
         app:layout_constraintTop_toBottomOf="@+id/tvName"/>
 
@@ -51,15 +49,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/medium_margin"
-        android:fontFamily="@font/roboto_regular"
-        android:text="Ikuti"
-        android:textColor="@color/primary50"
-        android:textSize="12dp"
-        app:cornerRadius="100dp"
+        android:text="@string/connec_follow"
+        android:textAppearance="@style/TextAppearance.Button"
+        app:cornerRadius="@dimen/button_edit_profile_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvName"
         app:strokeColor="@color/primary40"
-        app:strokeWidth="1dp"
+        app:strokeWidth="@dimen/view_height"
         android:textAllCaps="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

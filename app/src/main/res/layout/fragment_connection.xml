@@ -19,14 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_back"
-            app:title=".@sekarrafiaturrahmah128"
+            app:title="@string/Title1"
             app:titleTextAppearance="@style/TextAppearance.Subtitle3"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="@dimen/zero_dp"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/huge_margin"
         app:tabMode="fixed"
         app:tabGravity="fill"
         android:background="@color/white"
