@@ -82,12 +82,13 @@
                 android:id="@+id/tvNamaEditProfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal_radius"
+                android:layout_marginTop="@dimen/custom_margin_10dp"
                 android:text="@string/edit_name"
                 android:textAppearance="@style/TextAppearance.Body2"
-                android:layout_marginTop="@dimen/custom_margin_10dp"
-                android:layout_marginStart="@dimen/normal_radius"
-                app:layout_constraintTop_toBottomOf="@id/ivProfile"
-                app:layout_constraintStart_toStartOf="@id/ivProfile"/>
+                app:fontFamily="More Fonts..."
+                app:layout_constraintStart_toStartOf="@id/ivProfile"
+                app:layout_constraintTop_toBottomOf="@id/ivProfile" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputNameEditText"
@@ -105,6 +106,9 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/zero_dp"
                     android:hint="@string/hint_edit_name"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
                     android:background="@color/white"
                     android:textAppearance="@style/TextAppearance.Body1"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -138,6 +142,9 @@
                     android:paddingStart="@dimen/zero_dp"
                     android:hint="@string/hint_edit_username"
                     android:background="@color/white"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.Body1"/>
 
             </com.google.android.material.textfield.TextInputLayout>
