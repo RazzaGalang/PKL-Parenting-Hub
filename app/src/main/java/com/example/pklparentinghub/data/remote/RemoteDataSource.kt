@@ -1,4 +1,4 @@
-package com.example.pklparentinghub.data.model.remote
+package com.example.pklparentinghub.data.remote
 
 import com.example.pklparentinghub.utils.Resource
 import com.google.gson.Gson
