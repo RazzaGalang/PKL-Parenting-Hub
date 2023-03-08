@@ -121,7 +121,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textColor="@color/white"
             app:cornerRadius="@dimen/small_margin"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginForgotPassword" />

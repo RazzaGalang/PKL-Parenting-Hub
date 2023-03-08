@@ -1,29 +1,27 @@
-package com.example.pklparentinghub.data.model.user
+package com.example.pklparentinghub.data.model.register
 
 
 import com.google.gson.annotations.SerializedName
 
-data class User(
-    @SerializedName("article")
-    val article: List<Article>,
+data class Data(
+    @SerializedName("birthday")
+    val birthday: Any,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("description")
-    val description: String,
+    val description: Any,
     @SerializedName("email")
     val email: String,
-    @SerializedName("follower")
-    val follower: Int,
+    @SerializedName("followers")
+    val followers: Any,
     @SerializedName("following")
-    val following: Int,
+    val following: Any,
     @SerializedName("full_name")
     val fullName: String,
     @SerializedName("gender")
-    val gender: String,
+    val gender: Any,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("password")
-    val password: String,
     @SerializedName("profile_cover")
     val profileCover: String,
     @SerializedName("profile_picture")
@@ -31,5 +29,7 @@ data class User(
     @SerializedName("updated_at")
     val updatedAt: String,
     @SerializedName("username")
-    val username: String
+    val username: String,
+    @SerializedName("verifikasi")
+    val verifikasi: Boolean
 )

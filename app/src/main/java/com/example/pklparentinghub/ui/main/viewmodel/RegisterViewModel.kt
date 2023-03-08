@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pklparentinghub.data.model.register.RegisterRequest
-import com.example.pklparentinghub.data.model.user.User
+import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.repository.RegisterRepository
 import com.example.pklparentinghub.utils.Resource
 import kotlinx.coroutines.launch
 
 class RegisterViewModel (private val registerRepository: RegisterRepository) : ViewModel() {
-    private val _registerResult: MutableLiveData<Resource<User>> = MutableLiveData()
-    val registerResult: LiveData<Resource<User>> get() = _registerResult
+    private val _registerResult: MutableLiveData<Resource<RegisterResponse>> = MutableLiveData()
+    val registerResult: LiveData<Resource<RegisterResponse>> get() = _registerResult
 
     fun requestRegister(fullname:String, username:String, email:String, password:String, confirmPassword:String) {
         viewModelScope.launch {
