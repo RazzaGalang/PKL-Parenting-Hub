@@ -9,8 +9,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.pklparentinghub.data.model.ImageData
 import com.example.pklparentinghub.databinding.ItemHomeArticleSliderBinding
 
-class ArticleHomeArticleSliderAdapter(private val items: List<ImageData>) :
-    RecyclerView.Adapter<ArticleHomeArticleSliderAdapter.ImageViewHolder>() {
+class ArticleHomeSliderAdapter(private val items: List<ImageData>) :
+    RecyclerView.Adapter<ArticleHomeSliderAdapter.ImageViewHolder>() {
 
     inner class ImageViewHolder(itemView: ItemHomeArticleSliderBinding) :
         RecyclerView.ViewHolder(itemView.root) {
@@ -19,7 +19,7 @@ class ArticleHomeArticleSliderAdapter(private val items: List<ImageData>) :
             with(binding) {
                 Glide.with(itemView)
                     .load(data.image)
-                    .transform(CenterCrop(), RoundedCorners(6))
+                    .transform(CenterCrop(), RoundedCorners(10))
                     .into(ivArticle)
                 tvTitle.text = data.title
             }

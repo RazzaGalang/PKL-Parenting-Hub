@@ -11,6 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -47,61 +48,67 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
-        android:layout_width="@dimen/zero_dp"
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/zero_dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        app:layout_constraintBottom_toTopOf="@+id/customText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilArticle"
                 style="@style/Widget.ParentingHub.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
-                android:layout_height="550dp"
+                android:layout_height="500dp"
                 android:layout_margin="@dimen/screen_margin"
-                app:placeholderText="@string/write_article">
+                app:placeholderText="@string/write_article"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/btnCreateArticle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etArticle"
                     style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="top|start"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:gravity="top|start" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCreateArticle"
                 style="@style/TextAppearance.Button"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/zero_dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
-                android:layout_marginBottom="@dimen/screen_margin"
                 android:padding="12dp"
                 android:text="@string/upload_article"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
-        </LinearLayout>
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/customText"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/huge_margin"
+        android:id="@+id/bottomAppBar"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/white"
-        app:elevation="@dimen/extra_small_margin"
+        app:contentInsetEnd="8dp"
+        app:contentInsetStart="8dp"
+        app:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="BottomAppBar">
+        tools:ignore="BottomAppBar" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

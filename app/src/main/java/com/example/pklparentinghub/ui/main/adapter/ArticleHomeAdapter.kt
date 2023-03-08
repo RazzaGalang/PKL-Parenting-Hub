@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pklparentinghub.data.model.user.Article
-import com.example.pklparentinghub.databinding.ItemHomeLatestArticleBinding
+import com.example.pklparentinghub.databinding.ItemHomeArticleBinding
 
-class ArticleHomeLatestAdapter: RecyclerView.Adapter<ArticleHomeLatestAdapter.ViewHolder>() {
+class ArticleHomeAdapter : RecyclerView.Adapter<ArticleHomeAdapter.ViewHolder>() {
 
-        inner class ViewHolder (private val binding: ItemHomeLatestArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+        inner class ViewHolder (private val binding: ItemHomeArticleBinding) : RecyclerView.ViewHolder(binding.root) {
             fun setData(item: Article) {
                 binding.apply {
                     itemTitle.text = item.title
@@ -45,7 +45,7 @@ class ArticleHomeLatestAdapter: RecyclerView.Adapter<ArticleHomeLatestAdapter.Vi
             set(value) = differ.submitList(value)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-            ItemHomeLatestArticleBinding.inflate(
+            ItemHomeArticleBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

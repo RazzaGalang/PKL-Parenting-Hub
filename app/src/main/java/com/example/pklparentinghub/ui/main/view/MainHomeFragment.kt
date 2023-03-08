@@ -1,23 +1,23 @@
 package com.example.pklparentinghub.ui.main.view
 
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.view.*
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.pklparentinghub.FragmentCreateArticle2
+import com.example.pklparentinghub.FragmentSearchArticle
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.model.ImageData
 import com.example.pklparentinghub.databinding.FragmentMainHomeBinding
 import com.example.pklparentinghub.shimmer.ShimmerArticleHomeRecyclerFragment
-import com.example.pklparentinghub.shimmer.ShimmerArticleProfileRecyclerFragment
-import com.example.pklparentinghub.ui.main.adapter.ArticleHomeArticleSliderAdapter
+import com.example.pklparentinghub.ui.main.adapter.ArticleHomeSliderAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -25,7 +25,7 @@ class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
 
     private var _binding: FragmentMainHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: ArticleHomeArticleSliderAdapter
+    private lateinit var adapter: ArticleHomeSliderAdapter
     private val list = ArrayList<ImageData>()
     private lateinit var dots: ArrayList<TextView>
 
@@ -42,6 +42,15 @@ class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
         super.onViewCreated(view, savedInstanceState)
         setUpViewPager()
         setUpArticleSlider()
+        setUpSearch()
+    }
+
+    private fun setUpSearch() {
+        binding.etSearchHome.setOnClickListener {
+            val fragment = FragmentSearchArticle()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
+        }
     }
 
     private fun setUpArticleSlider(){
@@ -49,7 +58,7 @@ class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
         list.add(ImageData(R.drawable.img_rv_horizontal, getString(R.string.example_title_article)))
         list.add(ImageData(R.drawable.img_rv_horizontal, getString(R.string.example_title_article)))
 
-        adapter = ArticleHomeArticleSliderAdapter(list)
+        adapter = ArticleHomeSliderAdapter(list)
         binding.articleSlider.adapter = adapter
         dots = ArrayList()
         setIndicator()

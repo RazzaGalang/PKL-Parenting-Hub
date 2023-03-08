@@ -16,14 +16,14 @@
         <item name="boxStrokeWidth">@dimen/zero_dp</item>
         <item name="boxStrokeWidthFocused">@dimen/zero_dp</item>
         <item name="errorIconDrawable">@null</item>
-        <item name="errorTextAppearance">@style/TextAppearance.AppCompat.Caption</item>
+        <item name="errorTextAppearance">@style/TextAppearance.Validation</item>
         <item name="errorTextColor">@color/error30</item>
         <item name="expandedHintEnabled">true</item>
         <item name="hintTextAppearance">@style/TextAppearance.Caption</item>
         <item name="passwordToggleTint">@color/grey</item>
         <item name="placeholderTextAppearance">@style/TextAppearance.Body2</item>
         <item name="placeholderTextColor">@color/primary50</item>
-        <item name="suffixTextAppearance">@style/TextAppearance.Caption</item>
+        <item name="suffixTextAppearance">@style/TextAppearance.Validation</item>
         <item name="suffixTextColor">@color/primary50</item>
     </style>
 
@@ -49,6 +49,32 @@
         <item name="iconPadding">0dp</item>
         <item name="iconGravity">textStart</item>
         <item name="rippleColor">@color/grey</item>
+    </style>
+
+    <style name="Widget.ParentingHub.Search.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">
+            @style/ThemeOverlay.ParentingHub.Search.TextInputLayout.OutlinedBox
+        </item>
+        <item name="hintTextColor">@color/grey</item>
+        <item name="boxBackgroundColor">@color/shimmer_color</item>
+        <item name="strokeColor">@color/grey</item>
+        <item name="boxStrokeWidth">@dimen/zero_dp</item>
+        <item name="boxStrokeWidthFocused">@dimen/zero_dp</item>
+        <item name="errorEnabled">false</item>
+        <item name="placeholderTextAppearance">@style/TextAppearance.Body2</item>
+        <item name="placeholderTextColor">@color/grey</item>
+        <item name="suffixTextAppearance">@style/TextAppearance.Body2</item>
+        <item name="suffixTextColor">@color/primary50</item>
+    </style>
+
+    <style name="ThemeOverlay.ParentingHub.Search.TextInputLayout.OutlinedBox" parent="">
+        <item name="editTextStyle">@style/Widget.ParentingHub.Search.TextInputEditText.OutlinedBox</item>
+    </style>
+
+    <style name="Widget.ParentingHub.Search.TextInputEditText.OutlinedBox" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:background">@drawable/slr_outline_search_view_border</item>
+        <item name="android:textAppearance">@style/TextAppearance.Body2</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

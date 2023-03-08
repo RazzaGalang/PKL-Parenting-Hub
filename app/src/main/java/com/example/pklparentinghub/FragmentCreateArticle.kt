@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,10 @@ class FragmentCreateArticle : Fragment() {
     private val REQUEST_CODE_PERMISSIONS = 101
     private val REQUEST_CODE_SELECT_IMAGE = 102
 
+    private var isNullTitle = false
+    var validCover = false
+    var validTitle = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,16 +38,79 @@ class FragmentCreateArticle : Fragment() {
 
         uploadImage()
         btnContinueOnClick()
+        checkTitle()
 
         return binding.root
     }
 
     private fun btnContinueOnClick() {
         binding.btnContinue.setOnClickListener{
-            val fragment = FragmentCreateArticle2()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.containerCreateArticle, fragment)?.commit()
+            validationTrue()
+            nullCheck()
         }
+    }
+
+    private fun checkTitle(){
+        binding.etTitleArticle.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length ?: 0 >= 1) {
+                    clearTitle()
+                } else {
+                    nullTitle()
+                }
+            }
+        })
+    }
+
+    private fun validationTrue(){
+        if(isNullTitle() && validTitle && validCover) binding()
+    }
+
+    private fun binding(){
+        val fragment = FragmentCreateArticle2()
+        val transaction = fragmentManager?.beginTransaction()
+        transaction?.replace(R.id.containerCreateArticle, fragment)?.commit()
+    }
+
+    private fun nullCheck(){
+        isNullTitle()
+        if(!validCover){
+            nullCover()
+        } else clearCover()
+    }
+
+    private fun isNullTitle(): Boolean{
+        isNullTitle = if (binding.etTitleArticle.length() == 0){
+            nullTitle()
+            false
+        } else {
+            true
+        }
+        return isNullTitle
+    }
+
+    private fun nullTitle(): Boolean {
+        binding.tilTitleArticle.error = getString(R.string.null_title)
+        binding.etTitleArticle.setBackgroundResource(R.drawable.bg_white_red_outline)
+        return false
+    }
+
+    private fun nullCover(): Boolean{
+        binding.tvErrorCover.text = getString(R.string.null_cover)
+        return false
+    }
+
+    private fun clearTitle(){
+        binding.tilTitleArticle.isErrorEnabled = false
+        binding.etTitleArticle.setBackgroundResource(R.drawable.slr_outline_button_border)
+        validTitle = true
+    }
+
+    private fun clearCover(){
+        binding.tvErrorCover.text = ""
+        validCover = true
     }
 
     private fun uploadImage() {
@@ -74,6 +143,7 @@ class FragmentCreateArticle : Fragment() {
             if (selectedImageUri != null) {
                 binding.ivUploadImage.setImageURI(selectedImageUri)
                 binding.btnUploadImage.text = ""
+                clearCover()
             }
         }
     }

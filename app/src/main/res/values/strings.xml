@@ -7,6 +7,8 @@
     <string name="menu_title_event">Event</string>
     <string name="menu_title_notification">Notifikasi</string>
     <string name="menu_title_profile">Profile</string>
+    <string name="error_text_null_fullname">*</string>
+    <string name="error_text_null_username"></string>
 
     <string name="add_image_article">Tambahkan Foto Sampul</string>
     <string name="add_title_article">Masukkan Judul Artikel</string>
@@ -14,5 +16,14 @@
     <string name="continue_article">Lanjut</string>
     <string name="write_article">Tulis Artikelmu Disini..</string>
     <string name="upload_article">Unggah Artikel</string>
+    <string name="another_article">Artikel Lainnya</string>
+    <string name="edit_article">Edit Artikel</string>
+    <string name="delete_article">Hapus Artikel</string>
+    <string name="search_article">Cari Artikel</string>
+    <string name="null_title">* Judul Artikel Wajib Diisi</string>
+    <string name="null_cover">* Foto Sampul Wajib Diunggah</string>
+    <string name="null_article">* Artikel Wajib Diisi</string>
+    <string name="min_article">* Artikel minimal berisi 100 karakter</string>
+    <string name="search_here">Cari di sini..</string>
     <string name="example_title_article">Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby</string>
 </resources>

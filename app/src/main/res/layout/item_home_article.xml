@@ -21,7 +21,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/itemCover"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/article_favorite_height"
+                android:layout_height="@dimen/article_home_height"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_profile_default_banner"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,8 @@
                 android:id="@+id/itemProfilePicture"
                 android:layout_width="@dimen/semi_huge_margin"
                 android:layout_height="@dimen/semi_huge_margin"
-                android:layout_margin="@dimen/screen_margin"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/normal_margin"
                 android:padding="3dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_profile_default_picture"
@@ -76,7 +77,8 @@
                 android:id="@+id/itemLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/screen_margin"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/normal_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/itemTitle"
                 app:layout_constraintBottom_toBottomOf="parent"/>

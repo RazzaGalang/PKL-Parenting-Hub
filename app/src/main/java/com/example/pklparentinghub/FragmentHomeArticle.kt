@@ -5,27 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.pklparentinghub.databinding.FragmentHomeLatestArticleBinding
-import com.example.pklparentinghub.ui.main.adapter.ArticleHomeLatestAdapter
+import com.example.pklparentinghub.databinding.FragmentHomeArticleBinding
+import com.example.pklparentinghub.ui.main.adapter.ArticleHomeAdapter
 
-class FragmentHomeLatestArticle : Fragment() {
+class FragmentHomeArticle : Fragment() {
 
-    private var _binding: FragmentHomeLatestArticleBinding? = null
+    private var _binding: FragmentHomeArticleBinding? = null
     private val binding get() = _binding!!
-    private val adapter : ArticleHomeLatestAdapter = ArticleHomeLatestAdapter()
+    private val adapter : ArticleHomeAdapter = ArticleHomeAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHomeLatestArticleBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeArticleBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.latestRecycler.adapter = adapter
+        binding.articleRecycler.adapter = adapter
     }
 
     override fun onDestroyView() {
