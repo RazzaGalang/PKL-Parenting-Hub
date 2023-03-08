@@ -121,7 +121,7 @@
                 style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,17 +133,17 @@
             android:layout_marginHorizontal="@dimen/screen_margin"
             android:layout_marginVertical="@dimen/screen_margin"
             android:hint="Konfirmasi Password"
-            app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registerPassword"
-            app:placeholderText="Masukkan Ulang Kata Sandi">
+            app:placeholderText="Masukkan Ulang Kata Sandi"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerInputConfirmPassword"
                 style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

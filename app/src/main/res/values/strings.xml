@@ -13,6 +13,9 @@
     <string name="error_text_null_confirm_password">* Konfirmasi Kata Sandi harus diisi</string>
     <string name="error_text_min_fullname">* Nama Lengkap minimal berisi 3 Karakter</string>
     <string name="error_text_min_username">* Nama Pengguna minimal berisi 6 Karakter</string>
-    <string name="error_text_password">* Password minimal berisi 6 Huruf dan 1 Angka</string>
+    <string name="error_text_password">* Password minimal berisi 8 Karakter dan 1 Angka</string>
     <string name="error_text_only_character">* Tidak boleh mengandung unsur angka dan simbol</string>
+    <string name="error_text_format_email">* Format Email tidak sesuai</string>
+    <string name="error_text_confirm_password">* Konfirmasi Password tidak sesuai</string>
+
 </resources>

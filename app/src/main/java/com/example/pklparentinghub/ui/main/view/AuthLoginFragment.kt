@@ -42,12 +42,6 @@ class AuthLoginFragment : Fragment() {
         loginAuth()
         initObserve()
         initTextWatcher()
-
-        binding.loginNavigateToRegister.setOnClickListener {
-            val fragment = AuthRegisterFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameLayoutAuthActivity, fragment)?.commit()
-        }
     }
 
     private fun setupViewModel (){
@@ -62,7 +56,7 @@ class AuthLoginFragment : Fragment() {
             val email = binding.loginInputEmail.text.toString()
             val password = binding.loginInputPassword.text.toString()
 
-            viewModel.requestLogin(email, password)
+            viewModel.requestLogin("example@gmail.com", "password1")
         }
     }
 
@@ -73,7 +67,7 @@ class AuthLoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
             when (result.status){
                 Status.SUCCESS -> {
-                    val intentBiasa = Intent(this.context, MainActivity::class.java)
+                    val intentBiasa = Intent(this.context, CompleteProfileActivity::class.java)
                     startActivity(intentBiasa)
 
                     Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
