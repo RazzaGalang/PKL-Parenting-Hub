@@ -40,10 +40,9 @@ class AuthRegisterFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAuthRegisterBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,6 +72,8 @@ class AuthRegisterFragment : Fragment() {
     private fun setupRegister (){
         binding.registerButtonContinue.setOnClickListener {
             if (!errorNullFullName() || !errorNullUserName() || !errorNullEmail() || !errorNullPassword() || !errorNullConfirmPassword()) {
+                requestValidateData()
+            } else if (binding.registerFullName.isErrorEnabled || binding.registerUsername.isErrorEnabled || binding.registerEmail.isErrorEnabled || binding.registerPassword.isErrorEnabled || binding.registerConfirmPassword.isErrorEnabled){
                 requestValidateData()
             } else {
                 viewModel.requestRegister(
