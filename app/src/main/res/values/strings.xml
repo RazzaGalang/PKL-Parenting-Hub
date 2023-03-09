@@ -1,14 +1,22 @@
 <resources>
     <string name="app_name">PKL Parenting Hub</string>
-    <string name="app_name_parenting_hub">Parenting Hub</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_title_beranda">Beranda</string>
     <string name="menu_title_event">Event</string>
     <string name="menu_title_notification">Notifikasi</string>
     <string name="menu_title_profile">Profile</string>
-    <string name="error_text_null_fullname">*</string>
-    <string name="error_text_null_username"></string>
+
+    <string name="error_text_null_fullname">* Nama Lengkap harus diisi</string>
+    <string name="error_text_null_username">* Nama Pengguna harus diisi</string>
+    <string name="error_text_null_email">* Surel harus diisi</string>
+    <string name="error_text_null_password">* Kata Sandi harus diisi</string>
+    <string name="error_text_null_confirm_password">* Konfirmasi Kata Sandi harus diisi</string>
+    <string name="error_text_min_fullname">* Nama Lengkap minimal berisi 3 Karakter</string>
+    <string name="error_text_min_username">* Nama Pengguna minimal berisi 6 Karakter</string>
+    <string name="error_text_password">* Password minimal berisi 8 Karakter dan 1 Angka</string>
+    <string name="error_text_only_character">* Tidak boleh mengandung unsur angka dan simbol</string>
+    <string name="error_text_format_email">* Format Email tidak sesuai</string>
+    <string name="error_text_confirm_password">* Konfirmasi Password tidak sesuai</string>
 
     <string name="add_image_article">Tambahkan Foto Sampul</string>
     <string name="add_title_article">Masukkan Judul Artikel</string>

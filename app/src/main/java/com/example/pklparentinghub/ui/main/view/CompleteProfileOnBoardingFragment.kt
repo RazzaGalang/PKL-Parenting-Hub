@@ -1,14 +1,14 @@
 package com.example.pklparentinghub.ui.main.view
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.pklparentinghub.R
+import androidx.fragment.app.Fragment
 import com.example.pklparentinghub.databinding.FragmentAuthOnBoardingBinding
 
-class AuthOnBoardingFragment : Fragment() {
+class CompleteProfileOnBoardingFragment : Fragment() {
 
     private var _binding: FragmentAuthOnBoardingBinding? = null
     private val binding get() = _binding!!
@@ -26,14 +26,22 @@ class AuthOnBoardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initNavigation()
+        setOutput()
+        setNavigation()
     }
 
-    private fun initNavigation(){
+    private fun setOutput(){
+        binding.apply {
+            onBoardingTitleText.text = "Selamat Datang, Parents!"
+            onBoardingContentText.text = "Halo Parents di seluruh dunia. Sebelum mulai, yuk lengkapi profile parents!"
+            onBoardingButtonContinue.text = "Lengkapi Profile"
+        }
+    }
+
+    private fun setNavigation(){
         binding.onBoardingButtonContinue.setOnClickListener {
-            val fragment = AuthLoginFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameLayoutAuthActivity, fragment)?.commit()
+            val cobaGeys = Intent(this.context, MainActivity::class.java)
+            startActivity(cobaGeys)
         }
     }
 

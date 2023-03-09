@@ -1,19 +1,40 @@
 package com.example.pklparentinghub.ui.main.view
 
+import android.content.ContentValues
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.pklparentinghub.condition.AuthRegisterSuccessFragment
 import com.example.pklparentinghub.R
+import com.example.pklparentinghub.condition.AuthRegisterConnectionErrorFragment
+import com.example.pklparentinghub.data.api.ApiHelper
+import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.databinding.FragmentAuthRegisterBinding
+import com.example.pklparentinghub.ui.base.RegisterViewModelFactory
+import com.example.pklparentinghub.ui.main.viewmodel.RegisterViewModel
+import com.example.pklparentinghub.utils.Status
 
 class AuthRegisterFragment : Fragment() {
 
     private var _binding: FragmentAuthRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel : RegisterViewModel
+
+    private val regexMinUsername = "^.{6,}$"
+    private val regexMinFullname = "^.{3,}$"
+    private val regexOnlyCharacter = "[A-Za-z '-]+"
+    private val regexPassword = "^(?=.*\\d)[A-Za-z\\d]{8,}$"
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +50,9 @@ class AuthRegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initTextWatcher()
+        setupViewModel()
+        setupRegister()
+        setupObserve()
     }
 
     private fun initTextWatcher(){
@@ -39,11 +63,68 @@ class AuthRegisterFragment : Fragment() {
         textWatcherConfirmPassword()
     }
 
+    private fun setupViewModel (){
+        viewModel = ViewModelProvider(
+            this,
+            RegisterViewModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[RegisterViewModel::class.java]
+    }
+
+    private fun setupRegister (){
+        binding.registerButtonContinue.setOnClickListener {
+            if (!errorNullFullName() || !errorNullUserName() || !errorNullEmail() || !errorNullPassword() || !errorNullConfirmPassword()) {
+                requestValidateData()
+            } else {
+                viewModel.requestRegister(
+                    fullname = binding.registerInputFullName.text.toString(),
+                    username = binding.registerInputUserName.text.toString(),
+                    email = binding.registerInputEmail.text.toString(),
+                    password = binding.registerInputPassword.text.toString(),
+                    confirmPassword = binding.registerInputConfirmPassword.text.toString())
+            }
+        }
+    }
+
+    private fun requestValidateData() {
+        errorNullFullName()
+        errorNullUserName()
+        errorNullEmail()
+        errorNullPassword()
+        errorNullConfirmPassword()
+    }
+
+    private fun setupObserve() {
+        viewModel.registerResult.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
+                        val exampleDialog = AuthRegisterSuccessFragment()
+                        exampleDialog.show(parentFragmentManager, "example_dialog")
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
+                        Log.e(ContentValues.TAG, "setupObservers: " + it.message)
+                        val exampleDialog = AuthRegisterConnectionErrorFragment()
+                        exampleDialog.show(parentFragmentManager, "example_dialog")
+                    }
+                    Status.LOADING -> {
+                        Log.e(ContentValues.TAG, "setupObservers: LOADING")
+                    }
+                }
+            }
+        })
+    }
+
     private fun textWatcherFullName() {
         binding.registerInputFullName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if ((s?.length ?: 0) < 1) {
                     errorNullFullName()
+                } else if (!(s.toString().matches(regexMinFullname.toRegex()))){
+                    errorMinFullname ()
+                } else if (!(s.toString().matches(regexOnlyCharacter.toRegex()))){
+                    errorOnlyCharacterFullname()
                 } else {
                     clearFullName()
                 }
@@ -63,6 +144,8 @@ class AuthRegisterFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if ((s?.length ?: 0) < 1) {
                     errorNullUserName()
+                } else if (!(s.toString().matches(regexMinUsername.toRegex()))) {
+                    errorMinUsername()
                 } else {
                     clearUserName()
                 }
@@ -82,6 +165,8 @@ class AuthRegisterFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if ((s?.length ?: 0) < 1) {
                     errorNullEmail()
+                } else if (!regexEmailAddress(binding.registerInputEmail.text.toString())) {
+                    errorFormatEmail()
                 } else {
                     clearEmail()
                 }
@@ -101,6 +186,15 @@ class AuthRegisterFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if ((s?.length ?: 0) < 1) {
                     errorNullPassword()
+                } else if (!(s.toString().matches(regexPassword.toRegex()))){
+                    errorFormatPassword()
+                    errorConfirmPassword()
+                } else if (binding.registerInputPassword.text.toString() != binding.registerInputConfirmPassword.text.toString()) {
+                    clearPassword()
+                    errorConfirmPassword()
+                } else if (binding.registerInputPassword.text.toString() == binding.registerInputConfirmPassword.text.toString()) {
+                    clearPassword()
+                    clearConfirmPassword()
                 } else {
                     clearPassword()
                 }
@@ -120,7 +214,9 @@ class AuthRegisterFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if ((s?.length ?: 0) < 1) {
                     errorNullConfirmPassword()
-                } else {
+                } else if (binding.registerInputPassword.text.toString() != binding.registerInputConfirmPassword.text.toString()) {
+                    errorConfirmPassword()
+                } else if (binding.registerInputPassword.text.toString() == binding.registerInputConfirmPassword.text.toString()) {
                     clearConfirmPassword()
                 }
             }
@@ -135,31 +231,87 @@ class AuthRegisterFragment : Fragment() {
     }
 
     private fun errorNullFullName(): Boolean {
-        binding.registerFullName.error = getText(R.string.app_name)
+        if (binding.registerInputFullName.length() == 0){
+            binding.registerFullName.error = getText(R.string.error_text_null_fullname)
+            errorBorderFullName()
+            return false
+        } else {
+            return true
+        }
+    }
+
+    private fun errorNullUserName(): Boolean {
+        if (binding.registerInputUserName.length() == 0){
+            binding.registerUsername.error = getText(R.string.error_text_null_username)
+            errorBorderUserName()
+            return false
+        } else {
+            return true
+        }
+    }
+
+    private fun errorNullEmail(): Boolean {
+        if (binding.registerInputEmail.length() == 0){
+            binding.registerEmail.error = getText(R.string.error_text_null_email)
+            errorBorderEmail()
+            return false
+        } else {
+            return true
+        }
+    }
+
+    private fun errorNullPassword(): Boolean {
+        if (binding.registerInputPassword.length() == 0){
+            binding.registerPassword.error = getText(R.string.error_text_null_password)
+            errorBorderPassword()
+            return false
+        } else {
+            return true
+        }
+    }
+
+    private fun errorNullConfirmPassword(): Boolean {
+        if (binding.registerInputConfirmPassword.length() == 0){
+            binding.registerConfirmPassword.error = getText(R.string.error_text_null_confirm_password)
+            errorBorderConfirmPassword()
+            return false
+        } else {
+            return true
+        }
+    }
+
+    private fun errorMinFullname () : Boolean {
+        binding.registerFullName.error = getText(R.string.error_text_min_fullname)
         errorBorderFullName()
         return false
     }
 
-    private fun errorNullUserName(): Boolean {
-        binding.registerUsername.error = getText(R.string.app_name)
+    private fun errorMinUsername () : Boolean {
+        binding.registerUsername.error = getText(R.string.error_text_min_username)
         errorBorderUserName()
         return false
     }
 
-    private fun errorNullEmail(): Boolean {
-        binding.registerEmail.error = getText(R.string.app_name)
+    private fun errorOnlyCharacterFullname() : Boolean {
+        binding.registerFullName.error = getText(R.string.error_text_only_character)
+        errorBorderFullName()
+        return false
+    }
+
+    private fun errorFormatEmail () : Boolean {
+        binding.registerEmail.error = getText(R.string.error_text_format_email)
         errorBorderEmail()
         return false
     }
 
-    private fun errorNullPassword(): Boolean {
-        binding.registerPassword.error = getText(R.string.app_name)
+    private fun errorFormatPassword () : Boolean {
+        binding.registerPassword.error = getText(R.string.error_text_password)
         errorBorderPassword()
         return false
     }
 
-    private fun errorNullConfirmPassword(): Boolean {
-        binding.registerConfirmPassword.error = getText(R.string.app_name)
+    private fun errorConfirmPassword(): Boolean {
+        binding.registerConfirmPassword.error = getText(R.string.error_text_confirm_password)
         errorBorderConfirmPassword()
         return false
     }
@@ -234,10 +386,13 @@ class AuthRegisterFragment : Fragment() {
         binding.registerInputConfirmPassword.setBackgroundResource(R.drawable.bg_white_red_outline)
     }
 
+    private fun regexEmailAddress(target: CharSequence?): Boolean {
+        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target.toString()).matches()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

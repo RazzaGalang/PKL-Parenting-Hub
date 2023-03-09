@@ -1,4 +1,4 @@
-package com.example.pklparentinghub.data.model.user
+package com.example.pklparentinghub.data.model.userFollow
 
 
 import com.google.gson.annotations.SerializedName

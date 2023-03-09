@@ -1,9 +1,7 @@
 package com.example.pklparentinghub.ui.main.view
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,10 +30,9 @@ class AuthLoginFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAuthLoginBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,13 +42,6 @@ class AuthLoginFragment : Fragment() {
         loginAuth()
         initObserve()
         initTextWatcher()
-
-        binding.loginNavigateToRegister.setOnClickListener {
-            val fragment = AuthRegisterFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameLayoutAuthActivity, fragment)?.commit()
-        }
-
     }
 
     private fun setupViewModel (){
@@ -61,16 +51,12 @@ class AuthLoginFragment : Fragment() {
         )[LoginViewModel::class.java]
     }
 
-    private fun initRequestData(){
-        viewModel.requestLogin( email = "example@gmail.com", password = "password")
-    }
-
     private fun loginAuth(){
         binding.loginButtonLogin.setOnClickListener {
             val email = binding.loginInputEmail.text.toString()
             val password = binding.loginInputPassword.text.toString()
 
-            viewModel.requestLogin(email, password)
+            viewModel.requestLogin("example@gmail.com", "password1")
         }
     }
 
@@ -81,7 +67,7 @@ class AuthLoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
             when (result.status){
                 Status.SUCCESS -> {
-                    val intentBiasa = Intent(this.context, MainActivity::class.java)
+                    val intentBiasa = Intent(this.context, CompleteProfileActivity::class.java)
                     startActivity(intentBiasa)
 
                     Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
@@ -100,6 +86,7 @@ class AuthLoginFragment : Fragment() {
 
     private fun initTextWatcher(){
         textWatcherEmail()
+        textWatcherPassword()
     }
 
     private fun textWatcherEmail() {
@@ -121,9 +108,35 @@ class AuthLoginFragment : Fragment() {
         })
     }
 
+    private fun textWatcherPassword() {
+        binding.loginInputPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if ((s?.length ?: 0) < 1) {
+                    errorNullPassword()
+                } else {
+                    clearPassword()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
+    }
+
+
     private fun errorNullEmail(): Boolean {
-        binding.loginEmail.error = getText(R.string.app_name)
+        binding.loginEmail.error = getText(R.string.error_text_null_email)
         errorBorderEmail()
+        return false
+    }
+
+    private fun errorNullPassword(): Boolean {
+        binding.loginPassword.error = getText(R.string.error_text_null_password)
+        errorBorderPassword()
         return false
     }
 
@@ -133,12 +146,26 @@ class AuthLoginFragment : Fragment() {
         return true
     }
 
+    private fun clearPassword(): Boolean {
+        binding.loginPassword.isErrorEnabled = false
+        defaultBorderPassword()
+        return true
+    }
+
     private fun defaultBorderEmail() {
         binding.loginInputEmail.setBackgroundResource(R.drawable.slr_outline_button_border)
     }
 
+    private fun defaultBorderPassword() {
+        binding.loginInputPassword.setBackgroundResource(R.drawable.slr_outline_button_border)
+    }
+
     private fun errorBorderEmail() {
         binding.loginInputEmail.setBackgroundResource(R.drawable.bg_white_red_outline)
+    }
+
+    private fun errorBorderPassword() {
+        binding.loginInputPassword.setBackgroundResource(R.drawable.bg_white_red_outline)
     }
 
     override fun onDestroyView() {

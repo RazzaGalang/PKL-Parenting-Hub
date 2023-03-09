@@ -1,17 +1,13 @@
-package com.example.pklparentinghub.data.model.user
+package com.example.pklparentinghub.data.model.userDetail
 
 
 import com.google.gson.annotations.SerializedName
 
-data class UserData(
+data class UserDetailResponse(
     @SerializedName("data")
     val `data`: Data,
-    @SerializedName("links")
-    val links: Links,
     @SerializedName("message")
     val message: String,
-    @SerializedName("meta")
-    val meta: Meta,
     @SerializedName("status")
     val status: String
 )

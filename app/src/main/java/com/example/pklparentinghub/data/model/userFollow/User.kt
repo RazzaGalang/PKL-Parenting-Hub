@@ -1,11 +1,11 @@
-package com.example.pklparentinghub.data.model.login
+package com.example.pklparentinghub.data.model.userFollow
 
 
 import com.google.gson.annotations.SerializedName
 
 data class User(
     @SerializedName("birthday")
-    val birthday: Any,
+    val birthday: String,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("description")
@@ -13,13 +13,13 @@ data class User(
     @SerializedName("email")
     val email: String,
     @SerializedName("followers")
-    val followers: Int,
+    val followers: Any,
     @SerializedName("following")
-    val following: Int,
+    val following: Any,
     @SerializedName("full_name")
     val fullName: String,
     @SerializedName("gender")
-    val gender: Any,
+    val gender: String,
     @SerializedName("id")
     val id: Int,
     @SerializedName("profile_cover")
