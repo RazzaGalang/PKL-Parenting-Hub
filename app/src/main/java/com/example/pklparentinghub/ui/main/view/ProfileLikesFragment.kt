@@ -1,31 +1,24 @@
 package com.example.pklparentinghub.ui.main.view
 
-import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.pklparentinghub.R
-import com.example.pklparentinghub.data.api.ApiHelper
-import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.data.model.profile.ProfileModel
 import com.example.pklparentinghub.databinding.FragmentProfileArticleBinding
+import com.example.pklparentinghub.databinding.FragmentProfileLikesBinding
 import com.example.pklparentinghub.ui.main.adapter.ProfileArtichleAdapter
 import com.example.pklparentinghub.ui.main.adapter.ShimmerArticleProfileAdapter
-import com.example.pklparentinghub.utils.Status
 
-class ProfileArticleFragment : Fragment() {
+class ProfileLikesFragment : Fragment() {
 
-    private var _binding: FragmentProfileArticleBinding? = null
+    private var _binding: FragmentProfileLikesBinding? = null
     private val binding get() = _binding!!
     private val profileAdapter = ProfileArtichleAdapter()
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -34,11 +27,10 @@ class ProfileArticleFragment : Fragment() {
     private val shimmerAdapter : ShimmerArticleProfileAdapter = ShimmerArticleProfileAdapter()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentProfileArticleBinding.inflate(inflater, container, false)
+    ): View? {
+        _binding = FragmentProfileLikesBinding.inflate(inflater, container, false)
         val view = binding.root
 
         swipeRefreshLayout = view.findViewById(R.id.refreshArthicle)
@@ -81,46 +73,51 @@ class ProfileArticleFragment : Fragment() {
     private fun loadData(): MutableList<ProfileModel>{
         val data : MutableList<ProfileModel> = mutableListOf()
 
-        data.add(ProfileModel(
+        data.add(
+            ProfileModel(
             R.drawable.img_auth_profile_default_picture,
             "Razza Galang Adzan",
             getString(R.string.desc_art),
-            R.drawable.ic_like,
+            R.drawable.ic_like_dark,
             "178 suka",
             "7 Februari 2023",
             R.drawable.img_default_arthicle_cover
-        ))
-        data.add(ProfileModel(
+        )
+        )
+        data.add(
+            ProfileModel(
             R.drawable.img_auth_profile_default_picture,
             "Razza Galang",
             getString(R.string.desc_art),
-            R.drawable.ic_like,
+            R.drawable.ic_like_dark,
             "178 suka",
             "7 Februari 2023",
             R.drawable.img_default_arthicle_cover
-        ))
-        data.add(ProfileModel(
+        )
+        )
+        data.add(
+            ProfileModel(
             R.drawable.img_auth_profile_default_picture,
             "Razza",
             getString(R.string.desc_art),
-            R.drawable.ic_like,
+            R.drawable.ic_like_dark,
             "178 suka",
             "7 Februari 2023",
             R.drawable.img_default_arthicle_cover
-        ))
-        data.add(ProfileModel(
+        )
+        )
+        data.add(
+            ProfileModel(
             R.drawable.img_auth_profile_default_picture,
             "Galang Adzan",
             getString(R.string.desc_art),
-            R.drawable.ic_like,
+            R.drawable.ic_like_dark,
             "178 suka",
             "7 Februari 2023",
             R.drawable.img_default_arthicle_cover
-        ))
+        )
+        )
 
         return data
     }
 }
-
-
-

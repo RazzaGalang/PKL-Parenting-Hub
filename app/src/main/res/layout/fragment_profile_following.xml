@@ -4,28 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.view.ProfileArticleFragment">
+    tools:context=".ui.main.view.ProfileFollowingFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshArthicle"
+        android:id="@+id/refreshFollowing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/profileRecycler"
+            android:id="@+id/profileFollowingRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/view_large_height"
-            tools:listitem="@layout/item_article_profile"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/shimmerRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_shimmer_article_profile"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            tools:listitem="@layout/item_following_profile" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

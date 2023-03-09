@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.view.ProfileEditFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/editProfileBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/editProfileTopBar"
+                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:navigationIcon="@drawable/ic_back_profile"
+                    app:title="@string/Title2"/>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/editProfileBanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/baner_height"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_auth_profile_default_banner"
+                app:layout_constraintTop_toBottomOf="@id/editProfileBar"
+                app:layout_constraintStart_toStartOf="parent"
+                android:adjustViewBounds="true"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/editProfileImageBanner"
+                android:layout_width="@dimen/icon_edit"
+                android:layout_height="@dimen/icon_edit"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_image"
+                app:layout_constraintBottom_toBottomOf="@+id/editProfileBanner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editProfileBar" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/editProfilePicture"
+                android:layout_width="@dimen/custom_profile_size"
+                android:layout_height="@dimen/custom_profile_size"
+                android:src="@drawable/img_auth_profile_default_picture"
+                android:background="@drawable/style_profile_picture_rounded"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editProfileBanner"
+                android:layout_marginTop="@dimen/custom_margin_top"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                app:shapeAppearanceOverlay="@style/circleImage"
+                android:scaleType="centerCrop"
+                app:strokeWidth="@dimen/extra_small_margin"
+                android:padding="@dimen/extra_small_margin"
+                app:strokeColor="@color/white"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/editProfileImagePicture"
+                android:layout_width="@dimen/icon_height"
+                android:layout_height="@dimen/icon_height"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_image"
+                android:layout_marginStart="@dimen/huge_margin"
+                app:layout_constraintBottom_toBottomOf="@+id/editProfileBanner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editProfileBanner" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/editProfileTextViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal_radius"
+                android:layout_marginTop="@dimen/custom_margin_10dp"
+                android:text="@string/edit_name"
+                android:textAppearance="@style/TextAppearance.Body2"
+                app:fontFamily="More Fonts..."
+                app:layout_constraintStart_toStartOf="@id/editProfilePicture"
+                app:layout_constraintTop_toBottomOf="@id/editProfilePicture" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editProfileInputFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/custom_margin_20dp"
+                android:paddingTop="@dimen/zero_dp"
+                app:hintEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/editProfileTextViewName"
+                app:layout_constraintStart_toStartOf="@id/editProfileTextViewName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editProfileEditFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/zero_dp"
+                    android:hint="@string/hint_edit_name"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:background="@color/white"
+                    android:textAppearance="@style/TextAppearance.Body1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/editProfileTextViewUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_username"
+                android:textAppearance="@style/TextAppearance.Body2"
+                android:layout_marginVertical="@dimen/medium_margin"
+                android:layout_marginStart="@dimen/normal_radius"
+                app:layout_constraintTop_toBottomOf="@id/editProfileInputFullName"
+                app:layout_constraintStart_toStartOf="@id/editProfilePicture"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editProfileInputUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/editProfileTextViewUsername"
+                app:layout_constraintStart_toStartOf="@id/editProfileTextViewName"
+                android:layout_marginHorizontal="@dimen/custom_margin_20dp"
+                app:prefixText="@"
+                app:hintEnabled="false"
+                android:paddingTop="@dimen/zero_dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editProfileEditUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/zero_dp"
+                    android:hint="@string/hint_edit_username"
+                    android:background="@color/white"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.Body1"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/editProfileTextViewBiodata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_bio"
+                android:textAppearance="@style/TextAppearance.Body2"
+                android:layout_marginVertical="@dimen/small_icon_height"
+                android:layout_marginStart="@dimen/normal_radius"
+                app:layout_constraintTop_toBottomOf="@id/editProfileInputUsername"
+                app:layout_constraintStart_toStartOf="@id/editProfilePicture"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editProfileInputBiodata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/editProfileTextViewBiodata"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="@dimen/custom_margin_20dp"
+                app:hintEnabled="false"
+                app:counterEnabled="true"
+                app:counterMaxLength="150"
+                android:paddingTop="@dimen/zero_dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editProfileEditBiodata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/zero_dp"
+                    android:background="@color/white"
+                    android:hint="@string/hint_edit_bio"
+                    android:inputType="textMultiLine"
+                    android:maxLength="150"
+                    android:textAppearance="@style/TextAppearance.Body1"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/editProfileTextViewRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_gender"
+                android:layout_marginVertical="@dimen/large_radius"
+                android:layout_marginStart="@dimen/normal_radius"
+                app:layout_constraintTop_toBottomOf="@id/editProfileInputBiodata"
+                app:layout_constraintStart_toStartOf="@id/editProfilePicture"
+                android:textAppearance="@style/TextAppearance.Body2"/>
+
+            <RadioGroup
+                android:id="@+id/editProfileRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/editProfileTextViewRadio"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <RadioButton
+                    android:id="@+id/editProfileRadioBoy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_margin"
+                    android:text="@string/edit_radio_button1"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:checked="true"
+                    android:textAppearance="@style/TextAppearance.Body4"/>
+
+                <RadioButton
+                    android:id="@+id/editProfileRadioGirl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_radio_button2"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_margin="@dimen/medium_margin"
+                    android:textAppearance="@style/TextAppearance.Body4"/>
+
+            </RadioGroup>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/editProfileTextViewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_date"
+                android:layout_marginVertical="@dimen/large_radius"
+                android:layout_marginStart="@dimen/normal_radius"
+                app:layout_constraintTop_toBottomOf="@id/editProfileRadioGroup"
+                app:layout_constraintStart_toStartOf="@id/editProfilePicture"
+                android:textAppearance="@style/TextAppearance.Body2"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputDateEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/custom_margin_20dp"
+                app:hintEnabled="false"
+                app:startIconDrawable="@drawable/ic_calendar"
+                app:layout_constraintTop_toTopOf="@+id/editProfileButtonDate"
+                app:layout_constraintEnd_toStartOf="@+id/editProfileButtonDate"
+                app:layout_constraintStart_toEndOf="@id/editProfileTextViewDate"
+                app:layout_constraintTop_toBottomOf="@id/editProfileTextViewDate">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editProfileEditDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/zero_dp"
+                    android:paddingTop="@dimen/custom_margin_10dp"
+                    android:enabled="false"
+                    android:background="@color/white"
+                    android:hint="@string/hint_edit_date"
+                    android:textAppearance="@style/TextAppearance.Body3"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editProfileButtonDate"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="@dimen/button_date"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:text="@string/hint_edit_date"
+                app:cornerRadius="@dimen/normal_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editProfileTextViewDate"
+                app:strokeColor="@color/primary50"
+                app:strokeWidth="@dimen/view_height"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.Body3"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editProfileButtonSave"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/custom_height_button"
+                android:text="@string/edit_button"
+                android:textAllCaps="false"
+                app:cornerRadius="@dimen/normal_margin"
+                android:layout_marginVertical="@dimen/screen_margin"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                app:layout_constraintTop_toBottomOf="@id/editProfileButtonDate"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textAppearance="@style/TextAppearance.Body1"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>
