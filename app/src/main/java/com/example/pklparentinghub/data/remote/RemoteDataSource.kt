@@ -1,13 +1,17 @@
 package com.example.pklparentinghub.data.remote
 
+import com.example.pklparentinghub.data.api.ApiService
+import com.example.pklparentinghub.data.model.login.LoginResponse
 import com.example.pklparentinghub.utils.Resource
 import com.google.gson.Gson
 
 class RemoteDataSource {
-//    suspend fun handleRegisterResponse(
-//        register: Register
-//    ): Resource<AuthResponse> {
-//        val response = apiService.registerAuth(
+
+//    private val apiService: ApiService
+//    suspend fun handleLoginResponse(
+//        register:
+//    ): Resource<LoginResponse> {
+//        val response = apiService.postLogin(
 //            register.name,
 //            register.username,
 //            register.email,
