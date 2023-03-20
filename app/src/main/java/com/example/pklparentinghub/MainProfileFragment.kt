@@ -41,6 +41,7 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         setupViewPager()
+        editProfile()
         view()
     }
 
@@ -68,6 +69,14 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
                 1 -> ProfileLikesFragment()
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }
+        }
+    }
+
+    private fun editProfile(){
+        binding.mainButtonEditProfile.setOnClickListener {
+            val fragment = ProfileEditFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
         }
     }
 

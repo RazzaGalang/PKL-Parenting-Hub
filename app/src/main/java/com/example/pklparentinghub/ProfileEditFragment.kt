@@ -59,7 +59,7 @@ class ProfileEditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         dateButton = view.findViewById(R.id.editProfileButtonDate)
-        dateText = view.findViewById(R.id.editProfileTextViewDate)
+        dateText = view.findViewById(R.id.editProfileEditDate)
 
         dateButton.setOnClickListener {
             showDatePicker()
@@ -67,8 +67,17 @@ class ProfileEditFragment : Fragment() {
         uploadImage()
         uploadProfile()
         username()
+        back()
         name()
         submit()
+    }
+
+    private fun back(){
+        binding.editProfileTopBar.setOnClickListener {
+            val fragment = MainProfileFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
+        }
     }
 
     private fun uploadImage() {
@@ -172,7 +181,7 @@ class ProfileEditFragment : Fragment() {
     }
 
     private fun name(){
-        binding.editProfileTextViewName.addTextChangedListener(object: TextWatcher{
+        binding.editProfileEditFullName.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -206,7 +215,9 @@ class ProfileEditFragment : Fragment() {
     }
 
     private fun binding(){
-
+        val fragment = MainProfileFragment()
+        val transaction = fragmentManager?.beginTransaction()
+        transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
     }
 
     private fun nullCheck(){

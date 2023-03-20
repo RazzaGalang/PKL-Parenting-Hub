@@ -31,6 +31,7 @@ class ProfileConnectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPager()
+        back()
     }
 
     private inner class MyPagerAdapter(fragmentActivity: FragmentActivity) :
@@ -44,6 +45,14 @@ class ProfileConnectionFragment : Fragment() {
                 1 -> ProfileFollowersFragment()
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }
+        }
+    }
+
+    private fun back(){
+        binding.topBarProfileConnection.setOnClickListener {
+            val fragment = MainProfileFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
         }
     }
 
