@@ -8,86 +8,62 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/itemProfilePicture"
-        android:layout_width="@dimen/custom_icon"
-        android:layout_height="@dimen/custom_icon"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        android:layout_marginVertical="@dimen/custom_margin_vertical"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:background="@drawable/style_profile_picture_rounded"
-        android:padding="@dimen/extra_small_margin"
+        android:layout_width="@dimen/semi_huge_margin"
+        android:layout_height="@dimen/semi_huge_margin"
+        android:layout_margin="@dimen/screen_margin"
+        android:padding="3dp"
         android:scaleType="centerCrop"
         android:src="@drawable/img_auth_profile_default_picture"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/circleImage"/>
+        app:shapeAppearanceOverlay="@style/circleImage" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/itemProfileUsername"
+        android:id="@+id/itemFullName"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/normal_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/itemProfilePicture"
+        app:layout_constraintEnd_toStartOf="@+id/itemCover"
+        app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
+        app:layout_constraintTop_toTopOf="@+id/itemProfilePicture" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/itemTitle"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_margin"
+        android:layout_marginVertical="@dimen/normal_margin"
+        app:layout_constraintEnd_toStartOf="@+id/itemCover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemProfilePicture" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/itemLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_regular"
+        android:layout_marginHorizontal="@dimen/screen_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/itemCover" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/itemTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/normal_margin"
-        android:layout_marginVertical="@dimen/normal_margin"
-        android:text="@string/User"
-        android:textAppearance="@style/TextAppearance.Caption"
-        app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
-        app:layout_constraintTop_toTopOf="@+id/itemProfilePicture"/>
+        app:layout_constraintBottom_toBottomOf="@+id/itemCover"
+        app:layout_constraintEnd_toStartOf="@+id/itemCover" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/itemProfileDefaultCover"
-        android:layout_width="@dimen/button_edit_profile_radius"
-        android:layout_height="@dimen/button_edit_profile_radius"
-        android:src="@drawable/img_default_arthicle_cover"
-        style="@style/cornerImage"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        app:layout_constraintTop_toTopOf="@id/itemProfilePicture"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/itemProfileDescription"
-        android:layout_width="@dimen/custom_width_list"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/screen_margin"
-        android:gravity="start"
-        android:text="@string/desc_art"
-        android:textAppearance="@style/TextAppearance.Body6"
-        app:layout_constraintEnd_toStartOf="@+id/itemProfileDefaultCover"
-        app:layout_constraintStart_toStartOf="@id/itemProfileLike"
-        app:layout_constraintTop_toBottomOf="@id/itemProfileUsername" />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/itemProfileIconLike"
-        android:layout_width="@dimen/button_large_radius"
-        android:layout_height="@dimen/button_large_radius"
-        android:layout_marginHorizontal="@dimen/custom_margin_20dp"
-        android:layout_marginVertical="@dimen/medium_margin"
-        android:button="@drawable/slr_icon_heart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemProfileDescription" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/itemProfileLike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/custom_margin_20dp"
-        android:text="@string/Like"
-        android:textAppearance="@style/TextAppearance.Validation"
-        android:textColor="@color/grey"
-        android:layout_marginBottom="@dimen/medium_margin"
+        android:id="@+id/itemCover"
+        android:src="@drawable/img_auth_profile_default_banner"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:layout_margin="@dimen/screen_margin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/itemProfileIconLike"
-        app:layout_constraintTop_toTopOf="@id/itemProfileIconLike" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/itemProfileDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/custom_margin_horizontal"
-        android:text="@string/Date"
-        android:textColor="@color/grey"
-        android:textAppearance="@style/TextAppearance.Validation"
-        android:layout_marginBottom="@dimen/medium_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/itemProfileDefaultCover"
-        app:layout_constraintTop_toTopOf="@id/itemProfileIconLike" />
+    </com.google.android.material.imageview.ShapeableImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>

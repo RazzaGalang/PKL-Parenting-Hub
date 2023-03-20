@@ -14,11 +14,11 @@ class ProfileArtichleAdapter: RecyclerView.Adapter<ProfileArtichleAdapter.Profil
         fun bind(item: ProfileModel) {
             binding.apply{
                 itemProfilePicture.setImageResource(item.ivProfile)
-                itemProfileUsername.text = item.username
-                itemProfileDescription.text = item.desc
-                itemProfileLike.text = item.like
-                itemProfileDate.text = item.date
-                itemProfileDefaultCover.setImageResource(item.default)
+                itemFullName.text = item.username
+                itemTitle.text = item.desc
+                itemLike.text = item.like
+                itemTime.text = item.date
+                itemCover.setImageResource(item.default)
             }
         }
     }

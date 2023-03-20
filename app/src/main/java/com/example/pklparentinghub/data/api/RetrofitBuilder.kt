@@ -9,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitBuilder {
 
     private const val BASE_URL = CONST_URL.CONST_BASE_URL
-
     fun getRetrofit(): ApiService{
         val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
