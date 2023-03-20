@@ -121,7 +121,7 @@
     </style>
 
     <style name="TextAppearance.Validation" parent="Base.TextAppearance.AppCompat">
-        <item name="fontFamily">@@font/roboto_regular</item>
+        <item name="fontFamily">@font/roboto_regular</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">9sp</item>
         <item name="lineHeight">@dimen/validation_line_height</item>
@@ -129,7 +129,7 @@
     </style>
 
     <style name="TextAppearance.Caption" parent="Base.TextAppearance.AppCompat">
-        <item name="fontFamily">@@font/roboto_regular</item>
+        <item name="fontFamily">@font/roboto_regular</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">11sp</item>
         <item name="lineHeight">@dimen/caption_line_height</item>

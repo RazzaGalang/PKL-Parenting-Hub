@@ -61,4 +61,7 @@
     <dimen name="custom_margin_vertical">18dp</dimen>
     <dimen name="custom_width_list">255dp</dimen>
     <dimen name="custom_margin_horizontal">110dp</dimen>
+
+
+    <dimen name="avatar_height">32dp</dimen>
 </resources>

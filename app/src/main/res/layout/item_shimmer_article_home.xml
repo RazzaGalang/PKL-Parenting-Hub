@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout
+    android:id="@+id/shimmerFrameLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/shimmerArticleCover"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="125dp"
+            android:layout_margin="@dimen/screen_margin"
+            android:background="@drawable/shimmer_rounded_corner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/shimmerArticleTime"
+            android:layout_width="100dp"
+            android:layout_height="12dp"
+            android:layout_margin="@dimen/screen_margin"
+            android:background="@drawable/shimmer_rounded_side"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmerArticleCover" />
+
+        <View
+            android:id="@+id/shimmerArticleTitleFirst"
+            android:background="@drawable/shimmer_rounded_side"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="15dp"
+            android:layout_marginVertical="@dimen/normal_margin"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTime" />
+
+        <View
+            android:id="@+id/shimmerArticleTitleSecond"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="15dp"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/normal_margin"
+            android:background="@drawable/shimmer_rounded_side"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTitleFirst" />
+
+        <View
+            android:id="@+id/shimmerArticleProfilePicture"
+            android:background="@drawable/shimmer_circle_shape"
+            android:layout_width="@dimen/large_margin"
+            android:layout_height="@dimen/large_margin"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/small_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTitleSecond" />
+
+        <View
+            android:id="@+id/shimmerArticleAuthor"
+            android:background="@drawable/shimmer_rounded_side"
+            android:layout_width="100dp"
+            android:layout_height="12dp"
+            android:layout_marginHorizontal="@dimen/normal_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/shimmerArticleProfilePicture"
+            app:layout_constraintStart_toEndOf="@+id/shimmerArticleProfilePicture"
+            app:layout_constraintTop_toTopOf="@+id/shimmerArticleProfilePicture" />
+
+        <View
+            android:id="@+id/shimmerArticleLike"
+            android:background="@drawable/shimmer_rounded_side"
+            android:layout_width="@dimen/huge_margin"
+            android:layout_height="12dp"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/shimmerArticleProfilePicture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shimmerArticleProfilePicture" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>
