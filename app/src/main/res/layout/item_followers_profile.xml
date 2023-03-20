@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/itemFollowersPicture"
+        android:layout_width="@dimen/custom_height_button"
+        android:layout_height="@dimen/custom_height_button"
+        android:src="@drawable/img_auth_profile_default_picture"
+        android:background="@drawable/style_profile_picture_rounded"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="@dimen/normal_margin"
+        android:layout_marginVertical="@dimen/normal_margin"
+        app:shapeAppearanceOverlay="@style/circleImage"
+        android:scaleType="centerCrop"
+        app:strokeWidth="@dimen/extra_small_margin"
+        android:padding="@dimen/extra_small_margin"
+        app:strokeColor="@color/white"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/itemFollowersFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/normal_margin"
+        android:layout_marginVertical="@dimen/normal_margin"
+        android:textAppearance="@style/TextAppearance.Body4"
+        android:text="@string/connec_name"
+        app:layout_constraintStart_toEndOf="@id/itemFollowersPicture"
+        app:layout_constraintTop_toTopOf="@id/itemFollowersPicture"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/itemFollowersUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/custom_margin_20dp"
+        android:layout_marginHorizontal="@dimen/normal_margin"
+        android:textAppearance="@style/TextAppearance.Caption"
+        android:text="@string/connec_username"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toEndOf="@id/itemFollowersPicture"
+        app:layout_constraintTop_toBottomOf="@+id/itemFollowersFullName"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/itemFollowersButton"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/medium_margin"
+        android:text="@string/connec_follow"
+        android:textAppearance="@style/TextAppearance.Button"
+        app:cornerRadius="@dimen/button_edit_profile_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/itemFollowersFullName"
+        app:strokeColor="@color/primary40"
+        app:strokeWidth="@dimen/view_height"
+        android:textAllCaps="false"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

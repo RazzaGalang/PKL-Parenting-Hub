@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.PKLParentingHub" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary30</item>
-        <item name="colorPrimaryVariant">@color/primary10</item>
+        <item name="colorPrimary">@color/primary50</item>
+        <item name="colorPrimaryVariant">@color/primary30</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/primary30</item>
-        <item name="colorSecondaryVariant">@color/primary10</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/primary50</item>
+        <item name="colorSecondaryVariant">@color/primary30</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

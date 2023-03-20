@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/fragmentProfile"
-        android:name="com.example.pklparentinghub.FragmentProfile"
+        android:name="com.example.pklparentinghub.MainProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_main_profile" >
         <action
             android:id="@+id/action_fragmentProfile_to_fragmentEditProfile"
             app:destination="@id/fragmentEditProfile" />
@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentEditProfile"
-        android:name="com.example.pklparentinghub.FragmentEditProfile"
+        android:name="com.example.pklparentinghub.ProfileEditFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" >
+        tools:layout="@layout/fragment_profile_edit" >
         <action
             android:id="@+id/action_fragmentEditProfile_to_fragmentProfile"
             app:destination="@id/fragmentProfile"
@@ -30,9 +30,9 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentConnection"
-        android:name="com.example.pklparentinghub.FragmentConnection"
+        android:name="com.example.pklparentinghub.ProfileConnectionFragment"
         android:label="fragment_connection"
-        tools:layout="@layout/fragment_connection" >
+        tools:layout="@layout/fragment_profile_connection" >
         <action
             android:id="@+id/action_fragmentConnection_to_fragmentProfile"
             app:destination="@id/fragmentProfile" />
