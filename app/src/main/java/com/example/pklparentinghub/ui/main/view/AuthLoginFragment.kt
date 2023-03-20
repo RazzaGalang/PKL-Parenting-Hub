@@ -42,6 +42,15 @@ class AuthLoginFragment : Fragment() {
         loginAuth()
         initObserve()
         initTextWatcher()
+        setupToRegister()
+    }
+
+    private fun setupToRegister(){
+        binding.loginNavigateToRegister.setOnClickListener{
+            val fragment = AuthRegisterFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutAuthActivity, fragment)?.commit()
+        }
     }
 
     private fun setupViewModel (){
