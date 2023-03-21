@@ -14,7 +14,7 @@ object Const {
     }
 
     object Token {
-        const val AUTH_PREFIX = "Bearer "
+        const val AUTH_PREFIX = "Bearer"
     }
 }
 
