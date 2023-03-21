@@ -26,5 +26,4 @@ class RegisterViewModel (private val registerRepository: RegisterRepository) : V
             }
         }
     }
-
 }
