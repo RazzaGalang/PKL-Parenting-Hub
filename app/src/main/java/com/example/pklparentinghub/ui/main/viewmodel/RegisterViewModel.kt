@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pklparentinghub.data.model.login.LoginResponse
 import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.repository.RegisterRepository
@@ -24,7 +23,7 @@ class RegisterViewModel (private val registerRepository: RegisterRepository) : V
                 val response = registerRepository.requestRegister(request)
                 _registerResult.value = Resource.success(response)
             } catch (e: Exception) {
-                _registerResult.value = Resource.error(data = null, message = "An error occurred")
+                _registerResult.value = Resource.error(message = "An error occurred", data = null)
             }
         }
     }

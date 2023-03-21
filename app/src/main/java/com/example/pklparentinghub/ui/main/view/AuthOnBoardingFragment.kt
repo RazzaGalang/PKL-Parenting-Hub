@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentAuthOnBoardingBinding
 
@@ -31,9 +32,7 @@ class AuthOnBoardingFragment : Fragment() {
 
     private fun initNavigation(){
         binding.onBoardingButtonContinue.setOnClickListener {
-            val fragment = AuthLoginFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameLayoutAuthActivity, fragment)?.commit()
+            findNavController().navigate(AuthOnBoardingFragmentDirections.actionAuthOnBoardingFragmentToAuthLoginFragment())
         }
     }
 

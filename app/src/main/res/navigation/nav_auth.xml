@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_auth"
+    app:startDestination="@id/authOnBoardingFragment">
+
+    <fragment
+        android:id="@+id/authOnBoardingFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.AuthOnBoardingFragment"
+        android:label="fragment_auth_on_boarding"
+        tools:layout="@layout/fragment_auth_on_boarding" >
+        <action
+            android:id="@+id/action_authOnBoardingFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authLoginFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.AuthLoginFragment"
+        android:label="fragment_auth_login"
+        tools:layout="@layout/fragment_auth_login" >
+        <action
+            android:id="@+id/action_authLoginFragment_to_authRegisterFragment"
+            app:destination="@id/authRegisterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authRegisterFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.AuthRegisterFragment"
+        android:label="fragment_auth_register"
+        tools:layout="@layout/fragment_auth_register" >
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment" />
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authRegisterConnectionErrorFragment"
+            app:destination="@id/authRegisterConnectionErrorFragment" />
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authRegisterSuccessFragment2"
+            app:destination="@id/authRegisterSuccessFragment2" />
+    </fragment>
+    <dialog
+        android:id="@+id/authRegisterConnectionErrorFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.AuthRegisterConnectionErrorFragment"
+        android:label="AuthRegisterConnectionErrorFragment" >
+        <action
+            android:id="@+id/action_authRegisterConnectionErrorFragment_to_authRegisterFragment"
+            app:destination="@id/authRegisterFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/authRegisterSuccessFragment2"
+        android:name="com.example.pklparentinghub.ui.main.condition.AuthRegisterSuccessFragment"
+        android:label="AuthRegisterSuccessFragment" >
+        <action
+            android:id="@+id/action_authRegisterSuccessFragment2_to_authRegisterFragment"
+            app:destination="@id/authRegisterFragment" />
+        <action
+            android:id="@+id/action_authRegisterSuccessFragment2_to_authLoginFragment"
+            app:destination="@id/authLoginFragment" />
+    </dialog>
+</navigation>

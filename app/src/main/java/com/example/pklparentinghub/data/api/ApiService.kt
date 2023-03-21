@@ -7,21 +7,20 @@ import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
 import com.example.pklparentinghub.data.model.userFollow.UserFollowResponse
-import com.example.pklparentinghub.utils.EndPoint
-import retrofit2.Call
+import com.example.pklparentinghub.utils.Const
 import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
 
     @Headers("Accept: application/json")
-    @POST(EndPoint.LOGIN_ENDPOINT)
+    @POST(Const.LOGIN_ENDPOINT)
     suspend fun postLogin(
         @Body request: LoginRequest
     ): Response<LoginResponse>
 
     @Headers("Accept: application/json")
-    @POST(EndPoint.REGISTER_ENDPOINT)
+    @POST(Const.REGISTER_ENDPOINT)
     suspend fun postRegister(
         @Body request: RegisterRequest
     ) : Response<RegisterResponse>
@@ -32,7 +31,6 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("param") userId : Int
     ): Response<UserDetailResponse>
-
 
     //BELOM
     @Headers("Accept: application/json")

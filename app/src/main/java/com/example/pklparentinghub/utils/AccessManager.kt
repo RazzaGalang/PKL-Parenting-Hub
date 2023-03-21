@@ -2,10 +2,7 @@ package com.example.pklparentinghub.utils
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
@@ -63,6 +60,10 @@ class AccessManager(private val context: Context) {
     private object PreferencesKey {
         const val AUTH_PREFERENCES_KEY = "auth_preferences"
         const val TOKEN_ACCESS_REF = "token_access_key"
+
+        private val accessTokenKey = stringPreferencesKey("access_token")
+        private val firstTimeAccessKey = booleanPreferencesKey("first_time_access")
+        private val homeFirstTimeAccessKey = booleanPreferencesKey("home_first_time_access")
 
         val accessKey = stringPreferencesKey(TOKEN_ACCESS_REF)
     }
