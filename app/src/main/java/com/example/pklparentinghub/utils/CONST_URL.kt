@@ -1,5 +1,5 @@
 package com.example.pklparentinghub.utils
 
 object CONST_URL {
-    const val CONST_BASE_URL = "https://6c7a-125-164-18-217.ap.ngrok.io"
+    const val CONST_BASE_URL = "https://42c7-125-164-17-166.ap.ngrok.io"
 }

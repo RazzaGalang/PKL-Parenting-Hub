@@ -40,23 +40,6 @@
         <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="TextAppearance.Subtitle1.Bold" parent="Base.TextAppearance.AppCompat">
-        <item name="fontFamily">@font/roboto_bold</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
-        <item name="android:textSize">20sp</item>
-        <item name="lineHeight">@dimen/subtitle_1_line_height</item>
-        <item name="android:letterSpacing">0.01</item>
-    </style>
-
-    <style name="TextAppearance.Subtitle3.Bold" parent="Base.TextAppearance.AppCompat">
-        <item name="fontFamily">@font/roboto_bold</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
-        <item name="android:textSize">16sp</item>
-        <item name="lineHeight">@dimen/subtitle_1_line_height</item>
-        <item name="android:letterSpacing">0.01</item>
-    </style>
-
-
     <style name="TextAppearance.Subtitle2" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/roboto_regular</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
@@ -83,10 +66,18 @@
         <item name="android:layout_margin">@dimen/screen_margin</item>
     </style>
 
+    <style name="TextAppearance.Subtitle4" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">@dimen/subtitle_3_line_height</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
     <style name="TextAppearance.Body1" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/roboto_regular</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="lineHeight">@dimen/body_1_line_height</item>
         <item name="android:letterSpacing">0.01</item>
     </style>
@@ -99,13 +90,44 @@
         <item name="android:letterSpacing">0.04</item>
     </style>
 
+    <style name="TextAppearance.Body3" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">@dimen/body_2_line_height</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="TextAppearance.Body4" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">@dimen/body_2_line_height</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="TextAppearance.Body5" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">@dimen/body_2_line_height</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="TextAppearance.Body6" parent="Base.TextAppearance.AppCompat">
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">@dimen/body_2_line_height</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
     <style name="TextAppearance.Button" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:textSize">13sp</item>
         <item name="lineHeight">@dimen/button_line_height</item>
-        <item name="android:letterSpacing">0.03</item>
-        <item name="backgroundTint">@color/primary30</item>
+        <item name="android:letterSpacing">0.01</item>
     </style>
 
     <style name="TextAppearance.Validation" parent="Base.TextAppearance.AppCompat">

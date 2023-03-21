@@ -10,16 +10,16 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.pklparentinghub.condition.AuthRegisterSuccessFragment
+import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
-import com.example.pklparentinghub.condition.AuthRegisterConnectionErrorFragment
+import com.example.pklparentinghub.ui.main.condition.AuthRegisterConnectionErrorFragment
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.databinding.FragmentAuthRegisterBinding
 import com.example.pklparentinghub.ui.base.RegisterViewModelFactory
+import com.example.pklparentinghub.ui.main.condition.AuthRegisterSuccessFragmentDirections
 import com.example.pklparentinghub.ui.main.viewmodel.RegisterViewModel
 import com.example.pklparentinghub.utils.Status
 
@@ -40,10 +40,9 @@ class AuthRegisterFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAuthRegisterBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +52,7 @@ class AuthRegisterFragment : Fragment() {
         setupViewModel()
         setupRegister()
         setupObserve()
+        setupToLogin()
     }
 
     private fun initTextWatcher(){
@@ -73,6 +73,8 @@ class AuthRegisterFragment : Fragment() {
     private fun setupRegister (){
         binding.registerButtonContinue.setOnClickListener {
             if (!errorNullFullName() || !errorNullUserName() || !errorNullEmail() || !errorNullPassword() || !errorNullConfirmPassword()) {
+                requestValidateData()
+            } else if (binding.registerFullName.isErrorEnabled || binding.registerUsername.isErrorEnabled || binding.registerEmail.isErrorEnabled || binding.registerPassword.isErrorEnabled || binding.registerConfirmPassword.isErrorEnabled){
                 requestValidateData()
             } else {
                 viewModel.requestRegister(
@@ -99,14 +101,11 @@ class AuthRegisterFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
-                        val exampleDialog = AuthRegisterSuccessFragment()
-                        exampleDialog.show(parentFragmentManager, "example_dialog")
+                        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthRegisterSuccessFragment2())
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
                         Log.e(ContentValues.TAG, "setupObservers: " + it.message)
-                        val exampleDialog = AuthRegisterConnectionErrorFragment()
-                        exampleDialog.show(parentFragmentManager, "example_dialog")
+                        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthRegisterConnectionErrorFragment())
                     }
                     Status.LOADING -> {
                         Log.e(ContentValues.TAG, "setupObservers: LOADING")
@@ -388,6 +387,12 @@ class AuthRegisterFragment : Fragment() {
 
     private fun regexEmailAddress(target: CharSequence?): Boolean {
         return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target.toString()).matches()
+    }
+
+    private fun setupToLogin(){
+        binding.registerNavigateToLogin.setOnClickListener{
+            findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthLoginFragment())
+        }
     }
 
     override fun onDestroyView() {
