@@ -9,10 +9,13 @@ import com.example.pklparentinghub.data.model.login.LoginResponse
 import com.example.pklparentinghub.data.repository.LoginRepository
 import com.example.pklparentinghub.utils.Resource
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
-    private val _loginResult = MutableLiveData<Resource<LoginResponse>>()
-    val loginResult: LiveData<Resource<LoginResponse>> = _loginResult
+    private val _loginResult = MutableLiveData<Resource<Response<LoginResponse>>>()
+    val loginResult: LiveData<Resource<Response<LoginResponse>>> = _loginResult
+
+
     fun requestLogin(email: String, password: String) {
         viewModelScope.launch {
             _loginResult.value = Resource.loading(data = null)

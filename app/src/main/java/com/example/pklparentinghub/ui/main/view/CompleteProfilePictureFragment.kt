@@ -13,8 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.lifecycle.lifecycleScope
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentCompleteProfilePictureBinding
+import com.example.pklparentinghub.utils.AccessManager
 
 class CompleteProfilePictureFragment : Fragment() {
 
@@ -47,7 +50,6 @@ class CompleteProfilePictureFragment : Fragment() {
             transaction?.replace(R.id.frameLayoutCompleteProfileActivity, fragment)?.commit()
         }
     }
-
 
     private fun initInsertPicture(){
         binding.completeProfilePictureInsertPicture.setOnClickListener {

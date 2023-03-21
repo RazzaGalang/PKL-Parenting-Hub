@@ -1,4 +1,4 @@
-package com.example.pklparentinghub.condition
+package com.example.pklparentinghub.ui.main.condition
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,8 +11,7 @@ import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentAuthRegisterConditionBinding
 import com.example.pklparentinghub.ui.main.view.AuthLoginFragment
 
-class AuthRegisterSuccessFragment : DialogFragment() {
-
+class AuthRegisterConnectionErrorFragment : DialogFragment () {
     private var _binding: FragmentAuthRegisterConditionBinding? = null
     private val binding get() = _binding!!
 
@@ -37,19 +36,15 @@ class AuthRegisterSuccessFragment : DialogFragment() {
             dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
 
-        binding.registerConditionImage.setImageResource(R.drawable.img_condition_success)
-        binding.registerConditionTitle.text = "Daftar Berhasil"
-        binding.registerConditionContent.text = "Anda akan ditujukan ke halaman masuk"
-        binding.registerConditionButton.text = "Masuk"
+        binding.registerConditionImage.setImageResource(R.drawable.img_condition_no_connection)
+        binding.registerConditionTitle.text = "Tidak Ada Internet"
+        binding.registerConditionContent.text = "Periksa Koneksi Internet Anda"
+        binding.registerConditionButton.text = "Kembali"
     }
-
 
     private fun setNavigation(){
         binding.registerConditionButton.setOnClickListener {
             dialog!!.dismiss()
-            val fragment = AuthLoginFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameLayoutAuthActivity, fragment)?.commit()
         }
     }
 
@@ -57,5 +52,4 @@ class AuthRegisterSuccessFragment : DialogFragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.pklparentinghub.condition
+package com.example.pklparentinghub.ui.main.condition
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentAuthRegisterConditionBinding
 import com.example.pklparentinghub.ui.main.view.AuthLoginFragment
+import com.example.pklparentinghub.ui.main.view.AuthLoginFragmentDirections
 
-class AuthRegisterConnectionErrorFragment : DialogFragment () {
+class AuthRegisterSuccessFragment : DialogFragment() {
+
     private var _binding: FragmentAuthRegisterConditionBinding? = null
     private val binding get() = _binding!!
 
@@ -36,15 +40,18 @@ class AuthRegisterConnectionErrorFragment : DialogFragment () {
             dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
 
-        binding.registerConditionImage.setImageResource(R.drawable.img_condition_no_connection)
-        binding.registerConditionTitle.text = "Tidak Ada Internet"
-        binding.registerConditionContent.text = "Periksa Koneksi Internet Anda"
-        binding.registerConditionButton.text = "Kembali"
+        binding.registerConditionImage.setImageResource(R.drawable.img_condition_success)
+        binding.registerConditionTitle.text = "Daftar Berhasil"
+        binding.registerConditionContent.text = "Anda akan ditujukan ke halaman masuk"
+        binding.registerConditionButton.text = "Masuk"
     }
+
 
     private fun setNavigation(){
         binding.registerConditionButton.setOnClickListener {
             dialog!!.dismiss()
+            findNavController().navigate(AuthRegisterSuccessFragmentDirections.actionAuthRegisterSuccessFragment2ToAuthLoginFragment())
+            findNavController().popBackStack()
         }
     }
 
@@ -52,4 +59,5 @@ class AuthRegisterConnectionErrorFragment : DialogFragment () {
         super.onDestroyView()
         _binding = null
     }
+
 }
