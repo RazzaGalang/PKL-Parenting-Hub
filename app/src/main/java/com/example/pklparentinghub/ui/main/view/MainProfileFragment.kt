@@ -32,6 +32,7 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         setupViewPager()
+        editProfile()
     }
 
 
@@ -46,6 +47,14 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
                 1 -> tab.text = "Disukai"
             }
         }.attach()
+    }
+
+    private fun editProfile(){
+            binding.mainProfileButtonEditProfile.setOnClickListener {
+                val fragment = ProfileEditFragment()
+                val transaction = fragmentManager?.beginTransaction()
+                transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
+            }
     }
 
     private inner class MyPagerAdapter(fragmentActivity: FragmentActivity) :

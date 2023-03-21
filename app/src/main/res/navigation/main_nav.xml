@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/mainHomeFragment">
+
+    <fragment
+        android:id="@+id/mainHomeFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.MainHomeFragment"
+        android:label="fragment_main_home"
+        tools:layout="@layout/fragment_main_home" >
+        <action
+            android:id="@+id/action_mainHomeFragment_to_mainEventFragment"
+            app:destination="@id/mainEventFragment" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_mainNotificationFragment"
+            app:destination="@id/mainNotificationFragment" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_mainProfileFragment2"
+            app:destination="@id/mainProfileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainEventFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.MainEventFragment"
+        android:label="fragment_main_event"
+        tools:layout="@layout/fragment_main_event" >
+        <action
+            android:id="@+id/action_mainEventFragment_to_mainHomeFragment"
+            app:destination="@id/mainHomeFragment" />
+        <action
+            android:id="@+id/action_mainEventFragment_to_mainNotificationFragment"
+            app:destination="@id/mainNotificationFragment" />
+        <action
+            android:id="@+id/action_mainEventFragment_to_mainProfileFragment2"
+            app:destination="@id/mainProfileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainNotificationFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.MainNotificationFragment"
+        android:label="fragment_main_notification"
+        tools:layout="@layout/fragment_main_notification" >
+        <action
+            android:id="@+id/action_mainNotificationFragment_to_mainHomeFragment"
+            app:destination="@id/mainHomeFragment" />
+        <action
+            android:id="@+id/action_mainNotificationFragment_to_mainEventFragment"
+            app:destination="@id/mainEventFragment" />
+        <action
+            android:id="@+id/action_mainNotificationFragment_to_mainProfileFragment2"
+            app:destination="@id/mainProfileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainProfileFragment2"
+        android:name="com.example.pklparentinghub.ui.main.view.MainProfileFragment"
+        android:label="fragment_main_profile"
+        tools:layout="@layout/fragment_main_profile" >
+        <action
+            android:id="@+id/action_mainProfileFragment2_to_mainHomeFragment"
+            app:destination="@id/mainHomeFragment" />
+        <action
+            android:id="@+id/action_mainProfileFragment2_to_mainNotificationFragment"
+            app:destination="@id/mainNotificationFragment" />
+        <action
+            android:id="@+id/action_mainProfileFragment2_to_mainEventFragment"
+            app:destination="@id/mainEventFragment" />
+    </fragment>
+</navigation>
