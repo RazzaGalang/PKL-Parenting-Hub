@@ -11,13 +11,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
+import com.example.pklparentinghub.data.model.login.LoginRequest
 import com.example.pklparentinghub.databinding.FragmentAuthLoginBinding
 import com.example.pklparentinghub.ui.base.LoginViewModelFactory
 import com.example.pklparentinghub.ui.main.viewmodel.LoginViewModel
+import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class AuthLoginFragment : Fragment() {
 
@@ -38,20 +45,13 @@ class AuthLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupViewModel()
-        loginAuth()
-        initObserve()
         initTextWatcher()
+        setupForm()
+        setupViewModel()
+        setupObserve()
         setupToRegister()
     }
 
-    private fun setupToRegister(){
-        binding.loginNavigateToRegister.setOnClickListener{
-            val fragment = AuthRegisterFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameLayoutAuthActivity, fragment)?.commit()
-        }
-    }
 
     private fun setupViewModel (){
         viewModel = ViewModelProvider(
@@ -60,24 +60,38 @@ class AuthLoginFragment : Fragment() {
         )[LoginViewModel::class.java]
     }
 
-    private fun loginAuth(){
+    private fun setupForm(){
         binding.loginButtonLogin.setOnClickListener {
-            val email = binding.loginInputEmail.text.toString()
-            val password = binding.loginInputPassword.text.toString()
-
-            viewModel.requestLogin("example@gmail.com", "password1")
+            if (!checkingValidate()) {
+                validateForm()
+            } else {
+                setupRequest()
+            }
         }
     }
 
-    private fun initObserve(){
-        setupObserve()
+
+    private fun setupRequest(){
+        viewModel.requestLogin(
+            "example@gmail.com", "password1"
+
+//                binding.loginInputEmail.text.toString(),
+//                binding.loginInputPassword.text.toString()
+        )
     }
+
+
     private fun setupObserve(){
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
             when (result.status){
                 Status.SUCCESS -> {
                     val intentBiasa = Intent(this.context, CompleteProfileActivity::class.java)
                     startActivity(intentBiasa)
+
+                    result.data?.body()?.data?.let {
+                        AccessManager(requireContext())
+                            .setAccess(it.token, lifecycleScope)
+                    }
 
                     Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
                 }
@@ -88,6 +102,14 @@ class AuthLoginFragment : Fragment() {
 
                 Status.ERROR -> {
                     Log.e(ContentValues.TAG, "setupObservers: ERROR")
+
+                    val type = object : TypeToken<List<String>>() {}.type
+                    val errors = Gson().fromJson<List<String>>(result.message, type)
+
+                    binding.apply {
+                        loginEmail.error = errors.find { it.contains("email") }
+                        loginPassword.error = errors.find { it.contains("password") }
+                    }
                 }
             }
         }
@@ -101,18 +123,13 @@ class AuthLoginFragment : Fragment() {
     private fun textWatcherEmail() {
         binding.loginInputEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if ((s?.length ?: 0) < 1) {
-                    errorNullEmail()
-                } else {
-                    clearEmail()
-                }
+                validateEmail()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
             }
         })
     }
@@ -120,45 +137,66 @@ class AuthLoginFragment : Fragment() {
     private fun textWatcherPassword() {
         binding.loginInputPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if ((s?.length ?: 0) < 1) {
-                    errorNullPassword()
-                } else {
-                    clearPassword()
-                }
+                validatePassword()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
             }
         })
     }
 
+    private fun checkingValidate(): Boolean {
+        return !(!validateEmail() || !validatePassword())
+    }
 
-    private fun errorNullEmail(): Boolean {
+    private fun validateForm() {
+        validateEmail()
+        validatePassword()
+    }
+
+    private fun validateEmail() : Boolean {
+        return if (binding.loginInputEmail.length() == 0) {
+            errorNullEmail()
+            false
+        } else {
+            clearEmail()
+            true
+        }
+    }
+
+    private fun validatePassword() : Boolean {
+        return if (binding.loginInputPassword.length() == 0) {
+            errorNullPassword()
+            false
+        } else {
+            clearPassword()
+            true
+        }
+    }
+
+
+
+    private fun errorNullEmail() {
         binding.loginEmail.error = getText(R.string.error_text_null_email)
         errorBorderEmail()
-        return false
     }
 
-    private fun errorNullPassword(): Boolean {
+    private fun errorNullPassword() {
         binding.loginPassword.error = getText(R.string.error_text_null_password)
         errorBorderPassword()
-        return false
     }
 
-    private fun clearEmail(): Boolean {
+    private fun clearEmail() {
         binding.loginEmail.isErrorEnabled = false
         defaultBorderEmail()
-        return true
     }
 
-    private fun clearPassword(): Boolean {
+    private fun clearPassword() {
         binding.loginPassword.isErrorEnabled = false
         defaultBorderPassword()
-        return true
     }
 
     private fun defaultBorderEmail() {
@@ -175,6 +213,12 @@ class AuthLoginFragment : Fragment() {
 
     private fun errorBorderPassword() {
         binding.loginInputPassword.setBackgroundResource(R.drawable.bg_white_red_outline)
+    }
+
+    private fun setupToRegister(){
+        binding.loginNavigateToRegister.setOnClickListener{
+            findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthRegisterFragment())
+        }
     }
 
     override fun onDestroyView() {
