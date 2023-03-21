@@ -4,6 +4,10 @@ object Const {
     const val CONST_BASE_URL = "https://42c7-125-164-17-166.ap.ngrok.io/"
 
     const val PREFIX = "api/"
+
+    object Token {
+        const val AUTH_PREFIX = "Bearer "
+    }
     object Network {
         const val LOGIN = PREFIX +  "login"
         const val REGISTER = PREFIX + "register"
