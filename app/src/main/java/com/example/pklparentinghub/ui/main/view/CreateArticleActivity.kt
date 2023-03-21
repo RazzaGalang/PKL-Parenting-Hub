@@ -1,7 +1,8 @@
-package com.example.pklparentinghub
+package com.example.pklparentinghub.ui.main.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.pklparentinghub.R
 
 class CreateArticleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

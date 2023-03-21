@@ -53,8 +53,4 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("param") userId : Int
     ): Response<UserFollowResponse>
-
-
-
-
 }

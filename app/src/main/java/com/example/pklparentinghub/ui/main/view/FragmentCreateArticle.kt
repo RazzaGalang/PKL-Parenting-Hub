@@ -1,4 +1,4 @@
-package com.example.pklparentinghub
+package com.example.pklparentinghub.ui.main.view
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
@@ -15,8 +15,8 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentCreateArticleBinding
-
 
 class FragmentCreateArticle : Fragment() {
 

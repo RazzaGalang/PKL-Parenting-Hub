@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pklparentinghub.data.model.user.Article
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.ItemHomeArticleBinding
+import com.example.pklparentinghub.databinding.ItemHomeArticleSliderBinding
 
 class ArticleHomeAdapter : RecyclerView.Adapter<ArticleHomeAdapter.ViewHolder>() {
 
-        inner class ViewHolder (private val binding: ItemHomeArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder (private val binding: ItemHomeArticleBinding) : RecyclerView.ViewHolder(binding.root) {
             fun setData(item: Article) {
                 binding.apply {
                     itemTitle.text = item.title

@@ -1,4 +1,4 @@
-package com.example.pklparentinghub
+package com.example.pklparentinghub.ui.main.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import androidx.fragment.app.Fragment
+import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentCreateArticle2Binding
-import com.example.pklparentinghub.ui.main.view.MainActivity
 
 class FragmentCreateArticle2 : Fragment() {
 

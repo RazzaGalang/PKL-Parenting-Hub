@@ -1,4 +1,4 @@
-package com.example.pklparentinghub
+package com.example.pklparentinghub.ui.main.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -2,29 +2,48 @@ package com.example.pklparentinghub.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.pklparentinghub.data.model.ImageData
+import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.ItemHomeArticleSliderBinding
 
-class ArticleHomeSliderAdapter(private val items: List<ImageData>) :
-    RecyclerView.Adapter<ArticleHomeSliderAdapter.ImageViewHolder>() {
+class ArticleHomeSliderAdapter() : RecyclerView.Adapter<ArticleHomeSliderAdapter.ImageViewHolder>() {
 
-    inner class ImageViewHolder(itemView: ItemHomeArticleSliderBinding) :
-        RecyclerView.ViewHolder(itemView.root) {
-        private val binding = itemView
-        fun bind(data: ImageData) {
-            with(binding) {
-                Glide.with(itemView)
-                    .load(data.image)
+    class ImageViewHolder(private val binding: ItemHomeArticleSliderBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun setData(data: Article) {
+            val title = data.title
+            val imageBanner = data.thumbnail
+
+            binding.apply {
+                Glide.with(ivArticle.context)
+                    .load(imageBanner)
                     .transform(CenterCrop(), RoundedCorners(10))
                     .into(ivArticle)
-                tvTitle.text = data.title
+                tvTitle.text = title
             }
         }
     }
+
+    private val differCallback = object : DiffUtil.ItemCallback<Article>() {
+        override fun areItemsTheSame(
+            oldItem: Article,
+            newItem: Article
+        ) = oldItem.id == newItem.id
+
+        override fun areContentsTheSame(
+            oldItem: Article,
+            newItem: Article
+        ) = oldItem == newItem
+    }
+
+    private val differ = AsyncListDiffer(this, differCallback)
+    var items: List<Article>
+        get() = differ.currentList
+        set(value) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ImageViewHolder(
         ItemHomeArticleSliderBinding.inflate(
@@ -34,9 +53,10 @@ class ArticleHomeSliderAdapter(private val items: List<ImageData>) :
         )
     )
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.setData(items[position])
+        holder.setIsRecyclable(true)
     }
 }

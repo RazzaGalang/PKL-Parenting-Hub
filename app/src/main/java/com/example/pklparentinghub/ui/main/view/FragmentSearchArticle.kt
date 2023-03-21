@@ -1,13 +1,11 @@
-package com.example.pklparentinghub
+package com.example.pklparentinghub.ui.main.view
 
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import com.example.pklparentinghub.databinding.FragmentSearchArticleBinding
-
 
 class FragmentSearchArticle : Fragment() {
 
