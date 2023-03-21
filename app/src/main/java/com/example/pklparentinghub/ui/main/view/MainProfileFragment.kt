@@ -11,6 +11,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentMainProfileBinding
 import com.example.pklparentinghub.shimmer.ShimmerArticleProfileRecyclerFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -33,6 +35,8 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
 
         setupViewPager()
         editProfile()
+        navBar()
+        floatingBar()
     }
 
 
@@ -47,6 +51,16 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
                 1 -> tab.text = "Disukai"
             }
         }.attach()
+    }
+
+    private fun navBar(){
+        val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        view.visibility = View.VISIBLE
+    }
+
+    private fun floatingBar(){
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.mainButtonCreateArticle)
+        fab.visibility = View.VISIBLE
     }
 
     private fun editProfile(){
