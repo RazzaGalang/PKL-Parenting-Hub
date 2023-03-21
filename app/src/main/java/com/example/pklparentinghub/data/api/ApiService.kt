@@ -14,19 +14,19 @@ import retrofit2.http.*
 interface ApiService {
 
     @Headers("Accept: application/json")
-    @POST(Const.LOGIN_ENDPOINT)
+    @POST(Const.Network.LOGIN)
     suspend fun postLogin(
         @Body request: LoginRequest
     ): Response<LoginResponse>
 
     @Headers("Accept: application/json")
-    @POST(Const.REGISTER_ENDPOINT)
+    @POST(Const.Network.REGISTER)
     suspend fun postRegister(
         @Body request: RegisterRequest
     ) : Response<RegisterResponse>
 
     @Headers("Accept: application/json")
-    @GET("/api/users/{param}")
+    @GET(Const.Network.USER)
     fun getUserDetail(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
@@ -34,21 +34,21 @@ interface ApiService {
 
     //BELOM
     @Headers("Accept: application/json")
-    @GET("api/users/{param}/content")
+    @GET(Const.Network.USER_CONTENT)
     fun getUserContent(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
     ): Response<UserContentResponse>
 
     @Headers("Accept: application/json")
-    @GET("/api/users/{param}/followings")
+    @GET(Const.Network.USER_FOLLOWING)
     fun getUserFollowings(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
     ): Response<UserFollowResponse>
 
     @Headers("Accept: application/json")
-    @GET("/api/users/{param}/follower")
+    @GET(Const.Network.USER_FOLLOWER)
     fun getUserFollower(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
