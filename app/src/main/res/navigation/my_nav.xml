@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/mainProfileFragment">
+
+    <fragment
+        android:id="@+id/mainProfileFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.MainProfileFragment"
+        android:label="fragment_main_profile"
+        tools:layout="@layout/fragment_main_profile" >
+        <action
+            android:id="@+id/action_mainProfileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_mainProfileFragment_to_profileConnectionFragment"
+            app:destination="@id/profileConnectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.ProfileEditFragment"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" >
+        <action
+            android:id="@+id/action_profileEditFragment_to_mainProfileFragment"
+            app:destination="@id/mainProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileConnectionFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.ProfileConnectionFragment"
+        android:label="fragment_profile_connection"
+        tools:layout="@layout/fragment_profile_connection" >
+        <action
+            android:id="@+id/action_profileConnectionFragment_to_mainProfileFragment"
+            app:destination="@id/mainProfileFragment" />
+    </fragment>
+</navigation>

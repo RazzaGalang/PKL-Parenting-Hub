@@ -27,5 +27,4 @@ class RegisterViewModel (private val authRepository: AuthRepository) : ViewModel
             }
         }
     }
-
 }
