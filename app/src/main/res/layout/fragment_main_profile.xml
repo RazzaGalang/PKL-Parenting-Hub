@@ -31,14 +31,14 @@
             android:padding="3dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_auth_profile_default_picture"
-            app:layout_constraintBottom_toBottomOf="@+id/mainProfileButtonFollow"
+            app:layout_constraintBottom_toBottomOf="@+id/mainProfileButtonEditProfile"
             app:layout_constraintStart_toStartOf="parent"
             app:shapeAppearanceOverlay="@style/circleImage"
             app:strokeColor="@color/white"
             app:strokeWidth="3dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mainProfileButtonFollow"
+            android:id="@+id/mainProfileButtonEditProfile"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainProfileButtonFollow" />
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileButtonEditProfile" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mainProfileUsername"
