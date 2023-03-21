@@ -20,6 +20,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentProfileEditBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 class ProfileEditFragment : Fragment() {
@@ -70,6 +72,8 @@ class ProfileEditFragment : Fragment() {
         back()
         name()
         submit()
+        navBar()
+        floatingBar()
 //        photo()
     }
 
@@ -81,6 +85,16 @@ class ProfileEditFragment : Fragment() {
 //            Log.d("PhotoPicker", "No media selected")
 //        }}
 //    }
+
+    private fun navBar(){
+        val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        view.visibility = View.GONE
+    }
+
+    private fun floatingBar(){
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.mainButtonCreateArticle)
+        fab.visibility = View.GONE
+    }
 
     private fun back(){
         binding.editProfileTopBar.setOnClickListener {
