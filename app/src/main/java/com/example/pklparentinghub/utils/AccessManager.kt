@@ -19,14 +19,14 @@ class AccessManager(private val context: Context) {
     suspend fun setAccess(tokenAccess: String) {
         // Insert into Preference Data Store
         context.dataStore.edit { preferences ->
-            preferences[PreferencesKey.accessKey] = "${Const.AUTH_PREFIX} $tokenAccess"
+            preferences[PreferencesKey.accessKey] = "${Const.Token.AUTH_PREFIX} $tokenAccess"
         }
     }
 
     // Insertion without Suspend Function based on Key
     fun setAccess(tokenAccess: String, scope: CoroutineScope) = scope.launch {
         context.dataStore.edit { preferences ->
-            preferences[PreferencesKey.accessKey] = "${Const.AUTH_PREFIX} $tokenAccess"
+            preferences[PreferencesKey.accessKey] = "${Const.Token.AUTH_PREFIX} $tokenAccess"
         }
     }
 

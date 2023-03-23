@@ -85,8 +85,7 @@ class AuthLoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
             when (result.status){
                 Status.SUCCESS -> {
-                    val intentBiasa = Intent(this.context, CompleteProfileActivity::class.java)
-                    startActivity(intentBiasa)
+                    findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
 
                     result.data?.body()?.data?.let {
                         AccessManager(requireContext())

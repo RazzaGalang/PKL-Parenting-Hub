@@ -101,7 +101,7 @@ class AuthRegisterFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
-                        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthRegisterSuccessFragment2())
+                        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthLoginFragment())
                     }
                     Status.ERROR -> {
                         Log.e(ContentValues.TAG, "setupObservers: " + it.message)
