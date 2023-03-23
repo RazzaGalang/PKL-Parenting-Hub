@@ -1,0 +1,54 @@
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_format">
+        <item
+            android:id="@+id/actionFormatBold"
+            android:icon="@drawable/ic_format_bold"
+            android:orderInCategory="1"
+            android:title="bold"
+            app:showAsAction="ifRoom|withText" />
+
+        <item
+            android:id="@+id/actionFormatItalic"
+            android:icon="@drawable/ic_format_italic"
+            android:orderInCategory="1"
+            android:title="italic"
+            app:showAsAction="ifRoom|withText" />
+
+        <item
+            android:id="@+id/actionFormatUnderlined"
+            android:icon="@drawable/ic_format_underlined"
+            android:orderInCategory="1"
+            android:title="underlined"
+            app:showAsAction="ifRoom|withText" />
+
+        <item
+            android:id="@+id/actionFormatUnorderedList"
+            android:icon="@drawable/ic_format_list_bulleted"
+            android:orderInCategory="1"
+            android:title="unordered list"
+            app:showAsAction="ifRoom|withText" />
+
+        <item
+            android:id="@+id/actionFormatOrderedList"
+            android:icon="@drawable/ic_format_list_numbered"
+            android:orderInCategory="1"
+            android:title="ordered list"
+            app:showAsAction="ifRoom|withText" />
+
+        <item
+            android:id="@+id/actionFormatLink"
+            android:icon="@drawable/ic_format_link"
+            android:orderInCategory="1"
+            android:title="link"
+            app:showAsAction="ifRoom|withText" />
+
+        <item
+            android:id="@+id/actionFormatQuote"
+            android:icon="@drawable/ic_format_link"
+            android:orderInCategory="1"
+            android:title="quote"
+            app:showAsAction="ifRoom|withText" />
+    </group>
+</menu>
