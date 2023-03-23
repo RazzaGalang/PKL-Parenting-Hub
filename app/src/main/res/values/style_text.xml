@@ -56,27 +56,11 @@
         <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="TextAppearance.Subtitle1.Bold" parent="Base.TextAppearance.AppCompat">
-        <item name="fontFamily">@font/roboto_bold</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
-        <item name="android:textSize">20sp</item>
-        <item name="lineHeight">@dimen/subtitle_1_line_height</item>
-        <item name="android:letterSpacing">0.01</item>
-    </style>
-
     <style name="TextAppearance.Subtitle2.Bold" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:textSize">18sp</item>
         <item name="lineHeight">@dimen/subtitle_2_line_height</item>
-        <item name="android:letterSpacing">0.01</item>
-    </style>
-
-    <style name="TextAppearance.Subtitle3.Bold" parent="Base.TextAppearance.AppCompat">
-        <item name="fontFamily">@font/roboto_bold</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
-        <item name="android:textSize">16sp</item>
-        <item name="lineHeight">@dimen/subtitle_3_line_height</item>
         <item name="android:letterSpacing">0.01</item>
     </style>
 

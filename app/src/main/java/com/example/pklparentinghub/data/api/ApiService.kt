@@ -5,6 +5,7 @@ import com.example.pklparentinghub.data.model.login.LoginResponse
 import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
+import com.example.pklparentinghub.data.model.userDetail.Data
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
 import com.example.pklparentinghub.data.model.userFollow.UserFollowResponse
 import com.example.pklparentinghub.utils.Const
@@ -44,7 +45,7 @@ interface ApiService {
     @GET(Const.Network.User.USER_DETAIL)
     suspend fun getUserDetail(
         @Header("Authorization") token: String,
-        @Path("param") userId : Int
+        @Path("param") userId: Int
     ): Response<UserDetailResponse>
 
     //BELOM
