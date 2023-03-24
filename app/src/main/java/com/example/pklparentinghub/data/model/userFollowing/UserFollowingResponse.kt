@@ -1,9 +1,9 @@
-package com.example.pklparentinghub.data.model.userFollow
+package com.example.pklparentinghub.data.model.userFollowing
 
 
 import com.google.gson.annotations.SerializedName
 
-data class UserFollowResponse(
+data class UserFollowingResponse(
     @SerializedName("data")
     val `data`: Data,
     @SerializedName("message")
