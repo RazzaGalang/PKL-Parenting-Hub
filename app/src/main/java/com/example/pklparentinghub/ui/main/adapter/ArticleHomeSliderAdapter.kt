@@ -15,14 +15,15 @@ class ArticleHomeSliderAdapter() : RecyclerView.Adapter<ArticleHomeSliderAdapter
 
     class ImageViewHolder(private val binding: ItemHomeArticleSliderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setData(data: Article) {
-            val title = data.title
-            val imageBanner = data.thumbnail
-
             binding.apply {
-                Glide.with(ivArticle.context)
+                val title = data.title
+                val imageBanner = data.thumbnail
+                val imgArticle = ivArticle
+
+                Glide.with(imgArticle)
                     .load(imageBanner)
                     .transform(CenterCrop(), RoundedCorners(10))
-                    .into(ivArticle)
+                    .into(imgArticle)
                 tvTitle.text = title
             }
         }

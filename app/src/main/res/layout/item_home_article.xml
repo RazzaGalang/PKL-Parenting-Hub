@@ -34,17 +34,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginTop="@dimen/normal_margin"
+                android:textAppearance="@style/TextAppearance.Body3"
+                android:textColor="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemCover" />
+                app:layout_constraintTop_toBottomOf="@id/itemCover"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemTitle"
                 android:layout_width="@dimen/zero_dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
-                android:layout_marginTop="@dimen/normal_margin"
-                android:textAppearance="@style/TextAppearance.Subtitle2"
+                android:textAppearance="@style/TextAppearance.Subtitle3.Bold"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/normal_margin"
+                android:textAppearance="@style/TextAppearance.Body3"
                 app:layout_constraintBottom_toBottomOf="@+id/itemProfilePicture"
                 app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
                 app:layout_constraintTop_toTopOf="@+id/itemProfilePicture" />
@@ -77,6 +79,9 @@
                 android:id="@+id/itemLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_like"
+                android:textAppearance="@style/TextAppearance.Body3"
+                android:textColor="@color/primary50"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/normal_margin"
                 app:layout_constraintEnd_toEndOf="parent"
