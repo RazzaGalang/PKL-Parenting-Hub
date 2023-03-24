@@ -44,7 +44,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/itemFollowingButton"
-        style="?attr/materialButtonOutlinedStyle"
+        style="@style/buttonFollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/medium_margin"

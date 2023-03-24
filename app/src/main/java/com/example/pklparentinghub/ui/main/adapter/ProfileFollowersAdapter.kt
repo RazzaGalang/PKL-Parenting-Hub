@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.model.userFollow.User
 import com.example.pklparentinghub.databinding.ItemFollowersProfileBinding
 
@@ -21,6 +22,11 @@ class ProfileFollowersAdapter: RecyclerView.Adapter<ProfileFollowersAdapter.Foll
                             .into(picture)
                         itemFollowersFullName.text = item.fullName
                         itemFollowersUsername.text = item.username
+                        itemFollowersButton.isChecked = item.isFollowings
+                        itemFollowersButton.text = if (item.isFollowings)
+                            root.context.getString(R.string.connec_followers)
+                        else
+                            root.context.getString(R.string.connec_follow)
                     }
                 }
             }

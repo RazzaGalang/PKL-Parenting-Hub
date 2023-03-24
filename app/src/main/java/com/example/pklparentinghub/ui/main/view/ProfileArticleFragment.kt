@@ -14,7 +14,6 @@ import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.databinding.FragmentProfileArticleBinding
 import com.example.pklparentinghub.ui.main.adapter.ShimmerArticleProfileAdapter
-import com.example.pklparentinghub.utils.Status
 
 class ProfileArticleFragment : Fragment() {
 

@@ -5,9 +5,9 @@ import com.example.pklparentinghub.data.model.login.LoginResponse
 import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
-import com.example.pklparentinghub.data.model.userDetail.Data
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
 import com.example.pklparentinghub.data.model.userFollow.UserFollowResponse
+import com.example.pklparentinghub.data.model.userFollowing.UserFollowingResponse
 import com.example.pklparentinghub.utils.Const
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -61,7 +61,7 @@ interface ApiService {
     suspend fun getUserFollowings(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
-    ): Response<UserFollowResponse>
+    ): Response<UserFollowingResponse>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.User.USER_FOLLOWER)

@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.pklparentinghub.R
-import com.example.pklparentinghub.data.model.profile.ProfileModel
-import com.example.pklparentinghub.databinding.FragmentProfileArticleBinding
 import com.example.pklparentinghub.databinding.FragmentProfileLikesBinding
 import com.example.pklparentinghub.ui.main.adapter.ProfileArtichleAdapter
 import com.example.pklparentinghub.ui.main.adapter.ShimmerArticleProfileAdapter
@@ -59,7 +57,6 @@ class ProfileLikesFragment : Fragment() {
     }
 
     private fun setRecyclerViewAdapter(){
-        profileAdapter.differ.submitList(loadData())
 
         binding.profileRecycler.layoutManager = LinearLayoutManager(this.context)
         binding.profileRecycler.adapter = profileAdapter
@@ -69,55 +66,5 @@ class ProfileLikesFragment : Fragment() {
                 (binding.profileRecycler.layoutManager as LinearLayoutManager).orientation
             )
         )
-    }
-    private fun loadData(): MutableList<ProfileModel>{
-        val data : MutableList<ProfileModel> = mutableListOf()
-
-        data.add(
-            ProfileModel(
-            R.drawable.img_auth_profile_default_picture,
-            "Razza Galang Adzan",
-            getString(R.string.desc_art),
-            R.drawable.ic_like_dark,
-            "178 suka",
-            "7 Februari 2023",
-            R.drawable.img_default_arthicle_cover
-        )
-        )
-        data.add(
-            ProfileModel(
-            R.drawable.img_auth_profile_default_picture,
-            "Razza Galang",
-            getString(R.string.desc_art),
-            R.drawable.ic_like_dark,
-            "178 suka",
-            "7 Februari 2023",
-            R.drawable.img_default_arthicle_cover
-        )
-        )
-        data.add(
-            ProfileModel(
-            R.drawable.img_auth_profile_default_picture,
-            "Razza",
-            getString(R.string.desc_art),
-            R.drawable.ic_like_dark,
-            "178 suka",
-            "7 Februari 2023",
-            R.drawable.img_default_arthicle_cover
-        )
-        )
-        data.add(
-            ProfileModel(
-            R.drawable.img_auth_profile_default_picture,
-            "Galang Adzan",
-            getString(R.string.desc_art),
-            R.drawable.ic_like_dark,
-            "178 suka",
-            "7 Februari 2023",
-            R.drawable.img_default_arthicle_cover
-        )
-        )
-
-        return data
     }
 }

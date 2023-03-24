@@ -6,6 +6,12 @@
         <item name="strokeColor">@color/white</item>
     </style>
 
+    <style name="buttonFollow" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:checkable" >true</item>
+        <item name="android:textColor">@color/slr_button_follow_text</item>
+        <item name="backgroundTint">@color/slr_button_follow_background</item>
+    </style>
+
     <style name="Widget.ParentingHub.TextInputLayout.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="materialThemeOverlay">
             @style/ThemeOverlay.ParentingHub.TextInputLayout.FilledBox

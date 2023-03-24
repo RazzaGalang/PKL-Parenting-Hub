@@ -1,4 +1,4 @@
-package com.example.pklparentinghub.data.model.userFollow
+package com.example.pklparentinghub.data.model.userFollowing
 
 
 import com.google.gson.annotations.SerializedName
@@ -32,7 +32,4 @@ data class User(
     val username: String,
     @SerializedName("verifikasi")
     val verifikasi: Boolean,
-    @SerializedName("is_followings")
-    val isFollowings: Boolean
-
 )
