@@ -1,6 +1,8 @@
 package com.example.pklparentinghub.utils
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
@@ -51,19 +53,47 @@ class AccessManager(private val context: Context) {
             preferences[PreferencesKey.accessKey] ?: emptyString
         }
 
+
+    suspend fun setFirstTimeAccess(status: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[firstTimeAccessKey] = status
+        }
+    }
+
+    suspend fun setHomeFirstTimeAccess(status: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[homeFirstTimeAccessKey] = status
+        }
+    }
+
+    val isFirstTimeAccess = context.dataStore.data
+        .catch { throwable ->
+            emit(emptyPreferences())
+            Log.e(TAG, "$throwable" )
+        }.map { preferences ->
+            preferences[firstTimeAccessKey] ?: true
+        }
+
+    val isHomeFirstTimeAccess = context.dataStore.data
+        .catch { throwable ->
+            emit(emptyPreferences())
+            Log.e(TAG, "$throwable" )
+        }.map { preferences ->
+            preferences[homeFirstTimeAccessKey] ?: true
+        }
+
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
             name = PreferencesKey.AUTH_PREFERENCES_KEY.toUpperCase(Locale.ROOT)
         )
+
+        private val firstTimeAccessKey = booleanPreferencesKey("first_time_access")
+        private val homeFirstTimeAccessKey = booleanPreferencesKey("home_first_time_access")
     }
 
     private object PreferencesKey {
         const val AUTH_PREFERENCES_KEY = "auth_preferences"
         const val TOKEN_ACCESS_REF = "token_access_key"
-
-        private val accessTokenKey = stringPreferencesKey("access_token")
-        private val firstTimeAccessKey = booleanPreferencesKey("first_time_access")
-        private val homeFirstTimeAccessKey = booleanPreferencesKey("home_first_time_access")
 
         val accessKey = stringPreferencesKey(TOKEN_ACCESS_REF)
     }
