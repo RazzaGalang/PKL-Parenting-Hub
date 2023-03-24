@@ -1,7 +1,6 @@
 package com.example.pklparentinghub.ui.main.view
 
 import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,13 +15,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
-import com.example.pklparentinghub.data.model.login.LoginRequest
 import com.example.pklparentinghub.databinding.FragmentAuthLoginBinding
 import com.example.pklparentinghub.ui.base.LoginViewModelFactory
 import com.example.pklparentinghub.ui.main.viewmodel.LoginViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -85,12 +82,15 @@ class AuthLoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
             when (result.status){
                 Status.SUCCESS -> {
-                    findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
-
                     result.data?.body()?.data?.let {
                         AccessManager(requireContext())
                             .setAccess(it.token, lifecycleScope)
                     }
+
+                    if(result.data?.body()?.data?.user?.verifikasi!!)
+                        findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToMainActivity())
+                    else
+                        findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
 
                     Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
                 }

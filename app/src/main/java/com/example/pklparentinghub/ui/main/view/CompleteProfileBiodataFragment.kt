@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.databinding.FragmentCompleteProfileBiodataBinding
 import java.util.*
 
@@ -34,21 +35,16 @@ class CompleteProfileBiodataFragment : Fragment() {
     }
 
     private fun buttonDate (){
-
         binding.completeProfileBiodataButtonInputDate.setOnClickListener {
             showDatePicker()
         }
-
     }
 
     private fun initNavigationButton () {
         binding.completeProfileBiodataNavigationButton.setOnClickListener {
-            val intentBiasa = Intent(this.context, MainActivity::class.java)
-            startActivity(intentBiasa)
+            findNavController().navigate(CompleteProfileBiodataFragmentDirections.actionCompleteProfileBiodataFragmentToMainActivity())
         }
     }
-
-
 
     @SuppressLint("SetTextI18n")
     private fun showDatePicker() {

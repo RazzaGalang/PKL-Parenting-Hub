@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_authOnBoardingFragment"
             app:destination="@id/authOnBoardingFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/authOnBoardingFragment"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_authLoginFragment_to_completeProfileOnBoardingFragment"
             app:destination="@id/completeProfileOnBoardingFragment" />
+        <action
+            android:id="@+id/action_authLoginFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/authRegisterFragment"
@@ -54,7 +60,11 @@
         android:id="@+id/completeProfileBiodataFragment"
         android:name="com.example.pklparentinghub.ui.main.view.CompleteProfileBiodataFragment"
         android:label="fragment_complete_profile_biodata"
-        tools:layout="@layout/fragment_complete_profile_biodata" />
+        tools:layout="@layout/fragment_complete_profile_biodata" >
+        <action
+            android:id="@+id/action_completeProfileBiodataFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
     <fragment
         android:id="@+id/completeProfileBannerFragment"
         android:name="com.example.pklparentinghub.ui.main.view.CompleteProfileBannerFragment"
@@ -93,4 +103,9 @@
             android:id="@+id/action_completeProfileOnBoardingFragment_to_completeProfilePictureFragment"
             app:destination="@id/completeProfilePictureFragment" />
     </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.pklparentinghub.ui.main.view.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>
