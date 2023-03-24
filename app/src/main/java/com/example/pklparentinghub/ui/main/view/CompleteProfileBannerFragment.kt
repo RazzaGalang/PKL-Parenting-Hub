@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentCompleteProfileBannerBinding
 
@@ -42,9 +43,7 @@ class CompleteProfileBannerFragment : Fragment() {
 
     private fun initNavigation(){
         binding.completeProfileBannerNavigationButton.setOnClickListener {
-            val fragment = CompleteProfileBiodataFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameLayoutCompleteProfileActivity, fragment)?.commit()
+            findNavController().navigate(CompleteProfileBannerFragmentDirections.actionCompleteProfileBannerFragmentToCompleteProfileBiodataFragment())
         }
     }
 

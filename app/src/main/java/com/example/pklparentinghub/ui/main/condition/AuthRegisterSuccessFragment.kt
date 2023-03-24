@@ -10,13 +10,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.example.pklparentinghub.R
-import com.example.pklparentinghub.databinding.FragmentAuthRegisterConditionBinding
+import com.example.pklparentinghub.databinding.FragmentConditionSingleActionBinding
 import com.example.pklparentinghub.ui.main.view.AuthLoginFragment
 import com.example.pklparentinghub.ui.main.view.AuthLoginFragmentDirections
 
 class AuthRegisterSuccessFragment : DialogFragment() {
 
-    private var _binding: FragmentAuthRegisterConditionBinding? = null
+    private var _binding: FragmentConditionSingleActionBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -24,7 +24,7 @@ class AuthRegisterSuccessFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAuthRegisterConditionBinding.inflate(inflater, container, false)
+        _binding = FragmentConditionSingleActionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -50,8 +50,7 @@ class AuthRegisterSuccessFragment : DialogFragment() {
     private fun setNavigation(){
         binding.registerConditionButton.setOnClickListener {
             dialog!!.dismiss()
-            findNavController().navigate(AuthRegisterSuccessFragmentDirections.actionAuthRegisterSuccessFragment2ToAuthLoginFragment())
-            findNavController().popBackStack()
+            findNavController().navigate(AuthRegisterSuccessFragmentDirections.actionAuthRegisterSuccessFragmentToAuthLoginFragment())
         }
     }
 
