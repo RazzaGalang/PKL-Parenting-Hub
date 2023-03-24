@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentCompleteProfilePictureBinding
 import com.example.pklparentinghub.utils.AccessManager
@@ -45,9 +46,7 @@ class CompleteProfilePictureFragment : Fragment() {
 
     private fun initNavigation(){
         binding.completeProfilePictureNavigationButton.setOnClickListener {
-            val fragment = CompleteProfileBannerFragment()
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameLayoutCompleteProfileActivity, fragment)?.commit()
+            findNavController().navigate(CompleteProfilePictureFragmentDirections.actionCompleteProfilePictureFragmentToCompleteProfileBannerFragment())
         }
     }
 

@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.pklparentinghub.R
-import com.example.pklparentinghub.databinding.FragmentAuthRegisterConditionBinding
-import com.example.pklparentinghub.ui.main.view.AuthLoginFragment
+import com.example.pklparentinghub.databinding.FragmentConditionSingleActionBinding
 
 class AuthRegisterConnectionErrorFragment : DialogFragment () {
-    private var _binding: FragmentAuthRegisterConditionBinding? = null
+    private var _binding: FragmentConditionSingleActionBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -20,7 +19,7 @@ class AuthRegisterConnectionErrorFragment : DialogFragment () {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAuthRegisterConditionBinding.inflate(inflater, container, false)
+        _binding = FragmentConditionSingleActionBinding.inflate(inflater, container, false)
         return binding.root
     }
 

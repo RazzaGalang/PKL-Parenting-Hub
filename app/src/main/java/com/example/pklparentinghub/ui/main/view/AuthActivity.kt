@@ -14,12 +14,13 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
+        setNavigation()
     }
 
     private fun setNavigation(){
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navAuthContainer) as NavHostFragment
         navController = navHostFragment.navController
-        navController.navigate(R.id.authOnBoardingFragment)
+        navController.navigate(R.id.splashScreenFragment)
 
         if (!navController.popBackStack()) finish()
     }
