@@ -1,11 +1,11 @@
-package com.example.pklparentinghub.data.model.articleBanner
+package com.example.pklparentinghub.data.model.articleData
 
 
 import com.google.gson.annotations.SerializedName
 
-data class ArticleBanner(
+data class ImageResponse(
     @SerializedName("data")
-    val `data`: Data,
+    val `data`: DataImage,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

@@ -3,7 +3,7 @@ package com.example.pklparentinghub.data.model.articleData
 
 import com.google.gson.annotations.SerializedName
 
-data class ArticleData(
+data class ArticleResponse(
     @SerializedName("data")
     val `data`: Data,
     @SerializedName("links")
