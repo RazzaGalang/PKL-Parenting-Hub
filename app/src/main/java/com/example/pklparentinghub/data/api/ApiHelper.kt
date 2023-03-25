@@ -2,6 +2,7 @@ package com.example.pklparentinghub.data.api
 
 import com.example.pklparentinghub.data.model.login.LoginRequest
 import com.example.pklparentinghub.data.model.register.RegisterRequest
+import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 
 class ApiHelper (private val apiService: ApiService) {
     suspend fun requestLogin(request: LoginRequest) = apiService.postLogin(request)
@@ -23,5 +24,6 @@ class ApiHelper (private val apiService: ApiService) {
     suspend fun getUserDetail(token: String, userId: Int) = apiService.getUserDetail(token = token, userId = userId)
     suspend fun getUserFollower(token: String, userId: Int) = apiService.getUserFollower(token = token, userId = userId)
     suspend fun getUserFollowings(token: String, userId: Int) = apiService.getUserFollowings(token = token, userId = userId)
+    suspend fun postUserFollow(token: String, request: UserFollowRequest) = apiService.postUserFollow(token = token, request )
     suspend fun getUserContent(token: String, userId: Int) = apiService.getUserContent(token = token, userId = userId)
 }

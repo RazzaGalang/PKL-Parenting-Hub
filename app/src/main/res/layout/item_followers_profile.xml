@@ -44,9 +44,10 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/itemFollowersButton"
-        style="@style/buttonFollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/primary40"
         android:layout_marginHorizontal="@dimen/medium_margin"
         android:text="@string/connec_follow"
         android:textAppearance="@style/TextAppearance.Button"

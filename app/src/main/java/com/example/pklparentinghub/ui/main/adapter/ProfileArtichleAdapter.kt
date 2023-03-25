@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pklparentinghub.data.model.userContent.Data
-import com.example.pklparentinghub.data.model.userFollow.User
 import com.example.pklparentinghub.databinding.ItemArticleProfileBinding
-import com.example.pklparentinghub.databinding.ItemFollowersProfileBinding
 
 class ProfileArtichleAdapter: RecyclerView.Adapter<ProfileArtichleAdapter.ArtichleViewHolder>() {
     inner class ArtichleViewHolder(private val binding: ItemArticleProfileBinding) :

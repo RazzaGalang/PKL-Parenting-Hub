@@ -1,5 +1,8 @@
 package com.example.pklparentinghub.ui.main.adapter
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -7,13 +10,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pklparentinghub.R
-import com.example.pklparentinghub.data.model.userFollow.User
+import com.example.pklparentinghub.data.model.userFollower.User
 import com.example.pklparentinghub.databinding.ItemFollowersProfileBinding
 
-class ProfileFollowersAdapter: RecyclerView.Adapter<ProfileFollowersAdapter.FollowerViewHolder>() {
+class ProfileFollowersAdapter(private val listener: OnItemClickListener): RecyclerView.Adapter<ProfileFollowersAdapter.FollowerViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(item: User)
+    }
     inner class FollowerViewHolder(private val binding: ItemFollowersProfileBinding) :
             RecyclerView.ViewHolder(binding.root){
+                @SuppressLint("ResourceAsColor")
                 fun setData(item: User){
+                    binding.itemFollowersButton.setOnClickListener { listener.onItemClick(item) }
+
                     binding.apply {
                         val followerPicture = item.profilePicture
                         val picture = itemFollowersPicture
@@ -22,11 +32,17 @@ class ProfileFollowersAdapter: RecyclerView.Adapter<ProfileFollowersAdapter.Foll
                             .into(picture)
                         itemFollowersFullName.text = item.fullName
                         itemFollowersUsername.text = item.username
-                        itemFollowersButton.isChecked = item.isFollowings
-                        itemFollowersButton.text = if (item.isFollowings)
-                            root.context.getString(R.string.connec_followers)
-                        else
-                            root.context.getString(R.string.connec_follow)
+                        val isFollowing = item.isFollowings
+                        if (isFollowing) {
+                            itemFollowersButton.setBackgroundColor(R.color.primary40)
+                            itemFollowersButton.strokeColor = ColorStateList.valueOf(Color.parseColor("#7A79A8"))
+                            itemFollowersButton.text = root.context.getString(R.string.connec_followers)
+                            itemFollowersButton.setTextColor(Color.parseColor("#FFFFFF"))
+                        } else {
+                            itemFollowersButton.strokeColor = ColorStateList.valueOf(Color.parseColor("#7A79A8"))
+                            itemFollowersButton.text = root.context.getString(R.string.connec_follow)
+                            itemFollowersButton.setTextColor(Color.parseColor("#7A79A8"))
+                        }
                     }
                 }
             }

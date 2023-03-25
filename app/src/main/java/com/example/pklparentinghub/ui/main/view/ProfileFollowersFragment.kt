@@ -1,6 +1,9 @@
 package com.example.pklparentinghub.ui.main.view
 
+import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,21 +17,25 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
+import com.example.pklparentinghub.data.model.userFollower.User
 import com.example.pklparentinghub.databinding.FragmentProfileFollowersBinding
+import com.example.pklparentinghub.ui.base.FollowModelFactory
 import com.example.pklparentinghub.ui.base.FollowerModelFactory
 import com.example.pklparentinghub.ui.main.adapter.ProfileFollowersAdapter
+import com.example.pklparentinghub.ui.main.viewmodel.FollowViewModel
 import com.example.pklparentinghub.ui.main.viewmodel.FollowerViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
 
-class ProfileFollowersFragment : Fragment() {
+class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClickListener {
 
     private var _binding: FragmentProfileFollowersBinding? = null
     private val binding get() = _binding!!
-    private val adapter : ProfileFollowersAdapter = ProfileFollowersAdapter()
+    private val adapter : ProfileFollowersAdapter = ProfileFollowersAdapter(this)
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: FollowerViewModel
+    private lateinit var viewModelFollow : FollowViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +61,37 @@ class ProfileFollowersFragment : Fragment() {
         setupObserver()
     }
 
+    override fun onItemClick(item: User) {
+        setupFollow(item)
+    }
+
+    private fun setupFollow(item: User){
+        lifecycleScope.launchWhenResumed {
+            AccessManager(requireContext())
+                .access
+                .collect { token ->
+                    viewModelFollow.postUserFollow(token, item.id).observe(viewLifecycleOwner, Observer {
+                        it?.let { resource ->
+                            when(resource.status) {
+                                Status.SUCCESS -> {
+                                    resource.data?.let { response ->
+                                        binding.apply {
+                                        }
+                                    }
+                                    setupObserver()
+                                }
+                                Status.LOADING -> {
+
+                                }
+                                Status.ERROR -> {
+                                    Log.e(TAG, "setupFollow: ", )
+                                }
+                            }
+                        }
+                    })
+                }
+        }
+    }
     private fun refreshData() {
         swipeRefreshLayout.isRefreshing = false
     }
@@ -63,6 +101,11 @@ class ProfileFollowersFragment : Fragment() {
             this,
             FollowerModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
         )[FollowerViewModel::class.java]
+
+        viewModelFollow = ViewModelProvider(
+            this,
+            FollowModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[FollowViewModel::class.java]
     }
 
     private fun setRecyclerViewAdapter(){

@@ -21,11 +21,6 @@ class ProfileFollowingAdapter: RecyclerView.Adapter<ProfileFollowingAdapter.Foll
                     .into(picture)
                 itemFollowingFullName.text = item.fullName
                 itemFollowingUsername.text = item.username
-//                itemFollowingButton.isChecked = item.isFollowings
-//                itemFollowingButton.text = if (item.isFollowings)
-//                    root.context.getString(R.string.connec_followers)
-//                else
-//                    root.context.getString(R.string.connec_follow)
             }
         }
     }
