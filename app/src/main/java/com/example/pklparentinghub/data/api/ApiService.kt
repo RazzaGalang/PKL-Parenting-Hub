@@ -1,6 +1,8 @@
 package com.example.pklparentinghub.data.api
 
 import com.example.pklparentinghub.data.model.articleData.ArticleResponse
+import com.example.pklparentinghub.data.model.articleData.ArticleRequest
+import com.example.pklparentinghub.data.model.articleData.ImageResponse
 import com.example.pklparentinghub.data.model.articleDetail.ArticleDetail
 import com.example.pklparentinghub.data.model.login.LoginRequest
 import com.example.pklparentinghub.data.model.login.LoginResponse
@@ -8,9 +10,11 @@ import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
-import com.example.pklparentinghub.data.model.userFollow.UserFollowResponse
+import com.example.pklparentinghub.data.model.userFollower.UserFollowerResponse
+import com.example.pklparentinghub.data.model.userFollowing.UserFollowingResponse
 import com.example.pklparentinghub.utils.Const
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -62,14 +66,14 @@ interface ApiService {
     suspend fun getUserFollowings(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
-    ): Response<UserFollowResponse>
+    ): Response<UserFollowingResponse>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.User.USER_FOLLOWER)
     suspend fun getUserFollower(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
-    ): Response<UserFollowResponse>
+    ): Response<UserFollowerResponse>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.Article.ARTICLE_ALL)
@@ -87,4 +91,16 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path ("param") articleId : Int
     ) : ArticleDetail
+
+    @Headers("Accept: application/json")
+    @POST(Const.Network.Article.ARTICLE_POST)
+    suspend fun postArticle(
+        @Body request: ArticleRequest
+    ): Response<ArticleResponse>
+
+    @Headers("Accept: application/json")
+    @POST(Const.Network.Article.IMAGE_UPLOAD)
+    suspend fun postImage(
+        @Part filename : MultipartBody.Part
+    ): Response<ImageResponse>
 }

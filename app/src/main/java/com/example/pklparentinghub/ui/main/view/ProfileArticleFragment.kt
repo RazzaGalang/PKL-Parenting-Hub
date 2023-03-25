@@ -42,6 +42,4 @@ class ProfileArticleFragment : Fragment() {
     private fun setupUI() {
         binding.shimmerRecycler.adapter = shimmerAdapter
     }
-
-
 }

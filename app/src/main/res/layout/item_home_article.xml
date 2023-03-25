@@ -8,6 +8,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvArticle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/normal_margin"
@@ -34,8 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginTop="@dimen/normal_margin"
-                android:textAppearance="@style/TextAppearance.Body3"
-                android:textColor="@color/grey"
+                android:textAppearance="@style/TextAppearance.Body2"
+                android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/itemCover"/>
@@ -70,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/normal_margin"
-                android:textAppearance="@style/TextAppearance.Body3"
+                android:textAppearance="@style/TextAppearance.Body1"
                 app:layout_constraintBottom_toBottomOf="@+id/itemProfilePicture"
                 app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
                 app:layout_constraintTop_toTopOf="@+id/itemProfilePicture" />

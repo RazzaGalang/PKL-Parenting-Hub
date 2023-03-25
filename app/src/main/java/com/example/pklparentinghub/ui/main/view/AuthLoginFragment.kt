@@ -68,10 +68,8 @@ class AuthLoginFragment : Fragment() {
 
     private fun setupRequest(){
         viewModel.requestLogin(
-            "example@gmail.com", "password1"
-
-//                binding.loginInputEmail.text.toString(),
-//                binding.loginInputPassword.text.toString()
+                binding.loginInputEmail.text.toString(),
+                binding.loginInputPassword.text.toString()
         )
     }
 

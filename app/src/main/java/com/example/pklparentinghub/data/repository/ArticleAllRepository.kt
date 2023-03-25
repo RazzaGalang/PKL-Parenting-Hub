@@ -1,6 +1,7 @@
 package com.example.pklparentinghub.data.repository
 
 import com.example.pklparentinghub.data.api.ApiHelper
+import com.example.pklparentinghub.data.model.articleData.ArticleRequest
 
 class ArticleAllRepository(private val apiHelper: ApiHelper) {
 

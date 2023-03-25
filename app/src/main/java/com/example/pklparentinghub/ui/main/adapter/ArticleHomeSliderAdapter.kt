@@ -11,13 +11,18 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.ItemHomeArticleSliderBinding
 
-class ArticleHomeSliderAdapter() : RecyclerView.Adapter<ArticleHomeSliderAdapter.ImageViewHolder>() {
+class ArticleHomeSliderAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<ArticleHomeSliderAdapter.ImageViewHolder>() {
 
-    class ImageViewHolder(private val binding: ItemHomeArticleSliderBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun setData(data: Article) {
+    interface OnItemClickListener {
+        fun onItemClick(item: Article)
+    }
+
+    inner class ImageViewHolder(private val binding: ItemHomeArticleSliderBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun setData(item: Article) {
+            binding.ivArticle.setOnClickListener {listener.onItemClick(item)}
             binding.apply {
-                val title = data.title
-                val imageBanner = data.thumbnail
+                val title = item.title
+                val imageBanner = item.thumbnail
                 val imgArticle = ivArticle
 
                 Glide.with(imgArticle)

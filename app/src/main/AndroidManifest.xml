@@ -17,6 +17,9 @@
         android:theme="@style/Theme.PKLParentingHub"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.view.DetailArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.view.CompleteProfileActivity"
             android:exported="false" />
         <activity

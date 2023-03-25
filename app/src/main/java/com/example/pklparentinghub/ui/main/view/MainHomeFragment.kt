@@ -1,5 +1,6 @@
 package com.example.pklparentinghub.ui.main.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.*
@@ -26,11 +27,11 @@ import com.example.pklparentinghub.utils.Status.*
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainHomeFragment : Fragment() {
+class MainHomeFragment : Fragment(), ArticleHomeSliderAdapter.OnItemClickListener {
 
     private var _binding: FragmentMainHomeBinding? = null
     private val binding get() = _binding!!
-    private val adapter: ArticleHomeSliderAdapter = ArticleHomeSliderAdapter()
+    private val adapter: ArticleHomeSliderAdapter = ArticleHomeSliderAdapter(this)
     private lateinit var viewModel : ArticleAllViewModel
 
     override fun onCreateView(
@@ -46,9 +47,15 @@ class MainHomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpViewPager()
         setUpSearch()
-        setupUI()
+        initListView()
         setupViewModel()
         requestWithToken()
+    }
+
+    override fun onItemClick(item: Article) {
+        val intent = Intent(this.context, DetailArticleActivity::class.java)
+        intent.putExtra("id", item.id)
+        startActivity(intent)
     }
 
     private fun setUpSearch() {
@@ -59,7 +66,7 @@ class MainHomeFragment : Fragment() {
         }
     }
 
-    private fun setupUI(){
+    private fun initListView(){
         binding.articleSlider.adapter = adapter
     }
 
@@ -110,8 +117,8 @@ class MainHomeFragment : Fragment() {
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> FragmentHomeArticle(popular = false, latest = true)
-                1 -> FragmentHomeArticle(popular = true, latest = false)
+                0 -> FragmentHomeArticle(false, true)
+                1 -> FragmentHomeArticle(true, false)
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }
         }
