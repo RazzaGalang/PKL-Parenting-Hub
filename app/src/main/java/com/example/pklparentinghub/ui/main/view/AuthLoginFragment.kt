@@ -49,7 +49,6 @@ class AuthLoginFragment : Fragment() {
         setupToRegister()
     }
 
-
     private fun setupViewModel (){
         viewModel = ViewModelProvider(
             this,
@@ -67,7 +66,6 @@ class AuthLoginFragment : Fragment() {
         }
     }
 
-
     private fun setupRequest(){
         viewModel.requestLogin(
             "example@gmail.com", "password1"
@@ -76,7 +74,6 @@ class AuthLoginFragment : Fragment() {
 //                binding.loginInputPassword.text.toString()
         )
     }
-
 
     private fun setupObserve(){
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
@@ -175,8 +172,6 @@ class AuthLoginFragment : Fragment() {
             true
         }
     }
-
-
 
     private fun errorNullEmail() {
         binding.loginEmail.error = getText(R.string.error_text_null_email)

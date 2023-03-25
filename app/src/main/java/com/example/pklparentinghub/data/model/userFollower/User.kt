@@ -1,4 +1,4 @@
-package com.example.pklparentinghub.data.model.userFollow
+package com.example.pklparentinghub.data.model.userFollower
 
 
 import com.google.gson.annotations.SerializedName
@@ -22,6 +22,8 @@ data class User(
     val gender: String,
     @SerializedName("id")
     val id: Int,
+    @SerializedName("is_followings")
+    val isFollowings: Boolean,
     @SerializedName("profile_cover")
     val profileCover: String,
     @SerializedName("profile_picture")

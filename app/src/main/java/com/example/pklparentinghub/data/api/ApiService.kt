@@ -1,7 +1,6 @@
 package com.example.pklparentinghub.data.api
 
-import com.example.pklparentinghub.data.model.articleBanner.ArticleBanner
-import com.example.pklparentinghub.data.model.articleData.ArticleData
+import com.example.pklparentinghub.data.model.articleData.ArticleResponse
 import com.example.pklparentinghub.data.model.articleDetail.ArticleDetail
 import com.example.pklparentinghub.data.model.login.LoginRequest
 import com.example.pklparentinghub.data.model.login.LoginResponse
@@ -12,7 +11,6 @@ import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
 import com.example.pklparentinghub.data.model.userFollow.UserFollowResponse
 import com.example.pklparentinghub.utils.Const
 import com.google.gson.JsonObject
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -81,18 +79,12 @@ interface ApiService {
         @Query("search") search: String,
         @Query("popular") popular : Boolean,
         @Query("latest") latest : Boolean
-    ) : ArticleData
+    ) : ArticleResponse
 
     @Headers("Accept: application/json")
     @GET(Const.Network.Article.ARTICLE_DETAIL)
     suspend fun getArticleDetail(
         @Header("Authorization") token: String,
         @Path ("param") articleId : Int
-    ) : Response<ArticleDetail>
-
-    @Headers("Accept: application/json")
-    @GET(Const.Network.Article.ARTICLE_BANNER)
-    suspend fun getArticleBanner(
-        @Header("Authorization") token: String,
-    ) : ArticleBanner
+    ) : ArticleDetail
 }

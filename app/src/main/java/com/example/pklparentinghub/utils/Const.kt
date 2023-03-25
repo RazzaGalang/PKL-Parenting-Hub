@@ -25,6 +25,8 @@ object Const {
             const val ARTICLE_ALL = PREFIX + "articles"
             const val ARTICLE_DETAIL = PREFIX + "articles/{param}"
             const val ARTICLE_BANNER = PREFIX + "articles/banner"
+            const val ARTICLE_POST = PREFIX + "articles"
+            const val IMAGE_POST = PREFIX + "articles"
         }
     }
 }
