@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -113,6 +114,13 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
             transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
         }
     }
+    
+    private fun showLoading(loading: Boolean){
+        binding.apply {
+            group.isVisible = !loading
+            profileShimmer.shimmerFrameLayout.isVisible = loading
+        }
+    }
 
     private inner class MyPagerAdapter(fragmentActivity: FragmentActivity) :
         FragmentStateAdapter(fragmentActivity) {
@@ -135,6 +143,7 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
                 .collect { token ->
                     viewModel.requestProfile(token, 11).observe(viewLifecycleOwner, Observer {
                         it?.let { resource ->
+                            showLoading( resource.status == Status.LOADING)
                             when(resource.status) {
                                 Status.SUCCESS -> {
                                     resource.data?.let { profile ->

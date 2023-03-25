@@ -9,7 +9,7 @@ import com.example.pklparentinghub.ui.main.viewmodel.FollowerViewModel
 
 class ContentModelFactory (private val apiHelper: ApiHelper): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FollowerViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ContentViewModel::class.java)) {
             return ContentViewModel(ProfileRepository(apiHelper)) as T
         }
         throw IllegalArgumentException("Unknown class name")

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +23,8 @@ import com.example.pklparentinghub.databinding.FragmentProfileFollowersBinding
 import com.example.pklparentinghub.ui.base.FollowModelFactory
 import com.example.pklparentinghub.ui.base.FollowerModelFactory
 import com.example.pklparentinghub.ui.main.adapter.ProfileFollowersAdapter
+import com.example.pklparentinghub.ui.main.adapter.ShimmerArticleProfileAdapter
+import com.example.pklparentinghub.ui.main.adapter.ShimmerProfileFollowAdapter
 import com.example.pklparentinghub.ui.main.viewmodel.FollowViewModel
 import com.example.pklparentinghub.ui.main.viewmodel.FollowerViewModel
 import com.example.pklparentinghub.utils.AccessManager
@@ -32,13 +35,17 @@ class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClick
     private var _binding: FragmentProfileFollowersBinding? = null
     private val binding get() = _binding!!
     private val adapter : ProfileFollowersAdapter = ProfileFollowersAdapter(this)
+    private val shimmerAdapter : ShimmerProfileFollowAdapter = ShimmerProfileFollowAdapter()
+
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: FollowerViewModel
     private lateinit var viewModelFollow : FollowViewModel
 
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileFollowersBinding.inflate(inflater, container, false)
@@ -59,10 +66,18 @@ class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClick
         setRecyclerViewAdapter()
         setupViewModel()
         setupObserver()
+        setupUI()
     }
 
     override fun onItemClick(item: User) {
         setupFollow(item)
+    }
+
+    private fun showLoading(loading: Boolean){
+        binding.apply {
+            profileFollowersRecycler.isVisible = !loading
+            shimmerRecycler.isVisible = loading
+        }
     }
 
     private fun setupFollow(item: User){
@@ -96,6 +111,10 @@ class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClick
         swipeRefreshLayout.isRefreshing = false
     }
 
+    private fun setupUI() {
+        binding.shimmerRecycler.adapter = shimmerAdapter
+    }
+
     private fun setupViewModel(){
         viewModel = ViewModelProvider(
             this,
@@ -120,6 +139,7 @@ class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClick
                 .collect { token->
                     viewModel.getUserFollower(token, 11).observe(viewLifecycleOwner, Observer {
                         it?.let { resource ->
+                            showLoading( resource.status == Status.LOADING)
                             when (resource.status) {
                                 Status.SUCCESS -> {
                                    resource.data?.let { response ->
@@ -128,13 +148,9 @@ class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClick
                                        }
                                    }
                                 }
-
                                 Status.LOADING -> {
-
                                 }
-
                                 Status.ERROR -> {
-
                                 }
                             }
                         }

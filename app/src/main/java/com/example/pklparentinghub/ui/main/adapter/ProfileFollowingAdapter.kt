@@ -1,5 +1,7 @@
 package com.example.pklparentinghub.ui.main.adapter
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -9,10 +11,15 @@ import com.bumptech.glide.Glide
 import com.example.pklparentinghub.data.model.userFollowing.User
 import com.example.pklparentinghub.databinding.ItemFollowingProfileBinding
 
-class ProfileFollowingAdapter: RecyclerView.Adapter<ProfileFollowingAdapter.FollowingViewHolder>() {
+class ProfileFollowingAdapter(private val listener: ProfileFollowingAdapter.OnItemClickListener): RecyclerView.Adapter<ProfileFollowingAdapter.FollowingViewHolder>() {
+    interface OnItemClickListener {
+        fun onItemClick(item: User)
+    }
     inner class FollowingViewHolder(private val binding: ItemFollowingProfileBinding) :
         RecyclerView.ViewHolder(binding.root){
         fun setData(item: User){
+            binding.itemFollowingButton.setOnClickListener { listener.onItemClick(item) }
+
             binding.apply {
                 val followerPicture = item.profilePicture
                 val picture = itemFollowingPicture

@@ -2,7 +2,6 @@ package com.example.pklparentinghub.ui.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import com.example.pklparentinghub.data.repository.ProfileRepository
 import com.example.pklparentinghub.utils.Resource

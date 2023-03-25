@@ -9,7 +9,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.ext.SdkExtensions.getExtensionVersion
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
@@ -22,7 +21,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.pklparentinghub.R
@@ -30,7 +28,6 @@ import com.example.pklparentinghub.databinding.FragmentProfileEditBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
-import android.os.ext.SdkExtensions.getExtensionVersion
 
 class ProfileEditFragment : Fragment() {
 
@@ -84,17 +81,7 @@ class ProfileEditFragment : Fragment() {
         submit()
         navBar()
         floatingBar()
-//        photo()
     }
-
-//    private fun photo(){
-//        val pickMedia = registerForActivityResult(Pick()) { -> uri
-//        if (uri != null){
-//            Log.d("PhotoPicker", "Selected URI: $uri")
-//        } else {
-//            Log.d("PhotoPicker", "No media selected")
-//        }}
-//    }
 
     private fun navBar(){
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -115,24 +102,20 @@ class ProfileEditFragment : Fragment() {
     }
 
     private fun uploadImage() {
-        binding.editProfileImageBanner.setOnClickListener {
-//            selectImageFromGallery(REQUEST_CODE_SELECT_IMAGE)
+        binding.editProfileBanner.setOnClickListener {
             isFromBanner = true;
             handlePhotoPickerLaunch()
         }
     }
 
     private fun uploadProfile() {
-        binding.editProfileImagePicture.setOnClickListener {
-//            selectImageFromGallery(REQUEST_CODE_SELECT_PROFILE)
+        binding.editProfilePicture.setOnClickListener {
             handlePhotoPickerLaunch()
         }
     }
 
     // Registers a photo picker activity launcher in single-select mode.
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        // Callback is invoked after the user selects a media item or closes the
-        // photo picker.
         if (uri != null) {
             Log.d("PhotoPicker", "Selected URI: $uri")
             if (isFromBanner) {
