@@ -1,12 +1,12 @@
 package com.example.pklparentinghub.utils
 
 object Const {
-    const val CONST_BASE_URL = "https://ab0b-125-164-16-246.ap.ngrok.io"
+    const val CONST_BASE_URL = "https://ab0b-125-164-16-246.ap.ngrok.io/"
 
     const val PREFIX = "api/"
 
     object Token {
-        const val AUTH_PREFIX = "Bearer "
+        const val AUTH_PREFIX = "Bearer"
     }
     object Network {
         const val LOGIN = PREFIX +  "login"

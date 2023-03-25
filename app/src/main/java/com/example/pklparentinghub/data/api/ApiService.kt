@@ -6,7 +6,7 @@ import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
-import com.example.pklparentinghub.data.model.userFollow.UserFollowResponse
+import com.example.pklparentinghub.data.model.userFollower.UserFollowerResponse
 import com.example.pklparentinghub.data.model.userFollowing.UserFollowingResponse
 import com.example.pklparentinghub.utils.Const
 import com.google.gson.JsonObject
@@ -45,7 +45,7 @@ interface ApiService {
     @GET(Const.Network.User.USER_DETAIL)
     suspend fun getUserDetail(
         @Header("Authorization") token: String,
-        @Path("param") userId: Int
+        @Path("param") userId : Int
     ): Response<UserDetailResponse>
 
     //BELOM
@@ -68,7 +68,7 @@ interface ApiService {
     suspend fun getUserFollower(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
-    ): Response<UserFollowResponse>
+    ): Response<UserFollowerResponse>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.Article.ARTICLE_ALL)
@@ -76,8 +76,8 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("per_page") perPage: Int,
         @Query("search") search: String,
-        @Query("popular") popular : Boolean = true,
-        @Query("latest") latest : Boolean = true
+        @Query("popular") popular : Boolean,
+        @Query("latest") latest : Boolean
     ) : Response<JsonObject> //Tambah Model
 
     @Headers("Accept: application/json")
