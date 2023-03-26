@@ -23,6 +23,7 @@ object Const {
         }
 
         object Article {
+            const val USER_LIKE = PREFIX + "articles/{param}/like"
             const val ARTICLE_ALL = PREFIX + "articles"
             const val ARTICLE_DETAIL = PREFIX + "articles/{param}"
             const val ARTICLE_BANNER = PREFIX + "articles/banner"

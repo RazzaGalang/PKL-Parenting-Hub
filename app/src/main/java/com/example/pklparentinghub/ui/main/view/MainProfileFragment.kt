@@ -1,5 +1,6 @@
 package com.example.pklparentinghub.ui.main.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract.Profile
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
+import com.example.pklparentinghub.data.model.userContent.Article
 import com.example.pklparentinghub.databinding.FragmentMainProfileBinding
 import com.example.pklparentinghub.shimmer.ShimmerArticleProfileRecyclerFragment
 import com.example.pklparentinghub.ui.base.ProfileViewModelFactory
@@ -130,11 +132,17 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> ProfileArticleFragment()
-                1 -> ShimmerArticleProfileRecyclerFragment()
+                1 -> ProfileLikesFragment()
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }
         }
     }
+
+//    override fun onItemCLick(item: Article) {
+//        val intent = Intent(this.context, DetailArticleActivity::class.java)
+//        intent.putExtra("id", item.id)
+//        startActivity(intent)
+//    }
 
     private fun setupObserver(){
         lifecycleScope.launchWhenResumed {

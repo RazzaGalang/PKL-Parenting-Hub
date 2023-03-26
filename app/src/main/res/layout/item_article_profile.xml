@@ -39,11 +39,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemProfilePicture" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/itemIconLike"
         android:layout_width="@dimen/button_large_radius"
         android:layout_height="@dimen/button_large_radius"
         android:layout_marginHorizontal="20dp"
+        android:src="@drawable/ic_like_dark"
         android:button="@drawable/slr_icon_heart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/itemCover" />
@@ -77,6 +78,7 @@
         android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:layout_margin="@dimen/screen_margin"
+        app:shapeAppearanceOverlay="@style/cornerBorder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">

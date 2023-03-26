@@ -80,6 +80,13 @@ interface ApiService {
     ): Response<MethodFollowResponse>
 
     @Headers("Accept: application/json")
+    @POST(Const.Network.Article.USER_LIKE)
+    suspend fun postUserLike(
+        @Header("Authorization") token: String,
+        @Path("param") articleId: Int
+    ): Response<UserContentResponse>
+
+    @Headers("Accept: application/json")
     @GET(Const.Network.Article.ARTICLE_ALL)
     suspend fun getArticleAll(
         @Header("Authorization") token: String,

@@ -12,8 +12,10 @@ data class LikedArticle(
     val createdAt: String,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("likes_count")
+    @SerializedName("like")
     val likesCount: Int,
+    @SerializedName("is_liked")
+    val isLiked: Boolean,
     @SerializedName("thumbnail")
     val thumbnail: String,
     @SerializedName("title")

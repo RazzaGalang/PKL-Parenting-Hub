@@ -5,66 +5,142 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.pklparentinghub.R
+import com.example.pklparentinghub.data.api.ApiHelper
+import com.example.pklparentinghub.data.api.RetrofitBuilder
+import com.example.pklparentinghub.data.model.userContent.LikedArticle
 import com.example.pklparentinghub.databinding.FragmentProfileLikesBinding
-import com.example.pklparentinghub.ui.main.adapter.ProfileArtichleAdapter
+import com.example.pklparentinghub.ui.base.ContentModelFactory
+import com.example.pklparentinghub.ui.base.LikeModelFactory
+import com.example.pklparentinghub.ui.main.adapter.ProfileLikesAdapter
 import com.example.pklparentinghub.ui.main.adapter.ShimmerArticleProfileAdapter
+import com.example.pklparentinghub.ui.main.viewmodel.ContentViewModel
+import com.example.pklparentinghub.ui.main.viewmodel.LikeViewModel
+import com.example.pklparentinghub.utils.AccessManager
+import com.example.pklparentinghub.utils.Status
 
-class ProfileLikesFragment : Fragment() {
+class ProfileLikesFragment : Fragment(), ProfileLikesAdapter.OnItemClickListener {
 
     private var _binding: FragmentProfileLikesBinding? = null
     private val binding get() = _binding!!
-    private val profileAdapter = ProfileArtichleAdapter()
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var recyclerView: RecyclerView
-
+    private val adapter : ProfileLikesAdapter = ProfileLikesAdapter(this)
     private val shimmerAdapter : ShimmerArticleProfileAdapter = ShimmerArticleProfileAdapter()
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewModel: ContentViewModel
+    private lateinit var viewModelLike : LikeViewModel
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileLikesBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        swipeRefreshLayout = view.findViewById(R.id.refreshArthicle)
         recyclerView = view.findViewById(R.id.profileRecycler)
-
-        swipeRefreshLayout.setOnRefreshListener {
-            refreshData()
-        }
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupUI()
         setRecyclerViewAdapter()
-    }
-
-    private fun refreshData() {
-        swipeRefreshLayout.isRefreshing = false
+        setupViewModel()
+        setupObserver()
+        setupUI()
     }
 
     private fun setupUI() {
         binding.shimmerRecycler.adapter = shimmerAdapter
     }
 
+    override fun onItemClick(item: LikedArticle) {
+        setupLike(item)
+    }
+
     private fun setRecyclerViewAdapter(){
 
         binding.profileRecycler.layoutManager = LinearLayoutManager(this.context)
-        binding.profileRecycler.adapter = profileAdapter
-        binding.profileRecycler.addItemDecoration(
-            DividerItemDecoration(
-                binding.profileRecycler.context,
-                (binding.profileRecycler.layoutManager as LinearLayoutManager).orientation
-            )
-        )
+        binding.profileRecycler.adapter = adapter
+    }
+
+    private fun showLoading(loading: Boolean){
+        binding.apply {
+            profileRecycler.isVisible = !loading
+            shimmerRecycler.isVisible = loading
+        }
+    }
+
+    private fun setupLike(item: LikedArticle){
+        lifecycleScope.launchWhenResumed {
+            AccessManager(requireContext())
+                .access
+                .collect{ token ->
+                    viewModelLike.postUserLike(token, item.id).observe(viewLifecycleOwner, Observer {
+                        it?.let { resource ->
+                            when(resource.status) {
+                                Status.SUCCESS -> {
+                                    resource.data?.let { response ->
+                                        binding.apply {
+                                        }
+                                    }
+                                    setupObserver()
+                                }
+                                Status.LOADING -> {
+
+                                }
+                                Status.ERROR -> {
+                                }
+                            }
+                        }
+                    })
+                }
+        }
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ContentModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[ContentViewModel::class.java]
+
+        viewModelLike = ViewModelProvider(
+            this,
+            LikeModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[LikeViewModel::class.java]
+    }
+
+    private fun setupObserver(){
+        lifecycleScope.launchWhenResumed {
+            AccessManager(requireContext())
+                .access
+                .collect { token ->
+                    viewModel.getUserContent(token, 11).observe(viewLifecycleOwner, Observer {
+                        it?.let { resource ->
+                            showLoading(resource.status == Status.LOADING)
+                            when (resource.status){
+                                Status.SUCCESS -> {
+                                    resource.data?.let { response ->
+                                        binding.apply {
+                                            adapter.items = response?.body()?.data?.likedArticles!!
+                                        }
+                                    }
+                                }
+                                Status.LOADING -> {
+                                }
+                                Status.ERROR -> {
+                                }
+                            }
+                        }
+                    })
+                }
+        }
     }
 }

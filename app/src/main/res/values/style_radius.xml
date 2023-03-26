@@ -3,4 +3,7 @@
     <style name="cornerImage" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerSize">12dp</item>
     </style>
+    <style name="cornerBorder" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">6dp</item>
+    </style>
 </resources>
