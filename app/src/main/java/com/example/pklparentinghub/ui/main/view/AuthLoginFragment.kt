@@ -20,8 +20,6 @@ import com.example.pklparentinghub.ui.base.LoginViewModelFactory
 import com.example.pklparentinghub.ui.main.viewmodel.LoginViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class AuthLoginFragment : Fragment() {
 
@@ -68,10 +66,9 @@ class AuthLoginFragment : Fragment() {
 
     private fun setupRequest(){
         viewModel.requestLogin(
-            "example@gmail.com", "password1"
-
-//                binding.loginInputEmail.text.toString(),
-//                binding.loginInputPassword.text.toString()
+//            "example@gmail.com", "password1"
+                binding.loginInputEmail.text.toString(),
+                binding.loginInputPassword.text.toString()
         )
     }
 
@@ -79,15 +76,22 @@ class AuthLoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
             when (result.status){
                 Status.SUCCESS -> {
-                    result.data?.body()?.data?.let {
-                        AccessManager(requireContext())
-                            .setAccess(it.token, lifecycleScope)
-                    }
+                    if (result.data?.isSuccessful == true){
+                        result.data.body()?.data?.let {
+                            AccessManager(requireContext())
+                                .setAccess(it.token, lifecycleScope)
 
-                    if(result.data?.body()?.data?.user?.verifikasi!!)
-                        findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToMainActivity())
-                    else
-                        findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
+                            AccessManager(requireContext())
+                                .setUserId(it.user.id, lifecycleScope)
+                        }
+
+                        if(result.data.body()?.data?.user?.verifikasi!!)
+                            findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToMainActivity())
+                        else
+                            findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
+                    } else {
+                        findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthLoginErrorFragment())
+                    }
 
                     Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
                 }
@@ -97,15 +101,7 @@ class AuthLoginFragment : Fragment() {
                 }
 
                 Status.ERROR -> {
-                    Log.e(ContentValues.TAG, "setupObservers: ERROR")
-
-                    val type = object : TypeToken<List<String>>() {}.type
-                    val errors = Gson().fromJson<List<String>>(result.message, type)
-
-                    binding.apply {
-                        loginEmail.error = errors.find { it.contains("email") }
-                        loginPassword.error = errors.find { it.contains("password") }
-                    }
+                    findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToConnectionErrorFragment())
                 }
             }
         }
