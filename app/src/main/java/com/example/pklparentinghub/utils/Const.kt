@@ -20,6 +20,8 @@ object Const {
             const val USER_FOLLOWER = PREFIX + "users/{param}/followers"
             const val USER_FOLLOWING = PREFIX + "users/{param}/followings"
             const val USER_FOLLOW = PREFIX + "users/follow"
+            const val USER_EDIT = PREFIX + "users/{param}"
+            const val USER_UPLOAD_FILE = PREFIX + "users/profile/upload"
         }
 
         object Article {
@@ -27,7 +29,6 @@ object Const {
             const val ARTICLE_ALL = PREFIX + "articles"
             const val ARTICLE_DETAIL = PREFIX + "articles/{param}"
             const val ARTICLE_BANNER = PREFIX + "articles/banner"
-
         }
 
     }

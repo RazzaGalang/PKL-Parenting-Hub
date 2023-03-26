@@ -40,6 +40,12 @@
         <action
             android:id="@+id/action_authLoginFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_authLoginFragment_to_authLoginErrorFragment"
+            app:destination="@id/authLoginErrorFragment" />
+        <action
+            android:id="@+id/action_authLoginFragment_to_ConnectionErrorFragment"
+            app:destination="@id/ConnectionErrorFragment" />
     </fragment>
     <fragment
         android:id="@+id/authRegisterFragment"
@@ -50,8 +56,8 @@
             android:id="@+id/action_authRegisterFragment_to_authRegisterSuccessFragment"
             app:destination="@id/authRegisterSuccessFragment" />
         <action
-            android:id="@+id/action_authRegisterFragment_to_authRegisterConnectionErrorFragment"
-            app:destination="@id/authRegisterConnectionErrorFragment" />
+            android:id="@+id/action_authRegisterFragment_to_ConnectionErrorFragment"
+            app:destination="@id/ConnectionErrorFragment" />
         <action
             android:id="@+id/action_authRegisterFragment_to_authLoginFragment"
             app:destination="@id/authLoginFragment" />
@@ -72,7 +78,15 @@
         tools:layout="@layout/fragment_complete_profile_banner" >
         <action
             android:id="@+id/action_completeProfileBannerFragment_to_completeProfileBiodataFragment"
-            app:destination="@id/completeProfileBiodataFragment" />
+            app:destination="@id/completeProfileBiodataFragment">
+            <argument
+                android:name="profilePicture"
+                app:argType="string"/>
+
+            <argument
+                android:name="bannerPicture"
+                app:argType="string"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/completeProfilePictureFragment"
@@ -81,31 +95,39 @@
         tools:layout="@layout/fragment_complete_profile_picture" >
         <action
             android:id="@+id/action_completeProfilePictureFragment_to_completeProfileBannerFragment"
-            app:destination="@id/completeProfileBannerFragment" />
+            app:destination="@id/completeProfileBannerFragment">
+            <argument
+                android:name="profilePicture"
+                app:argType="string"/>
+        </action>
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/authRegisterSuccessFragment"
         android:name="com.example.pklparentinghub.ui.main.condition.AuthRegisterSuccessFragment"
         android:label="AuthRegisterSuccessFragment" >
         <action
             android:id="@+id/action_authRegisterSuccessFragment_to_authLoginFragment"
             app:destination="@id/authLoginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/authRegisterConnectionErrorFragment"
-        android:name="com.example.pklparentinghub.ui.main.condition.AuthRegisterConnectionErrorFragment"
-        android:label="AuthRegisterConnectionErrorFragment" />
-    <fragment
+    </dialog>
+    <dialog
+        android:id="@+id/ConnectionErrorFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.ConnectionErrorFragment"
+        android:label="ConnectionErrorFragment" />
+    <dialog
         android:id="@+id/completeProfileOnBoardingFragment"
         android:name="com.example.pklparentinghub.ui.main.view.CompleteProfileOnBoardingFragment"
         android:label="CompleteProfileOnBoardingFragment" >
         <action
             android:id="@+id/action_completeProfileOnBoardingFragment_to_completeProfilePictureFragment"
             app:destination="@id/completeProfilePictureFragment" />
-    </fragment>
+    </dialog>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.pklparentinghub.ui.main.view.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <dialog
+        android:id="@+id/authLoginErrorFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.AuthLoginErrorFragment"
+        android:label="AuthLoginErrorFragment" />
 </navigation>

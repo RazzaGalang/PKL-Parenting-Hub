@@ -1,6 +1,6 @@
 package com.example.pklparentinghub.ui.main.view
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -14,12 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
-import com.example.pklparentinghub.ui.main.condition.AuthRegisterConnectionErrorFragment
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.databinding.FragmentAuthRegisterBinding
 import com.example.pklparentinghub.ui.base.RegisterViewModelFactory
-import com.example.pklparentinghub.ui.main.condition.AuthRegisterSuccessFragmentDirections
 import com.example.pklparentinghub.ui.main.viewmodel.RegisterViewModel
 import com.example.pklparentinghub.utils.Status
 
@@ -96,23 +94,32 @@ class AuthRegisterFragment : Fragment() {
     }
 
     private fun setupObserve() {
-        viewModel.registerResult.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.registerResult.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
+                        Log.e(TAG, "setupObserve: MASUK KE SUCCESS")
                         findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthLoginFragment())
                     }
                     Status.ERROR -> {
-                        Log.e(ContentValues.TAG, "setupObservers: " + it.message)
-                        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthRegisterConnectionErrorFragment())
+                        Log.e(TAG, "setupObservers: ${resource.message.toString()}")
+                        if (resource.message?.contains("username")!!){
+                            errorBorderUserName()
+                            binding.registerUsername.error = "Nama Pengguna yang Anda Masukkan Tidak Tersedia"
+                        } else if (resource.message.contains("email")){
+                            errorBorderEmail()
+                            binding.registerEmail.error = "Email Anda Sudah Terdaftar"
+                        } else {
+                            Log.e(TAG, "setupObservers: " + it.message)
+                            findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToConnectionErrorFragment())
+                        }
                     }
                     Status.LOADING -> {
-                        Log.e(ContentValues.TAG, "setupObservers: LOADING")
+                        Log.e(TAG, "setupObservers: LOADING")
                     }
                 }
             }
-        })
+        }
     }
 
     private fun textWatcherFullName() {

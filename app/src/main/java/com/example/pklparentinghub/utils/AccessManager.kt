@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.*
-import java.util.concurrent.Flow
 
 class AccessManager(private val context: Context) {
 
     private val emptyString = ""
+    private val emptyInt = 0
 
     // Insertion with Suspend Function based on Key
     suspend fun setAccess(tokenAccess: String) {
@@ -29,6 +29,12 @@ class AccessManager(private val context: Context) {
     fun setAccess(tokenAccess: String, scope: CoroutineScope) = scope.launch {
         context.dataStore.edit { preferences ->
             preferences[PreferencesKey.accessKey] = "${Const.Token.AUTH_PREFIX} $tokenAccess"
+        }
+    }
+
+    fun setUserId(usedId: Int, scope: CoroutineScope) = scope.launch {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKey.userIdKey] = usedId
         }
     }
 
@@ -52,6 +58,14 @@ class AccessManager(private val context: Context) {
         }.map { preferences ->
             preferences[PreferencesKey.accessKey] ?: emptyString
         }
+
+    val accessUserId = context.dataStore.data
+        .catch {
+            emit(emptyPreferences())
+        }.map { preferences ->
+            preferences[PreferencesKey.userIdKey] ?: emptyInt
+        }
+
 
 
     suspend fun setFirstTimeAccess(status: Boolean) {
@@ -94,7 +108,9 @@ class AccessManager(private val context: Context) {
     private object PreferencesKey {
         const val AUTH_PREFERENCES_KEY = "auth_preferences"
         const val TOKEN_ACCESS_REF = "token_access_key"
+        const val USER_ID_REF = "user_id_key"
 
         val accessKey = stringPreferencesKey(TOKEN_ACCESS_REF)
+        val userIdKey = intPreferencesKey(USER_ID_REF)
     }
 }
