@@ -27,6 +27,7 @@ import com.example.pklparentinghub.ui.main.viewmodel.FollowViewModel
 import com.example.pklparentinghub.ui.main.viewmodel.FollowingViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
+import kotlinx.coroutines.flow.collect
 
 class ProfileFollowingFragment : Fragment(), ProfileFollowingAdapter.OnItemClickListener {
 
@@ -134,28 +135,34 @@ class ProfileFollowingFragment : Fragment(), ProfileFollowingAdapter.OnItemClick
             AccessManager(requireContext())
                 .access
                 .collect { token->
-                    viewModel.getUserFollowings(token, 11).observe(viewLifecycleOwner, Observer {
-                        it?.let { resource ->
-                            showLoading( resource.status == Status.LOADING)
-                            when (resource.status) {
-                                Status.SUCCESS -> {
-                                    resource.data?.let { response ->
-                                        binding.apply {
-                                            adapter.items = response?.body()?.data?.user!!
+                    lifecycleScope.launchWhenResumed {
+                        AccessManager(requireContext())
+                            .accessUserId
+                            .collect { userId ->
+                                viewModel.getUserFollowings(token, userId).observe(viewLifecycleOwner, Observer {
+                                    it?.let { resource ->
+                                        showLoading( resource.status == Status.LOADING)
+                                        when (resource.status) {
+                                            Status.SUCCESS -> {
+                                                resource.data?.let { response ->
+                                                    binding.apply {
+                                                        adapter.items = response?.body()?.data?.user!!
+                                                    }
+                                                }
+                                            }
+
+                                            Status.LOADING -> {
+
+                                            }
+
+                                            Status.ERROR -> {
+
+                                            }
                                         }
                                     }
-                                }
-
-                                Status.LOADING -> {
-
-                                }
-
-                                Status.ERROR -> {
-
-                                }
+                                })
                             }
-                        }
-                    })
+                    }
                 }
         }
     }

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.main.view.MainProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -135,7 +136,7 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mainProfileViewPager"
-            android:layout_width="@dimen/zero_dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
