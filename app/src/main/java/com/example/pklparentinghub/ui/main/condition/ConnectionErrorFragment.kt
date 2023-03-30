@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentConditionSingleActionBinding
 
-class AuthRegisterConnectionErrorFragment : DialogFragment () {
+class ConnectionErrorFragment : DialogFragment () {
     private var _binding: FragmentConditionSingleActionBinding? = null
     private val binding get() = _binding!!
 
@@ -31,6 +31,8 @@ class AuthRegisterConnectionErrorFragment : DialogFragment () {
     }
 
     private fun setOutput(){
+        dialog?.setCancelable(false)
+
         if (dialog != null && dialog!!.window != null) {
             dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }

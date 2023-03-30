@@ -5,10 +5,14 @@ import com.example.pklparentinghub.data.model.login.LoginResponse
 import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
+import com.example.pklparentinghub.data.model.userDetail.CompleteProfileRequest
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
-import com.example.pklparentinghub.data.model.userFollow.UserFollowResponse
+import com.example.pklparentinghub.data.model.userFileUpload.UserFileUploadResponse
+import com.example.pklparentinghub.data.model.userFollower.UserFollowerResponse
+import com.example.pklparentinghub.data.model.userFollowing.UserFollowingResponse
 import com.example.pklparentinghub.utils.Const
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -33,12 +37,29 @@ interface ApiService {
     ): Response<JsonObject> //Tambah Model
 
     @Headers("Accept: application/json")
+    @PUT(Const.Network.User.USER_EDIT)
+    suspend fun updateUser(
+        @Header("Authorization") token: String,
+        @Path("param") userId : Int,
+        @Body request: CompleteProfileRequest
+    ): Response<UserDetailResponse>
+
+    @Multipart
+    @Headers("Accept: application/json")
+    @POST(Const.Network.User.USER_UPLOAD_FILE)
+    suspend fun storeFileUser(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part
+    ): Response<UserFileUploadResponse>
+
+
+    @Headers("Accept: application/json")
     @GET(Const.Network.User.USER_ALL)
     suspend fun getProfileUserAll(
         @Header("Authorization") token: String,
         @Query("per_page") perPage : Int,
         @Query("search") search: String
-    ): Response<JsonObject>//Tambah Model
+    ): Response<JsonObject>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.User.USER_DETAIL)
@@ -60,14 +81,14 @@ interface ApiService {
     suspend fun getUserFollowings(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
-    ): Response<UserFollowResponse>
+    ): Response<UserFollowingResponse>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.User.USER_FOLLOWER)
     suspend fun getUserFollower(
         @Header("Authorization") token: String,
         @Path("param") userId : Int
-    ): Response<UserFollowResponse>
+    ): Response<UserFollowerResponse>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.Article.ARTICLE_ALL)
@@ -75,8 +96,8 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("per_page") perPage: Int,
         @Query("search") search: String,
-        @Query("popular") popular : Boolean = true,
-        @Query("latest") latest : Boolean = true
+        @Query("popular") popular : Boolean,
+        @Query("latest") latest : Boolean
     ) : Response<JsonObject> //Tambah Model
 
     @Headers("Accept: application/json")

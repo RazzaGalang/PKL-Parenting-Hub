@@ -67,6 +67,18 @@
             app:strokeColor="@color/white"
             app:strokeWidth="3dp" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/completeProfilePictureErrorText"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:textAppearance="@style/TextAppearance.ValidationImage"
+            android:textAlignment="center"
+            android:textColor="@color/error30"
+            app:layout_constraintEnd_toEndOf="@+id/completeProfilePictureInsertPicture"
+            app:layout_constraintStart_toStartOf="@+id/completeProfilePictureInsertPicture"
+            app:layout_constraintTop_toBottomOf="@+id/completeProfilePictureInsertPicture" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/completeProfilePictureNavigationButton"
             android:layout_width="@dimen/zero_dp"

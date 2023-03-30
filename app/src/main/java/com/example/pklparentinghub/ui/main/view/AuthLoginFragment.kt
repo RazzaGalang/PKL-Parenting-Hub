@@ -1,6 +1,6 @@
 package com.example.pklparentinghub.ui.main.view
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,8 +20,6 @@ import com.example.pklparentinghub.ui.base.LoginViewModelFactory
 import com.example.pklparentinghub.ui.main.viewmodel.LoginViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class AuthLoginFragment : Fragment() {
 
@@ -49,7 +47,6 @@ class AuthLoginFragment : Fragment() {
         setupToRegister()
     }
 
-
     private fun setupViewModel (){
         viewModel = ViewModelProvider(
             this,
@@ -67,16 +64,12 @@ class AuthLoginFragment : Fragment() {
         }
     }
 
-
     private fun setupRequest(){
         viewModel.requestLogin(
-            "example@gmail.com", "password1"
-
-//                binding.loginInputEmail.text.toString(),
-//                binding.loginInputPassword.text.toString()
+            binding.loginInputEmail.text.toString(),
+            binding.loginInputPassword.text.toString()
         )
     }
-
 
     private fun setupObserve(){
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
@@ -85,29 +78,34 @@ class AuthLoginFragment : Fragment() {
                     result.data?.body()?.data?.let {
                         AccessManager(requireContext())
                             .setAccess(it.token, lifecycleScope)
+
+                        AccessManager(requireContext())
+                            .setUserId(it.user.id, lifecycleScope)
                     }
 
-                    if(result.data?.body()?.data?.user?.verifikasi!!)
+                    if (result.data?.body()?.data?.user?.verifikasi!!){
                         findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToMainActivity())
-                    else
+                        Log.e(TAG, "setupObserve: DIRECTION KE COMPLETE PROFILE")
+                    } else {
                         findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
-
-                    Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
+                        Log.e(TAG, "setupObserve: DIRECTION KE COMPLETE PROFILE")
+                    }
                 }
 
                 Status.LOADING -> {
-                    Log.e(ContentValues.TAG, "setupObservers: LOADING")
+                    Log.e(TAG, "setupObservers: LOADING")
                 }
 
                 Status.ERROR -> {
-                    Log.e(ContentValues.TAG, "setupObservers: ERROR")
-
-                    val type = object : TypeToken<List<String>>() {}.type
-                    val errors = Gson().fromJson<List<String>>(result.message, type)
-
-                    binding.apply {
-                        loginEmail.error = errors.find { it.contains("email") }
-                        loginPassword.error = errors.find { it.contains("password") }
+                    if (result.message?.contains("errors") == true){
+                        Log.e(TAG, "setupObserve: CONTAINS ERROR")
+                        findNavController().navigate(AuthLoginFragmentDirections.actionToAuthLoginErrorFragment())
+                    } else if (result.message?.contains("incorrect") == true){
+                        Log.e(TAG, "setupObserve: CONTAINS INCORRECT")
+                        findNavController().navigate(AuthLoginFragmentDirections.actionToAuthLoginErrorFragment())
+                    } else {
+                        Log.e(TAG, "setupObserve: IKALIDUT")
+                        findNavController().navigate(AuthLoginFragmentDirections.actionToConnectionErrorFragment())
                     }
                 }
             }
@@ -175,8 +173,6 @@ class AuthLoginFragment : Fragment() {
             true
         }
     }
-
-
 
     private fun errorNullEmail() {
         binding.loginEmail.error = getText(R.string.error_text_null_email)
