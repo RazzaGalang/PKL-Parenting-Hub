@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.example.pklparentinghub.ui.main.view.SplashScreenFragment"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" >
+        android:label="@null"
+        tools:layout="@layout/fragment_splash_screen">
         <action
             android:id="@+id/action_splashScreenFragment_to_authOnBoardingFragment"
             app:destination="@id/authOnBoardingFragment" />
@@ -20,8 +20,8 @@
     <fragment
         android:id="@+id/authOnBoardingFragment"
         android:name="com.example.pklparentinghub.ui.main.view.AuthOnBoardingFragment"
-        android:label="fragment_auth_on_boarding"
-        tools:layout="@layout/fragment_auth_on_boarding" >
+        android:label="@null"
+        tools:layout="@layout/fragment_auth_on_boarding">
         <action
             android:id="@+id/action_authOnBoardingFragment_to_authLoginFragment"
             app:destination="@id/authLoginFragment" />
@@ -29,38 +29,50 @@
     <fragment
         android:id="@+id/authLoginFragment"
         android:name="com.example.pklparentinghub.ui.main.view.AuthLoginFragment"
-        android:label="fragment_auth_login"
-        tools:layout="@layout/fragment_auth_login" >
+        android:label="@null"
+        tools:layout="@layout/fragment_auth_login">
         <action
             android:id="@+id/action_authLoginFragment_to_authRegisterFragment"
             app:destination="@id/authRegisterFragment" />
         <action
-            android:id="@+id/action_authLoginFragment_to_completeProfileOnBoardingFragment"
-            app:destination="@id/completeProfileOnBoardingFragment" />
+            android:id="@+id/action_to_authLoginErrorFragment"
+            app:destination="@id/authLoginErrorFragment" />
+        <action
+            android:id="@+id/action_to_ConnectionErrorFragment"
+            app:destination="@id/ConnectionErrorFragment" />
         <action
             android:id="@+id/action_authLoginFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_authLoginFragment_to_completeProfileOnBoardingFragment"
+            app:destination="@id/completeProfileOnBoardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/authRegisterFragment"
         android:name="com.example.pklparentinghub.ui.main.view.AuthRegisterFragment"
-        android:label="fragment_auth_register"
-        tools:layout="@layout/fragment_auth_register" >
+        android:label="@null"
+        tools:layout="@layout/fragment_auth_register">
         <action
             android:id="@+id/action_authRegisterFragment_to_authRegisterSuccessFragment"
             app:destination="@id/authRegisterSuccessFragment" />
         <action
-            android:id="@+id/action_authRegisterFragment_to_authRegisterConnectionErrorFragment"
-            app:destination="@id/authRegisterConnectionErrorFragment" />
+            android:id="@+id/action_authRegisterFragment_to_ConnectionErrorFragment"
+            app:destination="@id/ConnectionErrorFragment" />
         <action
             android:id="@+id/action_authRegisterFragment_to_authLoginFragment"
             app:destination="@id/authLoginFragment" />
+        <action
+            android:id="@+id/action_authRegisterFragment_to_emailBeenTakenFragment"
+            app:destination="@id/emailBeenTakenFragment" />
+        <action
+            android:id="@+id/action_authRegisterFragment_to_usernameBeenTakenFragment"
+            app:destination="@id/usernameBeenTakenFragment" />
     </fragment>
     <fragment
         android:id="@+id/completeProfileBiodataFragment"
         android:name="com.example.pklparentinghub.ui.main.view.CompleteProfileBiodataFragment"
-        android:label="fragment_complete_profile_biodata"
-        tools:layout="@layout/fragment_complete_profile_biodata" >
+        android:label="@null"
+        tools:layout="@layout/fragment_complete_profile_biodata">
         <action
             android:id="@+id/action_completeProfileBiodataFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
@@ -68,37 +80,37 @@
     <fragment
         android:id="@+id/completeProfileBannerFragment"
         android:name="com.example.pklparentinghub.ui.main.view.CompleteProfileBannerFragment"
-        android:label="fragment_complete_profile_banner"
-        tools:layout="@layout/fragment_complete_profile_banner" >
+        android:label="@null"
+        tools:layout="@layout/fragment_complete_profile_banner">
         <action
             android:id="@+id/action_completeProfileBannerFragment_to_completeProfileBiodataFragment"
-            app:destination="@id/completeProfileBiodataFragment" />
+            app:destination="@id/completeProfileBiodataFragment">
+            <argument
+                android:name="profilePicture"
+                app:argType="string" />
+
+            <argument
+                android:name="bannerPicture"
+                app:argType="string" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/completeProfilePictureFragment"
         android:name="com.example.pklparentinghub.ui.main.view.CompleteProfilePictureFragment"
-        android:label="fragment_complete_profile_picture"
-        tools:layout="@layout/fragment_complete_profile_picture" >
+        android:label="@null"
+        tools:layout="@layout/fragment_complete_profile_picture">
         <action
             android:id="@+id/action_completeProfilePictureFragment_to_completeProfileBannerFragment"
-            app:destination="@id/completeProfileBannerFragment" />
+            app:destination="@id/completeProfileBannerFragment">
+            <argument
+                android:name="profilePicture"
+                app:argType="string" />
+        </action>
     </fragment>
-    <fragment
-        android:id="@+id/authRegisterSuccessFragment"
-        android:name="com.example.pklparentinghub.ui.main.condition.AuthRegisterSuccessFragment"
-        android:label="AuthRegisterSuccessFragment" >
-        <action
-            android:id="@+id/action_authRegisterSuccessFragment_to_authLoginFragment"
-            app:destination="@id/authLoginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/authRegisterConnectionErrorFragment"
-        android:name="com.example.pklparentinghub.ui.main.condition.AuthRegisterConnectionErrorFragment"
-        android:label="AuthRegisterConnectionErrorFragment" />
     <fragment
         android:id="@+id/completeProfileOnBoardingFragment"
         android:name="com.example.pklparentinghub.ui.main.view.CompleteProfileOnBoardingFragment"
-        android:label="CompleteProfileOnBoardingFragment" >
+        android:label="@null">
         <action
             android:id="@+id/action_completeProfileOnBoardingFragment_to_completeProfilePictureFragment"
             app:destination="@id/completeProfilePictureFragment" />
@@ -106,6 +118,30 @@
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.pklparentinghub.ui.main.view.MainActivity"
-        android:label="activity_main"
+        android:label="@null"
         tools:layout="@layout/activity_main" />
+    <dialog
+        android:id="@+id/authLoginErrorFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.LoginErrorFragment"
+        android:label="@null" />
+    <dialog
+        android:id="@+id/emailBeenTakenFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.EmailBeenTakenFragment"
+        android:label="@null" />
+    <dialog
+        android:id="@+id/usernameBeenTakenFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.UsernameBeenTakenFragment"
+        android:label="@null" />
+    <dialog
+        android:id="@+id/authRegisterSuccessFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.RegisterSuccessFragment"
+        android:label="@null">
+        <action
+            android:id="@+id/action_authRegisterSuccessFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/ConnectionErrorFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.ConnectionErrorFragment"
+        android:label="@null" />
 </navigation>

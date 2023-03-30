@@ -1,5 +1,7 @@
 package com.example.pklparentinghub.ui.main.viewmodel
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,7 +23,14 @@ class LoginViewModel(private val authRepository: AuthRepository) : ViewModel() {
             try {
                 val request = LoginRequest(email, password)
                 val response = authRepository.requestLogin(request)
-                _loginResult.value = Resource.success(response)
+                if (response.isSuccessful) {
+                    val loginResponse = response.body()
+                    Log.e(ContentValues.TAG, "requestRegister: $loginResponse", )
+                    _loginResult.value = Resource.success(response)
+                } else {
+                    val errorBody = response.errorBody()?.string() ?: "Unknown error"
+                    _loginResult.value = Resource.error(message = errorBody,  data = null)
+                }
             } catch (e: Exception) {
                 _loginResult.value = Resource.error(data = null, message = "An error occurred")
             }

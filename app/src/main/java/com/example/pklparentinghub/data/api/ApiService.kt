@@ -9,7 +9,9 @@ import com.example.pklparentinghub.data.model.login.LoginResponse
 import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
+import com.example.pklparentinghub.data.model.userDetail.CompleteProfileRequest
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
+import com.example.pklparentinghub.data.model.userFileUpload.UserFileUploadResponse
 import com.example.pklparentinghub.data.model.userFollower.UserFollowerResponse
 import com.example.pklparentinghub.data.model.userFollowing.UserFollowingResponse
 import com.example.pklparentinghub.utils.Const
@@ -39,12 +41,29 @@ interface ApiService {
     ): Response<JsonObject> //Tambah Model
 
     @Headers("Accept: application/json")
+    @PUT(Const.Network.User.USER_EDIT)
+    suspend fun updateUser(
+        @Header("Authorization") token: String,
+        @Path("param") userId : Int,
+        @Body request: CompleteProfileRequest
+    ): Response<UserDetailResponse>
+
+    @Multipart
+    @Headers("Accept: application/json")
+    @POST(Const.Network.User.USER_UPLOAD_FILE)
+    suspend fun storeFileUser(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part
+    ): Response<UserFileUploadResponse>
+
+
+    @Headers("Accept: application/json")
     @GET(Const.Network.User.USER_ALL)
     suspend fun getProfileUserAll(
         @Header("Authorization") token: String,
         @Query("per_page") perPage : Int,
         @Query("search") search: String
-    ): Response<JsonObject>//Tambah Model
+    ): Response<JsonObject>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.User.USER_DETAIL)
