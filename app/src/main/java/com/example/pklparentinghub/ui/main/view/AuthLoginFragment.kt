@@ -1,6 +1,6 @@
 package com.example.pklparentinghub.ui.main.view
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -66,9 +66,8 @@ class AuthLoginFragment : Fragment() {
 
     private fun setupRequest(){
         viewModel.requestLogin(
-//            "example@gmail.com", "password1"
-                binding.loginInputEmail.text.toString(),
-                binding.loginInputPassword.text.toString()
+            binding.loginInputEmail.text.toString(),
+            binding.loginInputPassword.text.toString()
         )
     }
 
@@ -76,32 +75,38 @@ class AuthLoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner){result ->
             when (result.status){
                 Status.SUCCESS -> {
-                    if (result.data?.isSuccessful == true){
-                        result.data.body()?.data?.let {
-                            AccessManager(requireContext())
-                                .setAccess(it.token, lifecycleScope)
+                    result.data?.body()?.data?.let {
+                        AccessManager(requireContext())
+                            .setAccess(it.token, lifecycleScope)
 
-                            AccessManager(requireContext())
-                                .setUserId(it.user.id, lifecycleScope)
-                        }
-
-                        if(result.data.body()?.data?.user?.verifikasi!!)
-                            findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToMainActivity())
-                        else
-                            findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
-                    } else {
-                        findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthLoginErrorFragment())
+                        AccessManager(requireContext())
+                            .setUserId(it.user.id, lifecycleScope)
                     }
 
-                    Log.e(ContentValues.TAG, "setupObservers: SUCCESS")
+                    if (result.data?.body()?.data?.user?.verifikasi!!){
+                        findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToMainActivity())
+                        Log.e(TAG, "setupObserve: DIRECTION KE COMPLETE PROFILE")
+                    } else {
+                        findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
+                        Log.e(TAG, "setupObserve: DIRECTION KE COMPLETE PROFILE")
+                    }
                 }
 
                 Status.LOADING -> {
-                    Log.e(ContentValues.TAG, "setupObservers: LOADING")
+                    Log.e(TAG, "setupObservers: LOADING")
                 }
 
                 Status.ERROR -> {
-                    findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToConnectionErrorFragment())
+                    if (result.message?.contains("errors") == true){
+                        Log.e(TAG, "setupObserve: CONTAINS ERROR")
+                        findNavController().navigate(AuthLoginFragmentDirections.actionToAuthLoginErrorFragment())
+                    } else if (result.message?.contains("incorrect") == true){
+                        Log.e(TAG, "setupObserve: CONTAINS INCORRECT")
+                        findNavController().navigate(AuthLoginFragmentDirections.actionToAuthLoginErrorFragment())
+                    } else {
+                        Log.e(TAG, "setupObserve: IKALIDUT")
+                        findNavController().navigate(AuthLoginFragmentDirections.actionToConnectionErrorFragment())
+                    }
                 }
             }
         }

@@ -98,17 +98,15 @@ class AuthRegisterFragment : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        Log.e(TAG, "setupObserve: MASUK KE SUCCESS")
-                        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthLoginFragment())
+                        Log.e(TAG, "setupObserve: SUCCESS")
+                        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthRegisterSuccessFragment())
                     }
                     Status.ERROR -> {
                         Log.e(TAG, "setupObservers: ${resource.message.toString()}")
                         if (resource.message?.contains("username")!!){
-                            errorBorderUserName()
-                            binding.registerUsername.error = "Nama Pengguna yang Anda Masukkan Tidak Tersedia"
+                            usernameBeenTaken()
                         } else if (resource.message.contains("email")){
-                            errorBorderEmail()
-                            binding.registerEmail.error = "Email Anda Sudah Terdaftar"
+                            emailBeenTaken()
                         } else {
                             Log.e(TAG, "setupObservers: " + it.message)
                             findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToConnectionErrorFragment())
@@ -120,6 +118,18 @@ class AuthRegisterFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun usernameBeenTaken() {
+        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToUsernameBeenTakenFragment())
+        errorBorderUserName()
+        binding.registerUsername.error = "Nama Pengguna yang Anda Masukkan Tidak Tersedia"
+    }
+
+    private fun emailBeenTaken() {
+        findNavController().navigate(AuthRegisterFragmentDirections.actionAuthRegisterFragmentToEmailBeenTakenFragment())
+        errorBorderEmail()
+        binding.registerEmail.error = "Email Anda Sudah Terdaftar"
     }
 
     private fun textWatcherFullName() {

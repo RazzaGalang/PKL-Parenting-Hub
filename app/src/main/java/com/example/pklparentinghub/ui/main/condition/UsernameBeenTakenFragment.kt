@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentConditionSingleActionBinding
 
-class AuthLoginErrorFragment : DialogFragment() {
+class UsernameBeenTakenFragment : DialogFragment() {
 
     private var _binding: FragmentConditionSingleActionBinding? = null
     private val binding get() = _binding!!
@@ -38,9 +38,9 @@ class AuthLoginErrorFragment : DialogFragment() {
             dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
 
-        binding.registerConditionImage.setImageResource(R.drawable.img_auth_login_failed)
-        binding.registerConditionTitle.text = "Gagal Masuk!"
-        binding.registerConditionContent.text = "Periksa Nama Pengguna dan Kata Sandi"
+        binding.registerConditionImage.setImageResource(R.drawable.img_condition_username_already_taken)
+        binding.registerConditionTitle.text = "Coba Lagi"
+        binding.registerConditionContent.text = "Nama Pengguna yang Anda Masukkan Tidak Tersedia"
         binding.registerConditionButton.text = "Kembali"
     }
 
