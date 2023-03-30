@@ -138,49 +138,59 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
         }
     }
 
-//    override fun onItemCLick(item: Article) {
-//        val intent = Intent(this.context, DetailArticleActivity::class.java)
-//        intent.putExtra("id", item.id)
-//        startActivity(intent)
-//    }
-
     private fun setupObserver(){
         lifecycleScope.launchWhenResumed {
             AccessManager(requireContext())
                 .access
                 .collect { token ->
-                    viewModel.requestProfile(token, 11).observe(viewLifecycleOwner, Observer {
-                        it?.let { resource ->
-                            showLoading( resource.status == Status.LOADING)
-                            when(resource.status) {
-                                Status.SUCCESS -> {
-                                    resource.data?.let { profile ->
-                                        binding.apply {
-                                            val mainCover = "${profile.body()?.data?.profileCover}"
-                                            val banner = mainProfileBanner
-                                            Glide.with(banner)
-                                                .load(mainCover)
-                                                .into(banner)
-                                            val mainPicture = "${profile.body()?.data?.profilePicture}"
-                                            val picture = mainProfilePicture
-                                            Glide.with(picture)
-                                                .load(mainPicture)
-                                                .into(picture)
-                                            mainProfileFullName.text = "${profile.body()?.data?.fullName}"
-                                            mainProfileUsername.text = "${profile.body()?.data?.username}"
-                                            mainProfileDescription.text = "${profile.body()?.data?.description}"
-                                            mainProfileFollowing.text = "${profile.body()?.data?.following} Mengikuti"
-                                            mainProfileFollower.text = "${profile.body()?.data?.followers} Pengikut"
+                    AccessManager(requireContext())
+                        .accessUserId
+                        .collect { userId ->
+                            viewModel.requestProfile(token, userId)
+                                .observe(viewLifecycleOwner, Observer {
+                                    it?.let { resource ->
+                                        showLoading(resource.status == Status.LOADING)
+                                        when (resource.status) {
+                                            Status.SUCCESS -> {
+                                                resource.data?.let { profile ->
+                                                    binding.apply {
+                                                        val mainCover =
+                                                            "${profile.body()?.data?.profileCover}"
+                                                        val banner = mainProfileBanner
+                                                        Glide.with(banner)
+                                                            .load(mainCover)
+                                                            .into(banner)
+                                                        val mainPicture =
+                                                            "${profile.body()?.data?.profilePicture}"
+                                                        val picture = mainProfilePicture
+                                                        Glide.with(picture)
+                                                            .load(mainPicture)
+                                                            .into(picture)
+                                                        mainProfileFullName.text =
+                                                            "${profile.body()?.data?.fullName}"
+                                                        mainProfileUsername.text =
+                                                            "${profile.body()?.data?.username}"
+                                                        mainProfileDescription.text =
+                                                            "${profile.body()?.data?.description}"
+                                                        mainProfileFollowing.text =
+                                                            "${profile.body()?.data?.following} Mengikuti"
+                                                        mainProfileFollower.text =
+                                                            "${profile.body()?.data?.followers} Pengikut"
+                                                    }
+                                                }
+                                            }
+                                            Status.ERROR -> {
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    it.message,
+                                                    Toast.LENGTH_LONG
+                                                ).show()
+                                            }
+                                            Status.LOADING -> {}
                                         }
                                     }
-                                }
-                                Status.ERROR -> {
-                                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                                }
-                                Status.LOADING -> {}
-                            }
+                                })
                         }
-                    })
                 }
         }
     }
