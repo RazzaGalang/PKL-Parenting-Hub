@@ -56,6 +56,18 @@
     <dimen name="validation_line_height">16sp</dimen>
     <dimen name="caption_line_height">13sp</dimen>
 
+    <!-- Custom Profile -->
+    <dimen name="button_date">150dp</dimen>
+    <dimen name="baner_height">130dp</dimen>
+    <dimen name="custom_height_button">60dp</dimen>
+    <dimen name="icon_edit">50dp</dimen>
+    <dimen name="custom_profile_size">90dp</dimen>
+    <dimen name="custom_margin_top">86dp</dimen>
+    <dimen name="custom_icon">35dp</dimen>
+    <dimen name="custom_margin_vertical">18dp</dimen>
+    <dimen name="custom_width_list">255dp</dimen>
+    <dimen name="custom_margin_horizontal">110dp</dimen>
+
 
     <dimen name="avatar_height">32dp</dimen>
 
