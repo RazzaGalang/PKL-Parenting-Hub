@@ -1,134 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainProfileFragment">
+    android:fillViewport="true"
+    tools:context=".ui.main.view.MainProfileFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/mainProfileBanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img_auth_profile_default_banner"
-        android:adjustViewBounds="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/mainProfilePicture"
-        android:layout_width="@dimen/custom_profile_size"
-        android:layout_height="@dimen/custom_profile_size"
-        android:src="@drawable/img_auth_profile_default_picture"
-        android:background="@drawable/style_profile_picture_rounded"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/mainButtonEditProfile"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        app:shapeAppearanceOverlay="@style/circleImage"
-        android:scaleType="centerCrop"
-        app:strokeWidth="@dimen/extra_small_margin"
-        android:padding="@dimen/extra_small_margin"
-        app:strokeColor="@color/white"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mainButtonEditProfile"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        android:layout_marginTop="@dimen/normal_margin"
-        android:text="@string/Title2"
-        android:textColor="@color/primary50"
-        app:cornerRadius="@dimen/button_edit_profile_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainProfileBanner"
-        app:strokeColor="@color/primary50"
-        app:strokeWidth="@dimen/view_height"
-        tools:ignore="TextSizeCheck"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.Caption"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mainProfileFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        android:layout_marginVertical="@dimen/normal_margin"
-        android:text="@string/prof_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainButtonEditProfile"
-        android:textAppearance="@style/TextAppearance.Subtitle2"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mainProfileUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/custom_margin_20dp"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        android:text="@string/prof_username"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainProfileFullName"
-        android:textAppearance="@style/TextAppearance.Body5"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mainProfileDescription"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        android:layout_marginVertical="@dimen/screen_margin"
-        android:text="@string/prof_desc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainProfileUsername"
-        android:textAppearance="@style/TextAppearance.Body5"/>
+        android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mainProfileFollowing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        android:layout_marginVertical="@dimen/screen_margin"
-        android:text="@string/prof_following"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainProfileDescription"
-        android:textAppearance="@style/TextAppearance.Body5"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/mainProfileBanner"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="115dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_auth_profile_default_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mainProfileFollowers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        android:layout_marginVertical="@dimen/screen_margin"
-        android:text="@string/prof_followers"
-        app:layout_constraintStart_toEndOf="@+id/mainProfileFollowing"
-        app:layout_constraintTop_toBottomOf="@+id/mainProfileDescription"
-        android:textAppearance="@style/TextAppearance.Body5"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/mainProfilePicture"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:background="@drawable/style_profile_picture_rounded"
+            android:padding="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_auth_profile_default_picture"
+            app:layout_constraintBottom_toBottomOf="@+id/mainProfileButtonEditProfile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImage"
+            app:strokeColor="@color/white"
+            app:strokeWidth="3dp" />
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/mainProfileDivider"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_height"
-        android:layout_marginTop="@dimen/screen_margin"
-        app:layout_constraintTop_toBottomOf="@+id/mainProfileFollowers"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mainProfileButtonEditProfile"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Edit Profile"
+            android:textAllCaps="false"
+            android:textColor="@color/primary50"
+            android:textSize="11dp"
+            app:cornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainProfileBanner"
+            app:strokeColor="@color/primary50"
+            app:strokeWidth="1dp" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/mainProfileTabLayout"
-        android:layout_width="@dimen/zero_dp"
-        android:layout_height="@dimen/huge_margin"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/mainProfileDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mainProfileFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/normal_margin"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileButtonEditProfile" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/mainProfileViewPager"
-        android:layout_width="@dimen/zero_dp"
-        android:layout_height="@dimen/zero_dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainProfileTabLayout"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mainProfileUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileFullName" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mainProfileDescription"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileUsername" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mainProfileFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileDescription" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mainProfileFollower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/screen_margin"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/mainProfileFollowing"
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileDescription" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/mainProfileDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/screen_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileFollowing" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/mainProfileTabLayout"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileDivider"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/mainProfileViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainProfileTabLayout" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="mainProfileBanner,mainProfilePicture,mainProfileButtonEditProfile,mainProfileFullName,mainProfileUsername,mainProfileDescription,mainProfileFollower,mainProfileFollowing,mainProfileDivider,mainProfileTabLayout,mainProfileViewPager"/>
+
+        <include
+            android:id="@+id/profileShimmer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/fragment_shimmer_profile"
+            android:visibility="gone"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

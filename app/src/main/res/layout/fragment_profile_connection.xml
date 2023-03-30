@@ -18,6 +18,7 @@
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/primary30"
             app:navigationIcon="@drawable/ic_back_profile"
             app:title="@string/Title1"
             app:titleTextAppearance="@style/TextAppearance.Subtitle3"/>

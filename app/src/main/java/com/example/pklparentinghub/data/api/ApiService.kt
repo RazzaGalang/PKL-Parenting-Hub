@@ -2,11 +2,13 @@ package com.example.pklparentinghub.data.api
 
 import com.example.pklparentinghub.data.model.login.LoginRequest
 import com.example.pklparentinghub.data.model.login.LoginResponse
+import com.example.pklparentinghub.data.model.methodFollow.MethodFollowResponse
 import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
 import com.example.pklparentinghub.data.model.userDetail.CompleteProfileRequest
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
+import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import com.example.pklparentinghub.data.model.userFileUpload.UserFileUploadResponse
 import com.example.pklparentinghub.data.model.userFollower.UserFollowerResponse
 import com.example.pklparentinghub.data.model.userFollowing.UserFollowingResponse
@@ -89,6 +91,20 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("param") userId : Int
     ): Response<UserFollowerResponse>
+
+    @Headers("Accept: application/json")
+    @POST(Const.Network.User.USER_FOLLOW)
+    suspend fun postUserFollow(
+        @Header("Authorization") token: String,
+        @Body request: UserFollowRequest
+    ): Response<MethodFollowResponse>
+
+    @Headers("Accept: application/json")
+    @POST(Const.Network.Article.USER_LIKE)
+    suspend fun postUserLike(
+        @Header("Authorization") token: String,
+        @Path("param") articleId: Int
+    ): Response<UserContentResponse>
 
     @Headers("Accept: application/json")
     @GET(Const.Network.Article.ARTICLE_ALL)

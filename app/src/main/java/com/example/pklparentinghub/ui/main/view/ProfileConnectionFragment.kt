@@ -11,6 +11,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentProfileConnectionBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -33,6 +35,9 @@ class ProfileConnectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPager()
+        navBar()
+        floatingButton()
+        back()
     }
 
     private inner class MyPagerAdapter(fragmentActivity: FragmentActivity) :
@@ -49,6 +54,23 @@ class ProfileConnectionFragment : Fragment() {
         }
     }
 
+    private fun navBar(){
+        val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        view.visibility = View.GONE
+    }
+
+    private fun floatingButton(){
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.mainButtonCreateArticle)
+        fab.visibility = View.GONE
+    }
+
+    private fun back(){
+        binding.topBarProfileConnection.setOnClickListener {
+            val fragment = MainProfileFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
+        }
+    }
     private fun setupPager(){
         val viewPager: ViewPager2 = binding.profileCOnnectionViewPager
         val tabLayout: TabLayout = binding.profileConnectionTab

@@ -1,21 +1,26 @@
 package com.example.pklparentinghub.ui.main.view
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.pklparentinghub.R
@@ -37,6 +42,7 @@ class ProfileEditFragment : Fragment() {
     private var isNullName = false
     private var isNullUsername = false
     private var isNullDate = false
+    private var isFromBanner = false
 
     var validName = false
     var validUsername = false
@@ -57,6 +63,7 @@ class ProfileEditFragment : Fragment() {
         return view
     }
 
+    @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -74,17 +81,7 @@ class ProfileEditFragment : Fragment() {
         submit()
         navBar()
         floatingBar()
-//        photo()
     }
-
-//    private fun photo(){
-//        val pickMedia = registerForActivityResult(Pick()) { -> uri
-//        if (uri != null){
-//            Log.d("PhotoPicker", "Selected URI: $uri")
-//        } else {
-//            Log.d("PhotoPicker", "No media selected")
-//        }}
-//    }
 
     private fun navBar(){
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -105,14 +102,48 @@ class ProfileEditFragment : Fragment() {
     }
 
     private fun uploadImage() {
-        binding.editProfileImageBanner.setOnClickListener {
-            selectImageFromGallery(REQUEST_CODE_SELECT_IMAGE)
+        binding.editProfileBanner.setOnClickListener {
+            isFromBanner = true;
+            handlePhotoPickerLaunch()
         }
     }
 
     private fun uploadProfile() {
-        binding.editProfileImagePicture.setOnClickListener {
-            selectImageFromGallery(REQUEST_CODE_SELECT_PROFILE)
+        binding.editProfilePicture.setOnClickListener {
+            handlePhotoPickerLaunch()
+        }
+    }
+
+    // Registers a photo picker activity launcher in single-select mode.
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            Log.d("PhotoPicker", "Selected URI: $uri")
+            if (isFromBanner) {
+                binding.editProfileBanner.setImageURI(uri)
+            }else{
+                binding.editProfilePicture.setImageURI(uri)
+            }
+        } else {
+            Log.d("PhotoPicker", "No media selected")
+        }
+        isFromBanner = false;
+    }
+
+    private fun isPhotoPickerAvailable(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+    }
+
+    private fun handlePhotoPickerLaunch() {
+        if (isPhotoPickerAvailable()) {
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        } else {
+            if (isFromBanner) {
+                selectImageFromGallery(REQUEST_CODE_SELECT_IMAGE)
+                isFromBanner = false
+            }else{
+                selectImageFromGallery(REQUEST_CODE_SELECT_PROFILE)
+            }
+
         }
     }
 
