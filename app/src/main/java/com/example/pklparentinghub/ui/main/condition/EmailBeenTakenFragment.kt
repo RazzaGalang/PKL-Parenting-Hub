@@ -7,11 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentConditionSingleActionBinding
 
-class AuthRegisterSuccessFragment : DialogFragment() {
+class EmailBeenTakenFragment : DialogFragment() {
 
     private var _binding: FragmentConditionSingleActionBinding? = null
     private val binding get() = _binding!!
@@ -39,17 +38,16 @@ class AuthRegisterSuccessFragment : DialogFragment() {
             dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
 
-        binding.registerConditionImage.setImageResource(R.drawable.img_condition_success)
-        binding.registerConditionTitle.text = "Daftar Berhasil"
-        binding.registerConditionContent.text = "Anda akan ditujukan ke halaman masuk"
-        binding.registerConditionButton.text = "Masuk"
+        binding.registerConditionImage.setImageResource(R.drawable.img_condition_email_already_taken)
+        binding.registerConditionTitle.text = "Surel Sudah Terdaftar"
+        binding.registerConditionContent.text = "Periksa Kembali Surel Anda"
+        binding.registerConditionButton.text = "Kembali"
     }
 
 
     private fun setNavigation(){
         binding.registerConditionButton.setOnClickListener {
             dialog!!.dismiss()
-            findNavController().navigate(AuthRegisterSuccessFragmentDirections.actionAuthRegisterSuccessFragmentToAuthLoginFragment())
         }
     }
 

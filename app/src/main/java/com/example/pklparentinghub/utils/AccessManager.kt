@@ -45,6 +45,12 @@ class AccessManager(private val context: Context) {
         }
     }
 
+    suspend fun clearUserId() {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKey.userIdKey] = emptyInt
+        }
+    }
+
     fun clearAccess(scope: CoroutineScope) = scope.launch {
         context.dataStore.edit { preferences ->
             preferences[PreferencesKey.accessKey] = emptyString

@@ -12,8 +12,6 @@ import okhttp3.MultipartBody
 import retrofit2.Response
 
 class StoreFileUserViewModel (private val profileRepository: ProfileRepository): ViewModel() {
-
-
     private val _storeUserFileResult: MutableLiveData<Resource<Response<UserFileUploadResponse>>> = MutableLiveData()
     val storeUserFileResult: LiveData<Resource<Response<UserFileUploadResponse>>> get() = _storeUserFileResult
 
