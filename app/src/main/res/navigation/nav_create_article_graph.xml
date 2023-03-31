@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_create_article_graph"
+    app:startDestination="@id/fragmentCreateArticle">
+
+    <fragment
+        android:id="@+id/fragmentCreateArticle"
+        android:name="com.example.pklparentinghub.ui.main.view.FragmentCreateArticle"
+        android:label="fragment_create_article"
+        tools:layout="@layout/fragment_create_article" >
+        <action
+            android:id="@+id/action_to_fragmentCreateArticle2"
+            app:destination="@id/fragmentCreateArticle2" >
+            <argument
+                android:name="valuesTitle"
+                app:argType="string" />
+            <argument
+                android:name="valuesThumbnail"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCreateArticle2"
+        android:name="com.example.pklparentinghub.ui.main.view.FragmentCreateArticle2"
+        android:label="fragment_create_article2"
+        tools:layout="@layout/fragment_create_article2" >
+        <action
+            android:id="@+id/action_to_fragmentCreateArticle"
+            app:destination="@id/fragmentCreateArticle" />
+    </fragment>
+</navigation>

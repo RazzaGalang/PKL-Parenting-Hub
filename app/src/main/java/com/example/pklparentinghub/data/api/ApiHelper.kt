@@ -1,11 +1,16 @@
 package com.example.pklparentinghub.data.api
 
+import com.example.pklparentinghub.data.model.articleData.ArticleRequest
 import com.example.pklparentinghub.data.model.login.LoginRequest
 import com.example.pklparentinghub.data.model.register.RegisterRequest
 import com.example.pklparentinghub.data.model.userContent.Article
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
 import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import com.example.pklparentinghub.data.model.userDetail.CompleteProfileRequest
+import okhttp3.MultipartBody
+import retrofit2.http.Header
+import retrofit2.http.Query
+import com.example.pklparentinghub.utils.Const
 import okhttp3.MultipartBody
 
 class ApiHelper (private val apiService: ApiService) {
@@ -39,6 +44,12 @@ class ApiHelper (private val apiService: ApiService) {
         popular = popular,
         latest = latest
     )
+
+    suspend fun requestArticle(request: ArticleRequest) = apiService.postArticle(request)
+
+    suspend fun postImage(filename: MultipartBody.Part) = apiService.postImage(filename)
+
+    suspend fun getArticleDetail(token: String, articleId: Int) = apiService.getArticleDetail(token = token, articleId = articleId)
     suspend fun getUserFollower(token: String, userId: Int) = apiService.getUserFollower(token = token, userId = userId)
     suspend fun getUserFollowings(token: String, userId: Int) = apiService.getUserFollowings(token = token, userId = userId)
     suspend fun postUserFollow(token: String, request: UserFollowRequest) = apiService.postUserFollow(token = token, request )

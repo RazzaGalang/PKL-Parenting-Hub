@@ -1,5 +1,6 @@
 package com.example.pklparentinghub.ui.main.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.*
@@ -7,30 +8,31 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
+import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.FragmentMainHomeBinding
-import com.example.pklparentinghub.shimmer.ShimmerArticleHomeRecyclerFragment
+import com.example.pklparentinghub.ui.base.ArticleAllViewModelFactory
 import com.example.pklparentinghub.ui.main.adapter.ArticleHomeSliderAdapter
-import com.example.pklparentinghub.utils.Status
+import com.example.pklparentinghub.ui.main.viewmodel.ArticleAllViewModel
+import com.example.pklparentinghub.utils.AccessManager
+import com.example.pklparentinghub.utils.Status.*
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
+class MainHomeFragment : Fragment(), ArticleHomeSliderAdapter.OnItemClickListener {
 
     private var _binding: FragmentMainHomeBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var adapter: ArticleHomeSliderAdapter
-
-    private lateinit var dots: ArrayList<TextView>
+    private val adapter: ArticleHomeSliderAdapter = ArticleHomeSliderAdapter(this)
+    private lateinit var viewModel : ArticleAllViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +47,15 @@ class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
         super.onViewCreated(view, savedInstanceState)
         setUpViewPager()
         setUpSearch()
-        setupUI()
+        initListView()
+        setupViewModel()
+        requestWithToken()
+    }
+
+    override fun onItemClick(item: Article) {
+        val intent = Intent(this.context, DetailArticleActivity::class.java)
+        intent.putExtra("id", item.id)
+        startActivity(intent)
     }
 
     private fun setUpSearch() {
@@ -56,41 +66,35 @@ class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
         }
     }
 
-    private fun setupUI(){
-        adapter = ArticleHomeSliderAdapter()
+    private fun initListView(){
         binding.articleSlider.adapter = adapter
-        dots = ArrayList()
-        setIndicator()
-
-        binding.articleSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                selectedDot(position)
-                super.onPageSelected(position)
-            }
-        })
     }
 
-    private fun selectedDot(position: Int) {
-        for(i in 0 until adapter.items.size){
-            if(i == position)
-                dots[i].setTextColor(ContextCompat.getColor(this.requireContext(), R.color.primary50))
-            else
-                dots[i].setTextColor(ContextCompat.getColor(this.requireContext(), R.color.grey))
-        }
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this, ArticleAllViewModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[ArticleAllViewModel::class.java]
     }
 
-    private fun setIndicator() {
-        for(i in 0 until adapter.items.size){
-            dots.add(TextView(this.context))
-            dots[i].text = Html.fromHtml("&#9679", Html.FROM_HTML_MODE_LEGACY).toString()
-            dots[i].textSize = 16f
-            binding.indicatorSlider.addView(dots[i])
-        }
-    }
-
-    private fun showLoading(loading: Boolean) {
-        binding.apply {
-            articleSlider.isVisible = !loading
+    private fun requestWithToken() {
+        lifecycleScope.launchWhenCreated {
+            AccessManager(requireContext())
+                .access
+                .collect { token ->
+                    viewModel.getArticleAll(token, 3, "", true, false).observe(viewLifecycleOwner, Observer {
+                        it?.let { resource ->
+                            when (resource.status) {
+                                SUCCESS -> {
+                                    resource.data?.let { article -> adapter.items = article.data.article }
+                                }
+                                ERROR -> {
+                                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                                }
+                                LOADING -> {}
+                            }
+                        }
+                    })
+                }
         }
     }
 
@@ -113,8 +117,8 @@ class MainHomeFragment : Fragment(R.layout.fragment_main_home) {
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> ShimmerArticleHomeRecyclerFragment()
-                1 -> ShimmerArticleHomeRecyclerFragment()
+                0 -> FragmentHomeArticle(false, true)
+                1 -> FragmentHomeArticle(true, false)
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }
         }

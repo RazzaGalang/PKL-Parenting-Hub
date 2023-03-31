@@ -11,7 +11,6 @@
         android:id="@+id/articleRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="@dimen/normal_margin"
         tools:listitem="@layout/item_home_article"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
@@ -19,7 +18,7 @@
         android:id="@+id/detailShimmerRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/small_margin"
         tools:listitem="@layout/item_shimmer_article_home"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </FrameLayout>

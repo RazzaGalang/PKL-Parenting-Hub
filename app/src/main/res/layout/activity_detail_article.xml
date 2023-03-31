@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.view.FragmentDetailArticle">
+    tools:context=".ui.main.view.DetailArticleActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -131,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/screen_margin"
                 android:textAppearance="@style/TextAppearance.Body1"
+                android:justificationMode="inter_word"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider"
@@ -154,6 +155,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/normal_margin"
+                android:drawableStart="@drawable/ic_like"
+                android:textAppearance="@style/TextAppearance.Body2"
+                android:tint="@color/primary50"
                 app:layout_constraintBottom_toTopOf="@+id/divider3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2" />

@@ -47,6 +47,17 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pbCreateArticleProgress"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/small_margin"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="33"
+        app:indicatorColor="@color/primary50"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:trackColor="@color/grey" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvUploadImage"
         android:layout_width="@dimen/zero_dp"

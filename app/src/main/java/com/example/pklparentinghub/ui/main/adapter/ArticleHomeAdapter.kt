@@ -11,20 +11,37 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.ItemHomeArticleBinding
 import com.example.pklparentinghub.databinding.ItemHomeArticleSliderBinding
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
-class ArticleHomeAdapter : RecyclerView.Adapter<ArticleHomeAdapter.ViewHolder>() {
+class ArticleHomeAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<ArticleHomeAdapter.ViewHolder>() {
 
-    class ViewHolder (private val binding: ItemHomeArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+    interface OnItemClickListener {
+        fun onItemClick(item: Article)
+    }
+
+    inner class ViewHolder (private val binding: ItemHomeArticleBinding) : RecyclerView.ViewHolder(binding.root) {
             fun setData(item: Article) {
+                binding.cvArticle.setOnClickListener{listener.onItemClick(item)}
                 binding.apply {
-                    itemTitle.text = item.title
-                    itemTime.text = item.createdAt
-
+                    val date = item.createdAt.substring(0, 9)
+                    val df: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+                    val dateFormat: DateFormat = SimpleDateFormat("dd MMMM yyyy")
+                    val newDate: String = dateFormat.format(df.parse(date))
                     val valuesThumbnail = item.thumbnail
                     val thumbnail = itemCover
                     Glide.with(thumbnail)
                         .load(valuesThumbnail)
                         .into(thumbnail)
+                    val valuesProfile = item.thumbnail
+                    val profile = itemProfilePicture
+                    Glide.with(profile)
+                        .load(valuesProfile)
+                        .into(profile)
+                    itemTitle.text = item.title
+                    itemTime.text = newDate
+                    itemFullName.text = item.author.fullName
+                    itemLike.text = " ${item.like}"
                 }
             }
         }
