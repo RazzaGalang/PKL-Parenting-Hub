@@ -27,7 +27,6 @@ import com.example.pklparentinghub.ui.main.viewmodel.FollowViewModel
 import com.example.pklparentinghub.ui.main.viewmodel.FollowingViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
-import kotlinx.coroutines.flow.collect
 
 class ProfileFollowingFragment : Fragment(), ProfileFollowingAdapter.OnItemClickListener {
 
@@ -44,7 +43,7 @@ class ProfileFollowingFragment : Fragment(), ProfileFollowingAdapter.OnItemClick
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProfileFollowingBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -146,8 +145,17 @@ class ProfileFollowingFragment : Fragment(), ProfileFollowingAdapter.OnItemClick
                                             Status.SUCCESS -> {
                                                 resource.data?.let { response ->
                                                     binding.apply {
-                                                        adapter.items = response?.body()?.data?.user!!
+                                                        adapter.items = response.body()?.data?.user!!
                                                     }
+                                                }
+                                                if (adapter.items.isEmpty()){
+                                                    binding.clFollowing.isVisible = true
+                                                    binding.profileFollowingRecycler.isVisible = false
+                                                    binding.shimmerRecycler.isVisible = false
+                                                } else {
+                                                    binding.clFollowing.isVisible = false
+                                                    binding.profileFollowingRecycler.isVisible = true
+                                                    binding.shimmerRecycler.isVisible = false
                                                 }
                                             }
 

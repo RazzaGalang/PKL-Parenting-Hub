@@ -93,6 +93,15 @@ class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClick
                                         binding.apply {
                                         }
                                     }
+                                    if (adapter.items.isEmpty()){
+                                        binding.clFollowers.isVisible = true
+                                        binding.profileFollowersRecycler.isVisible = false
+                                        binding.shimmerRecycler.isVisible = false
+                                    } else {
+                                        binding.clFollowers.isVisible = false
+                                        binding.profileFollowersRecycler.isVisible = true
+                                        binding.shimmerRecycler.isVisible = false
+                                    }
                                     setupObserver()
                                 }
                                 Status.LOADING -> {
