@@ -94,11 +94,21 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
     }
 
     private fun editProfile(){
-            binding.mainProfileButtonEditProfile.setOnClickListener {
-                val fragment = ProfileEditFragment()
-                val transaction = fragmentManager?.beginTransaction()
-                transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
-            }
+        binding.mainProfileButtonEditProfile.setOnClickListener {
+            val fragment = ProfileEditFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
+        }
+        binding.icElipseSearch.setOnClickListener {
+            val fragment = FragmentSearchArticle()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
+        }
+        binding.icElipseSetting.setOnClickListener {
+            val fragment = SettingFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
+        }
     }
 
     private fun textFollower(){

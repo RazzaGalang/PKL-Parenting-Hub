@@ -33,6 +33,7 @@ class SettingFragment : Fragment() {
     private fun initView() {
         initOnClick()
         initItemView()
+        initBack()
     }
 
     private fun initItemView() {
@@ -45,6 +46,14 @@ class SettingFragment : Fragment() {
 
             keluar.ivItem.setImageResource(R.drawable.ic_log_out)
             keluar.tvItem.setTextColor(requireContext().getColor(R.color.error30))
+        }
+    }
+
+    private fun initBack(){
+        binding.ivBack.setOnClickListener {
+            val fragment = MainProfileFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
         }
     }
 
