@@ -59,7 +59,6 @@ class ProfileArticleAdapter(private val listener: OnItemClickListener): Recycler
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.id == newItem.id
         }
-
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem == newItem
         }

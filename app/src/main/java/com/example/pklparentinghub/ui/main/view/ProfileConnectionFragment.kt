@@ -5,12 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.pklparentinghub.R
+import com.example.pklparentinghub.data.api.ApiHelper
+import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.databinding.FragmentProfileConnectionBinding
+import com.example.pklparentinghub.ui.base.ProfileViewModelFactory
+import com.example.pklparentinghub.ui.main.viewmodel.ProfileViewModel
+import com.example.pklparentinghub.utils.AccessManager
+import com.example.pklparentinghub.utils.Status
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
@@ -20,6 +31,8 @@ class ProfileConnectionFragment : Fragment() {
 
     private var _binding: FragmentProfileConnectionBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +48,8 @@ class ProfileConnectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPager()
+        setupObserver()
+        setupViewModel()
         navBar()
         floatingButton()
         back()
@@ -82,5 +97,49 @@ class ProfileConnectionFragment : Fragment() {
                 1 -> tab.text = "Pengikut"
             }
         }.attach()
+    }
+
+    private fun setupViewModel(){
+        viewModel = ViewModelProvider(
+            this,
+            ProfileViewModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[ProfileViewModel::class.java]
+    }
+
+    private fun setupObserver(){
+            lifecycleScope.launchWhenResumed {
+                AccessManager(requireContext())
+                    .access
+                    .collect { token ->
+                        AccessManager(requireContext())
+                            .accessUserId
+                            .collect { userId ->
+                                viewModel.requestProfile(token, userId)
+                                    .observe(viewLifecycleOwner, Observer {
+                                        it?.let { resource ->
+                                            when (resource.status) {
+                                                Status.SUCCESS -> {
+                                                    resource.data?.let { profile ->
+                                                        binding.apply {
+                                                            topBarProfileConnection.title =
+                                                                "@ ${profile.body()?.data?.username}"
+                                                        }
+                                                    }
+                                                }
+                                                Status.ERROR -> {
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        it.message,
+                                                        Toast.LENGTH_LONG
+                                                    ).show()
+                                                }
+                                                Status.LOADING -> {}
+                                            }
+                                        }
+                                    })
+                            }
+                    }
+            }
+
     }
 }

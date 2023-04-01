@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -124,25 +125,40 @@ class ProfileArticleFragment : Fragment(), ProfileArticleAdapter.OnItemClickList
             AccessManager(requireContext())
                 .access
                 .collect { token ->
-                    viewModel.getUserContent(token, 11).observe(viewLifecycleOwner, Observer {
-                        it?.let { resource ->
-                            showLoading(resource.status == Status.LOADING)
-                            when (resource.status){
-                                Status.SUCCESS -> {
-                                    resource.data?.let { response ->
-                                        binding.apply {
-                                            adapter.items = response?.body()?.data?.articles!!
+                    AccessManager(requireContext())
+                        .accessUserId
+                        .collect { userId ->
+                            viewModel.getUserContent(token, userId).observe(viewLifecycleOwner, Observer {
+                                it?.let { resource ->
+                                    showLoading(resource.status == Status.LOADING)
+                                    when (resource.status){
+                                        Status.SUCCESS -> {
+                                            resource.data?.let { response ->
+                                                binding.apply {
+                                                    adapter.items = response?.body()?.data?.articles!!
+                                                }
+                                            }
+                                            if (adapter.items.isEmpty()){
+                                                binding.ivEmptyState.isVisible = true
+                                                binding.tvEmptyState.isVisible = true
+                                                binding.shimmerRecycler.isVisible = false
+                                                binding.shimmerRecycler.isVisible = false
+                                            } else {
+                                                binding.ivEmptyState.isVisible = false
+                                                binding.tvEmptyState.isVisible = false
+                                                binding.shimmerRecycler.isVisible = true
+                                                binding.shimmerRecycler.isVisible = false
+                                            }
+                                        }
+                                        Status.LOADING -> {
+                                        }
+                                        Status.ERROR -> {
                                         }
                                     }
                                 }
-                                Status.LOADING -> {
-                                }
-                                Status.ERROR -> {
-                                }
-                            }
-                        }
-                    })
+                            })
                 }
+            }
         }
     }
 

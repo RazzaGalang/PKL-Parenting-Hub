@@ -24,6 +24,46 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icElipseSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_elipse"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/screen_margin"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icElipseSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_elipse"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icElipseSetting"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_setting"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/custom_width_icon"
+            android:layout_marginEnd="@dimen/custom_height_icon"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search_profile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icSetting"
+            android:layout_marginTop="@dimen/custom_width_icon"
+            android:layout_marginEnd="@dimen/custom_height_icon2"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/mainProfilePicture"
             android:layout_width="90dp"
             android:layout_height="90dp"

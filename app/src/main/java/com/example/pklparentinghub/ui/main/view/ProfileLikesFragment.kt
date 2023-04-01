@@ -122,24 +122,41 @@ class ProfileLikesFragment : Fragment(), ProfileLikesAdapter.OnItemClickListener
             AccessManager(requireContext())
                 .access
                 .collect { token ->
-                    viewModel.getUserContent(token, 11).observe(viewLifecycleOwner, Observer {
-                        it?.let { resource ->
-                            showLoading(resource.status == Status.LOADING)
-                            when (resource.status){
-                                Status.SUCCESS -> {
-                                    resource.data?.let { response ->
-                                        binding.apply {
-                                            adapter.items = response?.body()?.data?.likedArticles!!
+                    AccessManager(requireContext())
+                        .accessUserId
+                        .collect { userId ->
+                            viewModel.getUserContent(token, userId)
+                                .observe(viewLifecycleOwner, Observer {
+                                    it?.let { resource ->
+                                        showLoading(resource.status == Status.LOADING)
+                                        when (resource.status) {
+                                            Status.SUCCESS -> {
+                                                resource.data?.let { response ->
+                                                    binding.apply {
+                                                        adapter.items =
+                                                            response?.body()?.data?.likedArticles!!
+                                                    }
+                                                }
+                                                if (adapter.items.isEmpty()){
+                                                    binding.ivEmptyState.isVisible = true
+                                                    binding.tvEmptyState.isVisible = true
+                                                    binding.shimmerRecycler.isVisible = false
+                                                    binding.shimmerRecycler.isVisible = false
+                                                } else {
+                                                    binding.ivEmptyState.isVisible = false
+                                                    binding.tvEmptyState.isVisible = false
+                                                    binding.shimmerRecycler.isVisible = true
+                                                    binding.shimmerRecycler.isVisible = false
+                                                }
+                                            }
+                                            Status.LOADING -> {
+                                            }
+                                            Status.ERROR -> {
+                                            }
                                         }
                                     }
-                                }
-                                Status.LOADING -> {
-                                }
-                                Status.ERROR -> {
-                                }
-                            }
+                                })
                         }
-                    })
                 }
         }
     }

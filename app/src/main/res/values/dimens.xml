@@ -67,5 +67,8 @@
     <dimen name="custom_width_list">255dp</dimen>
     <dimen name="custom_margin_horizontal">110dp</dimen>
     <dimen name="avatar_height">32dp</dimen>
+    <dimen name="custom_height_icon2">22dp</dimen>
+    <dimen name="custom_height_icon">23dp</dimen>
+    <dimen name="custom_width_icon">14dp</dimen>
 
 </resources>
