@@ -165,6 +165,7 @@ class CompleteProfileBiodataFragment : Fragment() {
                     Status.SUCCESS -> {
                         Log.e(TAG, "setupSubmitData: UPDATE SUCCESS" )
                         findNavController().navigate(CompleteProfileBiodataFragmentDirections.actionCompleteProfileBiodataFragmentToMainActivity())
+                        requireActivity().finish()
                     }
                     Status.ERROR -> {
                         Log.e(TAG, "setupSubmitData: UPDATE ERROR" )

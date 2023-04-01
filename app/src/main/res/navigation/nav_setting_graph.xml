@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_setting_graph"
+    app:startDestination="@id/settingFragment">
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.SettingFragment"
+        android:label="@null"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_settingDetailFragment"
+            app:destination="@id/settingDetailFragment">
+            <argument
+                android:name="requestDetail"
+                app:argType="string"
+                app:nullable="false"/>
+        </action>
+
+        <action
+            android:id="@+id/action_to_logoutPopFragment"
+            app:destination="@id/logoutPopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingDetailFragment"
+        android:name="com.example.pklparentinghub.ui.main.view.SettingDetailFragment"
+        android:label="@null"
+        tools:layout="@layout/fragment_setting_detail" />
+    <dialog
+        android:id="@+id/logoutPopFragment"
+        android:name="com.example.pklparentinghub.ui.main.condition.LogoutPopFragment"
+        android:label="@null">
+    </dialog>
+</navigation>

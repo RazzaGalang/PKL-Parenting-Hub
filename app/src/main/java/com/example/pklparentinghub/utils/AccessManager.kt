@@ -57,6 +57,12 @@ class AccessManager(private val context: Context) {
         }
     }
 
+    fun clearUserId(scope: CoroutineScope) = scope.launch {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKey.userIdKey] = emptyInt
+        }
+    }
+
     // Properties Variable to access Authorization Bearer (Token)
     val access = context.dataStore.data
         .catch {

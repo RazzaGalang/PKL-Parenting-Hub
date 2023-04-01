@@ -23,4 +23,12 @@
             tools:listitem="@layout/item_followers_profile" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shimmerRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:listitem="@layout/item_shimmer_follower_profile"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
 </FrameLayout>
