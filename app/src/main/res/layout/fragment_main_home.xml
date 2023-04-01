@@ -30,63 +30,115 @@
                     style="@style/Widget.ParentingHub.Search.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
-                    android:paddingBottom="4dp"
-                    android:layout_marginEnd="@dimen/large_margin"
-                    app:startIconDrawable="@drawable/ic_search"
-                    app:placeholderText="@string/search_here"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvErrorCover">
+                    android:layout_marginEnd="@dimen/screen_margin"
+                    android:paddingBottom="@dimen/small_margin"
+                    app:placeholderText="@string/article_search_here"
+                    app:startIconDrawable="@drawable/ic_search">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSearchHome"
                         style="@style/Widget.ParentingHub.Search.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/small_margin"/>
+                        android:focusable="false"
+                        android:inputType="none"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:padding="@dimen/small_margin"
+                        android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/articleSlider"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/article_horizontal_height"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
-
-        <LinearLayout
-            android:id="@+id/indicatorSlider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/articleSlider"
-            android:gravity="center"
-            android:orientation="horizontal" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/homeTabLayout"
-            android:layout_width="@dimen/zero_dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="@dimen/small_margin"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/indicatorSlider"
-            app:tabGravity="fill"
-            app:tabMode="fixed" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/homeViewPager"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="@dimen/zero_dp"
             android:layout_height="@dimen/zero_dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeTabLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSlider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/article_detail_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/articleSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/articleSliderLoading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/screen_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/shimmerArticleTopBar"
+                            android:layout_width="@dimen/zero_dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/shimmer_rounded_corner"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/view_height"
+                android:background="@color/shimmer_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clSlider" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/homeTabLayout"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="48dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider1"
+                app:tabGravity="fill"
+                app:tabMode="fixed" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/view_height"
+                android:background="@color/shimmer_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeTabLayout" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/homeViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero_dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeTabLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

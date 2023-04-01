@@ -1,88 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/itemHomeFavourite"
+    android:id="@+id/cvArticle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/normal_radius"
+    app:strokeWidth="@dimen/custom_margin_10dp"
+    android:layout_marginHorizontal="@dimen/screen_margin"
+    android:layout_marginBottom="@dimen/screen_margin">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/normal_margin"
-        android:layout_marginHorizontal="@dimen/screen_margin"
-        app:cardCornerRadius="@dimen/normal_margin">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/itemCover"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/article_home_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_profile_default_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/itemCover"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/article_home_height"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_profile_default_banner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/itemTime"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:textAppearance="@style/TextAppearance.Body3"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemCover"
+            tools:text="@string/example_time" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/itemTime"
-                android:layout_width="@dimen/zero_dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/screen_margin"
-                android:layout_marginTop="@dimen/normal_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemCover" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/itemTitle"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:textAppearance="@style/TextAppearance.Subtitle3.Bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemTime"
+            tools:text="@string/example_title_article" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/itemTitle"
-                android:layout_width="@dimen/zero_dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/screen_margin"
-                android:layout_marginTop="@dimen/normal_margin"
-                android:textAppearance="@style/TextAppearance.Subtitle2"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemTime" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/itemProfilePicture"
+            android:layout_width="@dimen/semi_huge_margin"
+            android:layout_height="@dimen/semi_huge_margin"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/normal_margin"
+            android:padding="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_profile_default_picture"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemTitle"
+            app:shapeAppearanceOverlay="@style/circleImage" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/itemProfilePicture"
-                android:layout_width="@dimen/semi_huge_margin"
-                android:layout_height="@dimen/semi_huge_margin"
-                android:layout_marginHorizontal="@dimen/screen_margin"
-                android:layout_marginVertical="@dimen/normal_margin"
-                android:padding="3dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_profile_default_picture"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemTitle"
-                app:shapeAppearanceOverlay="@style/circleImage" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/itemFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/normal_margin"
+            android:textAppearance="@style/TextAppearance.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/itemProfilePicture"
+            app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
+            app:layout_constraintTop_toTopOf="@+id/itemProfilePicture"
+            tools:text="@tools:sample/full_names" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/itemFullName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/normal_margin"
-                app:layout_constraintBottom_toBottomOf="@+id/itemProfilePicture"
-                app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
-                app:layout_constraintTop_toTopOf="@+id/itemProfilePicture" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/itemIconLike"
+            android:layout_width="@dimen/custom_margin_20dp"
+            android:layout_height="@dimen/custom_margin_20dp"
+            android:layout_marginHorizontal="@dimen/small_margin"
+            android:button="@drawable/slr_icon_heart"
+            android:src="@drawable/ic_like_dark"
+            app:layout_constraintBottom_toBottomOf="@id/itemLike"
+            app:layout_constraintEnd_toStartOf="@+id/itemLike"
+            app:layout_constraintTop_toTopOf="@+id/itemLike" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/itemLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/screen_margin"
-                android:layout_marginVertical="@dimen/normal_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemTitle"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/itemLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginVertical="@dimen/normal_margin"
+            android:textAppearance="@style/TextAppearance.Body2"
+            android:textColor="@color/primary50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemTitle"
+            tools:text="@string/example_like" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -4,10 +4,10 @@
     <group>
         <item
             android:id="@+id/editArticle"
-            android:title="@string/edit_article"/>
+            android:title="@string/article_edit"/>
 
         <item
             android:id="@+id/deleteArticle"
-            android:title="@string/delete_article" />
+            android:title="@string/article_delete" />
     </group>
 </menu>

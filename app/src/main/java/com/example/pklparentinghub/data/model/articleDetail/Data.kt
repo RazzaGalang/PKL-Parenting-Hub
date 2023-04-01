@@ -16,6 +16,8 @@ data class Data(
     val like: Int,
     @SerializedName("thumbnail")
     val thumbnail: String,
+    @SerializedName("is_liked")
+    val isLiked: Boolean,
     @SerializedName("title")
     val title: String,
     @SerializedName("updated_at")

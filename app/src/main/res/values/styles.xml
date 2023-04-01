@@ -28,14 +28,14 @@
         <item name="boxStrokeWidth">@dimen/zero_dp</item>
         <item name="boxStrokeWidthFocused">@dimen/zero_dp</item>
         <item name="errorIconDrawable">@null</item>
-        <item name="errorTextAppearance">@style/TextAppearance.Validation</item>
+        <item name="errorTextAppearance">@style/TextAppearance.Caption</item>
         <item name="errorTextColor">@color/error30</item>
         <item name="expandedHintEnabled">true</item>
         <item name="hintTextAppearance">@style/TextAppearance.Caption</item>
         <item name="passwordToggleTint">@color/grey</item>
         <item name="placeholderTextAppearance">@style/TextAppearance.Body2</item>
         <item name="placeholderTextColor">@color/primary50</item>
-        <item name="suffixTextAppearance">@style/TextAppearance.Validation</item>
+        <item name="suffixTextAppearance">@style/TextAppearance.Caption</item>
         <item name="suffixTextColor">@color/primary50</item>
     </style>
 

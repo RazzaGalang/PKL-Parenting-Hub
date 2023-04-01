@@ -14,6 +14,8 @@ data class Article(
     val id: Int,
     @SerializedName("like")
     val like: Int,
+    @SerializedName("is_liked")
+    val isLiked: Boolean,
     @SerializedName("thumbnail")
     val thumbnail: String,
     @SerializedName("title")
