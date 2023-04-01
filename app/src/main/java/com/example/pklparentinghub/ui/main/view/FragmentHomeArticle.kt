@@ -16,9 +16,11 @@ import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.FragmentHomeArticleBinding
 import com.example.pklparentinghub.ui.base.ArticleAllViewModelFactory
+import com.example.pklparentinghub.ui.base.LikeModelFactory
 import com.example.pklparentinghub.ui.main.adapter.ArticleHomeAdapter
 import com.example.pklparentinghub.ui.main.adapter.ShimmerArticleHomeAdapter
 import com.example.pklparentinghub.ui.main.viewmodel.ArticleAllViewModel
+import com.example.pklparentinghub.ui.main.viewmodel.LikeViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
 
@@ -28,6 +30,7 @@ class FragmentHomeArticle(var popular: Boolean, private var latest: Boolean) : F
     private val binding get() = _binding!!
 
     private lateinit var viewModel : ArticleAllViewModel
+    private lateinit var likeViewModel: LikeViewModel
     private val adapter: ArticleHomeAdapter = ArticleHomeAdapter(this)
     private val shimmerAdapter: ShimmerArticleHomeAdapter = ShimmerArticleHomeAdapter()
 
@@ -43,13 +46,18 @@ class FragmentHomeArticle(var popular: Boolean, private var latest: Boolean) : F
         super.onViewCreated(view, savedInstanceState)
         initListView()
         setupViewModel()
-        requestWithToken()
+        setupObserver()
+        swipeRefresh()
     }
 
     override fun onItemClick(item: Article) {
         val intent = Intent(this.context, DetailArticleActivity::class.java)
         intent.putExtra("id", item.id)
         startActivity(intent)
+    }
+
+    override fun onItemLike(item: Article) {
+        setupLike(item)
     }
 
     private fun initListView(){
@@ -61,6 +69,18 @@ class FragmentHomeArticle(var popular: Boolean, private var latest: Boolean) : F
         viewModel = ViewModelProvider(
             this, ArticleAllViewModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
         )[ArticleAllViewModel::class.java]
+
+        likeViewModel = ViewModelProvider(
+            this,
+            LikeModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[LikeViewModel::class.java]
+    }
+
+    private fun swipeRefresh(){
+        binding.swipeRefreshHome.setOnRefreshListener {
+            setupObserver()
+            binding.swipeRefreshHome.isRefreshing = true
+        }
     }
 
     private fun showLoading(loading: Boolean) {
@@ -70,7 +90,29 @@ class FragmentHomeArticle(var popular: Boolean, private var latest: Boolean) : F
         }
     }
 
-    private fun requestWithToken() {
+    private fun setupLike(item: Article){
+        lifecycleScope.launchWhenResumed {
+            AccessManager(requireContext())
+                .access
+                .collect{ token ->
+                    likeViewModel.postUserLike(token, item.id).observe(viewLifecycleOwner, Observer {
+                        it?.let { resource ->
+                            when(resource.status) {
+                                Status.SUCCESS -> {
+                                    setupObserver()
+                                }
+                                Status.LOADING -> {}
+                                Status.ERROR -> {
+                                    Toast.makeText(requireContext(), "Error " + it.message, Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        }
+                    })
+                }
+        }
+    }
+
+    private fun setupObserver() {
         lifecycleScope.launchWhenCreated {
             AccessManager(requireContext())
                 .access
@@ -81,6 +123,7 @@ class FragmentHomeArticle(var popular: Boolean, private var latest: Boolean) : F
                             when (resource.status) {
                                 Status.SUCCESS -> {
                                     resource.data?.let { article -> adapter.items = article.data.article }
+                                    binding.swipeRefreshHome.isRefreshing = false
                                 }
                                 Status.ERROR -> {
                                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()

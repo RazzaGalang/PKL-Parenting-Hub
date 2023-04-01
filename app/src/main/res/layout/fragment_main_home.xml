@@ -40,111 +40,105 @@
                         style="@style/Widget.ParentingHub.Search.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
                         android:focusable="false"
-                        android:padding="@dimen/small_margin"
+                        android:inputType="none"
+                        android:lines="1"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:lines="1"/>
+                        android:padding="@dimen/small_margin"
+                        android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="@dimen/zero_dp"
             android:layout_height="@dimen/zero_dp"
-            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSlider"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/article_detail_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clSlider"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/articleSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/article_detail_height"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/articleSliderLoading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/screen_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/articleSlider"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_height="wrap_content">
 
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/articleSliderLoading"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/screen_margin"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <View
-                                android:id="@+id/shimmerArticleTopBar"
-                                android:layout_width="@dimen/zero_dp"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/shimmer_rounded_corner"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </com.facebook.shimmer.ShimmerFrameLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/divider1"
-                    android:layout_width="@dimen/zero_dp"
-                    android:layout_height="@dimen/view_height"
-                    android:background="@color/shimmer_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/clSlider" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/homeTabLayout"
-                    android:layout_width="@dimen/zero_dp"
-                    android:layout_height="48dp"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider1"
-                    app:tabGravity="fill"
-                    app:tabMode="fixed" />
-
-                <View
-                    android:id="@+id/divider2"
-                    android:layout_width="@dimen/zero_dp"
-                    android:layout_height="@dimen/view_height"
-                    android:background="@color/shimmer_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/homeTabLayout" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/homeViewPager"
-                    android:layout_width="@dimen/zero_dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/homeTabLayout" />
-
+                        <View
+                            android:id="@+id/shimmerArticleTopBar"
+                            android:layout_width="@dimen/zero_dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/shimmer_rounded_corner"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/view_height"
+                android:background="@color/shimmer_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clSlider" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/homeTabLayout"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="48dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider1"
+                app:tabGravity="fill"
+                app:tabMode="fixed" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/view_height"
+                android:background="@color/shimmer_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeTabLayout" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/homeViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero_dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeTabLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

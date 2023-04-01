@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.ItemArticleProfileBinding
+import com.example.pklparentinghub.databinding.ItemSearchArticleBinding
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
@@ -16,13 +17,20 @@ class ArticleSearchAdapter(private val listener: OnItemClickListener) : Recycler
 
     interface OnItemClickListener {
         fun onItemClick(item: Article)
+        fun onItemLike(item: Article)
     }
 
-    inner class ViewHolder (private val binding: ItemArticleProfileBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder (private val binding: ItemSearchArticleBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setData(item: Article) {
-            binding.clArticle.setOnClickListener{listener.onItemClick(item)}
             binding.apply {
-                val date = item.createdAt.substring(0, 9)
+                clArticle.setOnClickListener{listener.onItemClick(item)}
+                itemIconLike.setOnClickListener{listener.onItemLike(item)}
+
+                val isLiked = item.isLiked
+                if (isLiked) itemIconLike.setImageResource(R.drawable.ic_like_dark)
+                else itemIconLike.setImageResource(R.drawable.ic_like)
+
+                val date = item.createdAt.substring(0, 10)
                 val df: DateFormat = SimpleDateFormat("yyyy-MM-dd")
                 val dateFormat: DateFormat = SimpleDateFormat("dd MMMM yyyy")
                 val newDate: String = dateFormat.format(df.parse(date))
@@ -32,7 +40,7 @@ class ArticleSearchAdapter(private val listener: OnItemClickListener) : Recycler
                     .load(valuesThumbnail)
                     .into(thumbnail)
                 val valuesProfile = item.author.profilePicture
-                val profile = itemProfilePicture
+                val profile = itemProfile
                 if (valuesProfile == "https://parenting-lite-api.intern.paninti.com/storage/images/default-profile.png"){
                     profile.setImageResource(R.drawable.img_profile_default_picture)
                 } else {
@@ -43,7 +51,7 @@ class ArticleSearchAdapter(private val listener: OnItemClickListener) : Recycler
                 itemTitle.text = item.title
                 itemTime.text = newDate
                 itemFullName.text = item.author.fullName
-                itemLike.text = " ${item.like} Suka"
+                itemLike.text = "${item.like} Suka"
             }
         }
     }
@@ -67,7 +75,7 @@ class ArticleSearchAdapter(private val listener: OnItemClickListener) : Recycler
         set(value) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        ItemArticleProfileBinding.inflate(
+        ItemSearchArticleBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

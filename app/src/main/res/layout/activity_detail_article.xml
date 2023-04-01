@@ -57,7 +57,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/itemCover"
@@ -137,7 +137,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider"
-                tools:text="@string/example_article" />
+                tools:text="@string/example_article"/>
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider2"
@@ -145,24 +145,43 @@
                 android:layout_height="@dimen/view_height"
                 android:layout_marginTop="@dimen/screen_margin"
                 android:background="@color/grey"
-                app:layout_constraintBottom_toTopOf="@+id/itemLike"
+                app:layout_constraintBottom_toTopOf="@+id/clLike"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/itemArticle" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/itemLike"
-                android:layout_width="wrap_content"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clLike"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/screen_margin"
-                android:layout_marginVertical="@dimen/medium_margin"
-                android:drawableStart="@drawable/ic_like"
-                android:textAppearance="@style/TextAppearance.Body2"
-                android:tint="@color/primary50"
+                android:layout_margin="@dimen/screen_margin"
                 app:layout_constraintBottom_toTopOf="@+id/divider3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider2" />
+                app:layout_constraintTop_toBottomOf="@+id/divider2">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/itemIconLike"
+                    android:layout_width="@dimen/custom_margin_20dp"
+                    android:layout_height="@dimen/custom_margin_20dp"
+                    android:button="@drawable/slr_icon_heart"
+                    android:src="@drawable/ic_like_dark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/itemLike"
+                    android:layout_width="@dimen/zero_dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/itemIconLike"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="@dimen/normal_margin"
+                    tools:text="@string/example_like" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider3"
@@ -173,7 +192,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemLike" />
+                app:layout_constraintTop_toBottomOf="@+id/clLike" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvAnotherArticle"
@@ -189,18 +208,15 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvArticleAnother"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
+                android:layout_height="match_parent"
                 android:fadeScrollbars="true"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/small_margin"
-                android:paddingBottom="@dimen/normal_margin"
+                android:paddingTop="@dimen/normal_margin"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvAnotherArticle"
-                tools:listitem="@layout/item_article_profile" />
+                tools:listitem="@layout/item_article_profile"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -423,7 +439,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/shimmerArticleDivider3"
-                tools:listitem="@layout/item_shimmer_article_profile" />
+                tools:listitem="@layout/item_search_article" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>

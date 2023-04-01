@@ -19,9 +19,11 @@ import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.FragmentSearchArticleBinding
 import com.example.pklparentinghub.ui.base.ArticleSearchViewModelFactory
+import com.example.pklparentinghub.ui.base.LikeModelFactory
 import com.example.pklparentinghub.ui.main.adapter.ArticleSearchAdapter
 import com.example.pklparentinghub.ui.main.adapter.ShimmerArticleProfileAdapter
 import com.example.pklparentinghub.ui.main.viewmodel.ArticleSearchViewModel
+import com.example.pklparentinghub.ui.main.viewmodel.LikeViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
 
@@ -30,7 +32,10 @@ class FragmentSearchArticle : Fragment(), ArticleSearchAdapter.OnItemClickListen
     private var _binding: FragmentSearchArticleBinding? = null
     private val binding get() = _binding!!
 
+    lateinit var searchText: String
+
     private lateinit var viewModel : ArticleSearchViewModel
+    private lateinit var likeViewModel: LikeViewModel
     private val adapter: ArticleSearchAdapter = ArticleSearchAdapter(this)
     private val shimmerAdapter: ShimmerArticleProfileAdapter = ShimmerArticleProfileAdapter()
 
@@ -57,10 +62,14 @@ class FragmentSearchArticle : Fragment(), ArticleSearchAdapter.OnItemClickListen
         startActivity(intent)
     }
 
+    override fun onItemLike(item: Article) {
+        setupLike(item)
+    }
+
     private fun setUpSearch() {
         binding.etSearchArticle.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val searchText = v.text.toString()
+                searchText = v.text.toString()
                 setUpObserveResult(searchText)
                 true
             } else {
@@ -84,12 +93,39 @@ class FragmentSearchArticle : Fragment(), ArticleSearchAdapter.OnItemClickListen
         viewModel = ViewModelProvider(
             this, ArticleSearchViewModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
         )[ArticleSearchViewModel::class.java]
+
+        likeViewModel = ViewModelProvider(
+            this,
+            LikeModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[LikeViewModel::class.java]
     }
 
     private fun showLoading(loading: Boolean) {
         binding.apply {
             rvArticleLoading.isVisible = loading
             rvArticle.isVisible = !loading
+        }
+    }
+
+    private fun setupLike(item: Article){
+        lifecycleScope.launchWhenResumed {
+            AccessManager(requireContext())
+                .access
+                .collect{ token ->
+                    likeViewModel.postUserLike(token, item.id).observe(viewLifecycleOwner, Observer {
+                        it?.let { resource ->
+                            when(resource.status) {
+                                Status.SUCCESS -> {
+                                    setUpObserveResult(searchText)
+                                }
+                                Status.LOADING -> {}
+                                Status.ERROR -> {
+                                    Toast.makeText(requireContext(), "Error " + it.message, Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        }
+                    })
+                }
         }
     }
 

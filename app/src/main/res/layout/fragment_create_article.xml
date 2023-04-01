@@ -107,7 +107,7 @@
         android:layout_height="@dimen/zero_dp"
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginHorizontal="@dimen/large_margin"
-        android:textAppearance="@style/TextAppearance.Validation"
+        android:textAppearance="@style/TextAppearance.Caption"
         android:textColor="@color/error30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

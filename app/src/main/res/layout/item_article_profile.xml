@@ -28,13 +28,12 @@
             android:id="@+id/itemFullName"
             android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.Body3"
+            android:textAppearance="@style/TextAppearance.Body2"
             android:layout_marginHorizontal="@dimen/normal_margin"
             app:layout_constraintBottom_toBottomOf="@+id/itemProfilePicture"
             app:layout_constraintEnd_toStartOf="@+id/itemCover"
             app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
-            app:layout_constraintTop_toTopOf="@+id/itemProfilePicture"
-            tools:text="@tools:sample/full_names"/>
+            app:layout_constraintTop_toTopOf="@+id/itemProfilePicture" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/itemTitle"
@@ -42,51 +41,51 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/screen_margin"
             android:layout_marginVertical="@dimen/normal_margin"
-            android:textAppearance="@style/TextAppearance.Body4"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.Subtitle3.Bold"
             app:layout_constraintEnd_toStartOf="@+id/itemCover"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemProfilePicture"
-            tools:text="@string/example_title_article"/>
+            app:layout_constraintTop_toBottomOf="@+id/itemProfilePicture" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/itemIconLike"
-            android:layout_width="@dimen/button_large_radius"
-            android:layout_height="@dimen/button_large_radius"
-            android:layout_marginHorizontal="20dp"
-            android:src="@drawable/ic_like_dark"
+            android:layout_width="@dimen/custom_margin_20dp"
+            android:layout_height="@dimen/custom_margin_20dp"
+            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_marginTop="@dimen/screen_margin"
             android:button="@drawable/slr_icon_heart"
+            android:src="@drawable/ic_like_dark"
+            app:layout_constraintBottom_toBottomOf="@id/itemCover"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/itemCover" />
+            app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/itemLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="@dimen/small_margin"
             android:letterSpacing="0"
             android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.Caption"
+            android:textAppearance="@style/TextAppearance.Body2"
             app:layout_constraintStart_toEndOf="@id/itemIconLike"
-            app:layout_constraintBottom_toBottomOf="@+id/itemCover"
-            tools:text="@string/example_like"/>
+            app:layout_constraintBottom_toBottomOf="@+id/itemCover" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/itemTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/normal_margin"
+            android:layout_marginHorizontal="@dimen/screen_margin"
             android:letterSpacing="0"
             android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.Caption"
+            android:textAppearance="@style/TextAppearance.Body2"
             app:layout_constraintBottom_toBottomOf="@+id/itemCover"
-            app:layout_constraintEnd_toStartOf="@+id/itemCover"
-            tools:text="@string/example_time" />
+            app:layout_constraintEnd_toStartOf="@+id/itemCover" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/itemCover"
             android:src="@drawable/img_auth_profile_default_banner"
             android:layout_width="100dp"
-            android:layout_height="@dimen/zero_dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:layout_margin="@dimen/screen_margin"
             app:shapeAppearanceOverlay="@style/cornerBorder"
