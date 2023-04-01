@@ -73,7 +73,7 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
     }
 
     private fun editProfile(){
-        binding.mainButtonEditProfile.setOnClickListener {
+        binding.mainProfileButtonEditProfile.setOnClickListener {
             val fragment = ProfileEditFragment()
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.frameLayoutMainActivity, fragment)?.commit()
@@ -82,7 +82,7 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
 
     private fun view(){
         val spannable = SpannableStringBuilder(binding.mainProfileFollowing.text.toString())
-        val spannable2 = SpannableStringBuilder(binding.mainProfileFollowers.text.toString())
+        val spannable2 = SpannableStringBuilder(binding.mainProfileFollower.text.toString())
         val greyColor = ForegroundColorSpan(Color.parseColor("#A9A9A9"))
 
         val clickableSpan = object : ClickableSpan() {
@@ -100,8 +100,8 @@ class MainProfileFragment : Fragment(R.layout.fragment_main_profile) {
         spannable.setSpan(clickableSpan, 4, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable2.setSpan(clickableSpan, 4, 12, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.mainProfileFollowing.text = spannable
-        binding.mainProfileFollowers.text = spannable2
-        binding.mainProfileFollowers.movementMethod = LinkMovementMethod.getInstance()
+        binding.mainProfileFollower.text = spannable2
+        binding.mainProfileFollower.movementMethod = LinkMovementMethod.getInstance()
         binding.mainProfileFollowing.movementMethod = LinkMovementMethod.getInstance()
     }
 

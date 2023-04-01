@@ -85,6 +85,7 @@ class AuthLoginFragment : Fragment() {
 
                     if (result.data?.body()?.data?.user?.verifikasi!!){
                         findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToMainActivity())
+                        requireActivity().finish()
                         Log.e(TAG, "setupObserve: DIRECTION KE COMPLETE PROFILE")
                     } else {
                         findNavController().navigate(AuthLoginFragmentDirections.actionAuthLoginFragmentToCompleteProfileOnBoardingFragment())
@@ -93,10 +94,12 @@ class AuthLoginFragment : Fragment() {
                 }
 
                 Status.LOADING -> {
-                    Log.e(TAG, "setupObservers: LOADING")
+                    binding.loginButtonLogin.isEnabled = false
                 }
 
                 Status.ERROR -> {
+                    binding.loginButtonLogin.isEnabled = true
+
                     if (result.message?.contains("errors") == true){
                         Log.e(TAG, "setupObserve: CONTAINS ERROR")
                         findNavController().navigate(AuthLoginFragmentDirections.actionToAuthLoginErrorFragment())

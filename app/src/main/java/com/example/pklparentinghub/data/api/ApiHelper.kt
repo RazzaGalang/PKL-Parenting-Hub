@@ -2,15 +2,17 @@ package com.example.pklparentinghub.data.api
 
 import com.example.pklparentinghub.data.model.login.LoginRequest
 import com.example.pklparentinghub.data.model.register.RegisterRequest
-import com.example.pklparentinghub.data.model.userContent.Article
-import com.example.pklparentinghub.data.model.userContent.UserContentResponse
-import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import com.example.pklparentinghub.data.model.userDetail.CompleteProfileRequest
+import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import okhttp3.MultipartBody
 
 class ApiHelper (private val apiService: ApiService) {
     suspend fun requestLogin(request: LoginRequest) = apiService.postLogin(request)
+
     suspend fun requestRegister(request: RegisterRequest) = apiService.postRegister(request)
+
+    suspend fun requestLogout(token: String) = apiService.postLogout(token = token)
+
     suspend fun getUserDetail(token: String, userId: Int) = apiService.getUserDetail(token = token, userId = userId)
 
     suspend fun storeFileUser(token: String, image: MultipartBody.Part) = apiService.storeFileUser(token = token, image = image)

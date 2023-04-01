@@ -8,8 +8,8 @@ import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
 import com.example.pklparentinghub.data.model.userDetail.CompleteProfileRequest
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
-import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import com.example.pklparentinghub.data.model.userFileUpload.UserFileUploadResponse
+import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import com.example.pklparentinghub.data.model.userFollower.UserFollowerResponse
 import com.example.pklparentinghub.data.model.userFollowing.UserFollowingResponse
 import com.example.pklparentinghub.utils.Const
@@ -36,7 +36,7 @@ interface ApiService {
     @POST(Const.Network.LOGOUT)
     suspend fun postLogout(
         @Header("Authorization") token: String
-    ): Response<JsonObject> //Tambah Model
+    ): Response<JsonObject>
 
     @Headers("Accept: application/json")
     @PUT(Const.Network.User.USER_EDIT)
