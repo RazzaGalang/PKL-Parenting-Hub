@@ -49,6 +49,15 @@ class CompleteProfileBannerFragment : Fragment() {
 
         initInsertPicture()
         initNavigation()
+        initView()
+    }
+
+    private fun initView() {
+        binding.apply {
+            ivBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
 
     private fun initNavigation(){
