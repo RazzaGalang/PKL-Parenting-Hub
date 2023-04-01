@@ -114,12 +114,22 @@ interface ApiService {
     @Headers("Accept: application/json")
     @POST(Const.Network.Article.ARTICLE_POST)
     suspend fun postArticle(
+        @Header("Authorization") token: String,
         @Body request: ArticleRequest
     ): Response<ArticleResponse>
 
+    @Multipart
     @Headers("Accept: application/json")
     @POST(Const.Network.Article.IMAGE_UPLOAD)
     suspend fun postImage(
-        @Part filename : MultipartBody.Part
+        @Header("Authorization") token: String,
+        @Part image : MultipartBody.Part
     ): Response<ImageResponse>
+
+    @Headers("Accept: application/json")
+    @GET(Const.Network.Article.ARTICLE_ALL)
+    suspend fun getArticleSearch(
+        @Header("Authorization") token: String,
+        @Query("search") search: String
+    ) : ArticleResponse
 }

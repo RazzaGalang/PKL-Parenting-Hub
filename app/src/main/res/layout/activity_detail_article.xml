@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -47,8 +46,11 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
+        android:id="@+id/svDetail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero_dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
@@ -60,7 +62,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/itemCover"
                 android:layout_width="@dimen/zero_dp"
-                android:layout_height="@dimen/add_article_height"
+                android:layout_height="@dimen/article_detail_height"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_rv_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,11 +75,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginTop="@dimen/normal_margin"
-                android:textAppearance="@style/TextAppearance.Subtitle1.Bold"
+                android:textAppearance="@style/TextAppearance.Subtitle2.Bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/itemCover"
-                tools:text="@string/example_title_article"/>
+                tools:text="@string/example_title_article" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/itemProfilePicture"
@@ -85,7 +87,7 @@
                 android:layout_height="@dimen/semi_huge_margin"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/normal_margin"
-                android:padding="3dp"
+                android:padding="@dimen/extra_small_margin"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_profile_default_picture"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,23 +99,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/normal_margin"
-                android:textAppearance="@style/TextAppearance.Body1"
+                android:textAppearance="@style/TextAppearance.Body2"
                 android:textColor="@color/dark_grey"
                 app:layout_constraintBottom_toBottomOf="@+id/itemProfilePicture"
                 app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
                 app:layout_constraintTop_toTopOf="@+id/itemProfilePicture"
-                tools:text="@tools:sample/full_names"/>
+                tools:text="@tools:sample/full_names" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/medium_margin"
                 android:textAppearance="@style/TextAppearance.Body2"
                 android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="@id/itemTitle"
                 app:layout_constraintTop_toBottomOf="@+id/itemTitle"
-                tools:text="17 April 2023"/>
+                tools:text="@string/example_time" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider"
@@ -130,12 +132,12 @@
                 android:layout_width="@dimen/zero_dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/screen_margin"
-                android:textAppearance="@style/TextAppearance.Body1"
                 android:justificationMode="inter_word"
+                android:textAppearance="@style/TextAppearance.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider"
-                tools:text="Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby. Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby Ini Beberapa Makanan yang ternyata tidak di Rekomendasikan untuk Baby"/>
+                tools:text="@string/example_article" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider2"
@@ -154,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
-                android:layout_marginVertical="@dimen/normal_margin"
+                android:layout_marginVertical="@dimen/medium_margin"
                 android:drawableStart="@drawable/ic_like"
                 android:textAppearance="@style/TextAppearance.Body2"
                 android:tint="@color/primary50"
@@ -178,21 +180,251 @@
                 android:layout_width="@dimen/zero_dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/screen_margin"
+                android:text="@string/article_another"
                 android:textAppearance="@style/TextAppearance.Subtitle3.Bold"
-                android:text="@string/another_article"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider3" />
 
-            <FrameLayout
-                android:id="@+id/frameRecyclerAnotherArticle"
-                android:layout_width="@dimen/zero_dp"
-                android:layout_height="@dimen/zero_dp"
-                android:layout_marginTop="@dimen/normal_margin"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvArticleAnother"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:fadeScrollbars="true"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/normal_margin"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvAnotherArticle" />
+                app:layout_constraintTop_toBottomOf="@id/tvAnotherArticle"
+                tools:listitem="@layout/item_article_profile" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/DetailArticleLoading"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zero_dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/shimmerArticleTopBar"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/article_detail_height"
+                android:background="@drawable/shimmer_rounded_corner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/shimmerArticleTitleFirst"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/subtitle_3_line_height"
+                android:layout_marginVertical="@dimen/medium_margin"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTopBar" />
+
+            <View
+                android:id="@+id/shimmerArticleTitleSecond"
+                android:layout_width="@dimen/article_detail_height"
+                android:layout_height="@dimen/subtitle_3_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/small_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTitleFirst" />
+
+            <View
+                android:id="@+id/shimmerArticleProfilePicture"
+                android:layout_width="@dimen/title_1_line_height"
+                android:layout_height="@dimen/title_1_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/normal_margin"
+                android:background="@drawable/shimmer_circle_shape"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTitleSecond" />
+
+            <View
+                android:id="@+id/shimmerArticleAuthor"
+                android:layout_width="100dp"
+                android:layout_height="@dimen/body_2_line_height"
+                android:layout_marginHorizontal="@dimen/normal_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintBottom_toBottomOf="@+id/shimmerArticleProfilePicture"
+                app:layout_constraintStart_toEndOf="@+id/shimmerArticleProfilePicture"
+                app:layout_constraintTop_toTopOf="@+id/shimmerArticleProfilePicture" />
+
+            <View
+                android:id="@+id/shimmerArticleTime"
+                android:layout_width="@dimen/article_home_height"
+                android:layout_height="@dimen/body_2_line_height"
+                android:layout_margin="@dimen/screen_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticleTitleSecond"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:id="@+id/shimmerArticleDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_margin="@dimen/screen_margin"
+                android:background="@drawable/shimmer_circle_shape"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shimmerArticleProfilePicture" />
+
+            <View
+                android:id="@+id/shimmerArticle1"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_margin="@dimen/screen_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticleDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticle2"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/small_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticle3"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/small_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticle4"
+                android:layout_width="150dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/small_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle3"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticle5"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/normal_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticle6"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/small_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticle7"
+                android:layout_width="200dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/small_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle6"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticle8"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/normal_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticle9"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/validation_line_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/small_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/shimmerArticleDivider2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_margin="@dimen/screen_margin"
+                android:background="@drawable/shimmer_circle_shape"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shimmerArticle9" />
+
+            <View
+                android:id="@+id/shimmerArticleLike"
+                android:layout_width="@dimen/huge_margin"
+                android:layout_height="12dp"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:background="@drawable/shimmer_rounded_side"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shimmerArticleDivider2"/>
+
+            <View
+                android:id="@+id/shimmerArticleDivider3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/normal_margin"
+                android:background="@drawable/shimmer_circle_shape"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shimmerArticleLike" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvArticleAnotherLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticleDivider3"
+                tools:listitem="@layout/item_shimmer_article_profile" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

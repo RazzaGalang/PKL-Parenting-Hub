@@ -11,9 +11,10 @@
         android:id="@+id/cvArticle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/normal_margin"
+        android:layout_marginBottom="@dimen/screen_margin"
         android:layout_marginHorizontal="@dimen/screen_margin"
-        app:cardCornerRadius="@dimen/normal_margin">
+        app:cardCornerRadius="@dimen/normal_radius"
+        app:cardElevation="@dimen/small_margin">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,7 +28,7 @@
                 android:src="@drawable/img_profile_default_banner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemTime"
@@ -35,11 +36,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginTop="@dimen/normal_margin"
-                android:textAppearance="@style/TextAppearance.Body2"
+                android:textAppearance="@style/TextAppearance.Body3"
                 android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemCover"/>
+                app:layout_constraintTop_toBottomOf="@id/itemCover"
+                tools:text="@string/example_time"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemTitle"
@@ -47,10 +49,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:textAppearance="@style/TextAppearance.Subtitle3.Bold"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemTime" />
+                app:layout_constraintTop_toBottomOf="@id/itemTime"
+                tools:text="@string/example_title_article"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/itemProfilePicture"
@@ -71,23 +73,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/normal_margin"
-                android:textAppearance="@style/TextAppearance.Body1"
+                android:textAppearance="@style/TextAppearance.Body2"
                 app:layout_constraintBottom_toBottomOf="@+id/itemProfilePicture"
                 app:layout_constraintStart_toEndOf="@+id/itemProfilePicture"
-                app:layout_constraintTop_toTopOf="@+id/itemProfilePicture" />
+                app:layout_constraintTop_toTopOf="@+id/itemProfilePicture"
+                tools:text="@tools:sample/full_names"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_like"
-                android:textAppearance="@style/TextAppearance.Body3"
+                android:textAppearance="@style/TextAppearance.Body2"
                 android:textColor="@color/primary50"
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/normal_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/itemTitle"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="@string/example_like"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

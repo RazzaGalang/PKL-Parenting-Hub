@@ -6,6 +6,11 @@
         <item name="strokeColor">@color/white</item>
     </style>
 
+    <style name="card" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">@color/grey</item>
+    </style>
+
     <style name="Widget.ParentingHub.TextInputLayout.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="materialThemeOverlay">
             @style/ThemeOverlay.ParentingHub.TextInputLayout.FilledBox

@@ -16,7 +16,6 @@ class ApiHelper(private val apiService: ApiService) {
 
     suspend fun storeFileUser(token: String, image: MultipartBody.Part) = apiService.storeFileUser(token = token, image = image)
 
-
     suspend fun updateUser(
         token: String,
         userId: Int,
@@ -41,9 +40,17 @@ class ApiHelper(private val apiService: ApiService) {
         latest = latest
     )
 
-    suspend fun requestArticle(request: ArticleRequest) = apiService.postArticle(request)
+    suspend fun requestArticle(token: String, request: ArticleRequest) = apiService.postArticle(token, request)
 
-    suspend fun postImage(filename: MultipartBody.Part) = apiService.postImage(filename)
+    suspend fun postImage(token: String, image: MultipartBody.Part) = apiService.postImage(token = token, image = image)
 
     suspend fun getArticleDetail(token: String, articleId: Int) = apiService.getArticleDetail(token = token, articleId = articleId)
+
+    suspend fun getArticleSearch(
+        token: String,
+        search: String
+    ) = apiService.getArticleSearch(
+        token = token,
+        search = search
+    )
 }

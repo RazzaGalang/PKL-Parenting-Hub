@@ -149,7 +149,7 @@
     <style name="TextAppearance.Button" parent="Base.TextAppearance.AppCompat">
         <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:fontFamily">@font/roboto_bold</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="lineHeight">@dimen/button_line_height</item>
         <item name="android:letterSpacing">0.01</item>
     </style>

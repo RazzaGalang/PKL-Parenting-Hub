@@ -26,8 +26,9 @@ class FragmentHomeArticle(var popular: Boolean, private var latest: Boolean) : F
 
     private var _binding: FragmentHomeArticleBinding? = null
     private val binding get() = _binding!!
-    private val adapter: ArticleHomeAdapter = ArticleHomeAdapter(this)
+
     private lateinit var viewModel : ArticleAllViewModel
+    private val adapter: ArticleHomeAdapter = ArticleHomeAdapter(this)
     private val shimmerAdapter: ShimmerArticleHomeAdapter = ShimmerArticleHomeAdapter()
 
     override fun onCreateView(

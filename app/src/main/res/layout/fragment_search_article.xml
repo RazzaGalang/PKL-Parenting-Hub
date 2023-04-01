@@ -19,7 +19,7 @@
             android:id="@+id/topAppBar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
             app:navigationIcon="@drawable/ic_back">
 
@@ -28,36 +28,150 @@
                 style="@style/Widget.ParentingHub.Search.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginEnd="@dimen/screen_margin"
                 android:paddingBottom="4dp"
-                app:startIconDrawable="@drawable/ic_search"
-                app:startIconTint="@color/primary50"
-                app:placeholderText="@string/search_here"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvErrorCover">
+                app:layout_constraintTop_toBottomOf="@+id/tvErrorCover"
+                app:placeholderText="@string/article_search_here"
+                app:startIconDrawable="@drawable/ic_search"
+                app:startIconTint="@color/primary50">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSearchArticle"
                     style="@style/Widget.ParentingHub.Search.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/small_margin"
+                    android:imeOptions="actionSearch"
+                    android:lines="1"
                     android:maxLines="1"
-                    android:singleLine="true"
-                    android:lines="1"/>
+                    android:padding="@dimen/small_margin"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSearch"
-        android:layout_width="@dimen/zero_dp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvInitial"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/zero_dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvArticle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/normal_margin"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_article_profile" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvArticleLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/medium_margin"
+                android:paddingTop="@dimen/medium_margin"
+                android:paddingBottom="@dimen/normal_margin"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_shimmer_article_profile"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zero_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/ivEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:layout_marginTop="@dimen/screen_margin"
+            android:layout_marginEnd="@dimen/huge_margin"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_condition_no_article_search"
+            app:layout_constraintBottom_toTopOf="@id/tvEmptyStateTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvEmptyStateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/extra_huge_margin"
+            android:layout_marginTop="@dimen/screen_margin"
+            android:text="@string/article_search_empty_state"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Body2"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivEmptyState" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clConnectionError"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zero_dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
+        <ImageView
+            android:id="@+id/ivConnection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/huge_margin"
+            android:layout_marginTop="@dimen/screen_margin"
+            android:layout_marginEnd="@dimen/huge_margin"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_condition_no_connection"
+            app:layout_constraintBottom_toTopOf="@id/tvConnection"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvConnection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/extra_huge_margin"
+            android:layout_marginTop="@dimen/screen_margin"
+            android:text="@string/error_text_lost_connection"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Body2"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivConnection" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
