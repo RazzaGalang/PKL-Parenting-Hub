@@ -6,11 +6,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.model.articleData.Article
 import com.example.pklparentinghub.databinding.ItemHomeArticleBinding
-import com.example.pklparentinghub.databinding.ItemHomeArticleSliderBinding
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
@@ -18,13 +16,21 @@ class ArticleHomeAdapter(private val listener: OnItemClickListener) : RecyclerVi
 
     interface OnItemClickListener {
         fun onItemClick(item: Article)
+
+        fun onItemLike(item: Article)
     }
 
     inner class ViewHolder (private val binding: ItemHomeArticleBinding) : RecyclerView.ViewHolder(binding.root) {
             fun setData(item: Article) {
-                binding.cvArticle.setOnClickListener{listener.onItemClick(item)}
                 binding.apply {
-                    val date = item.createdAt.substring(0, 9)
+                    cvArticle.setOnClickListener{listener.onItemClick(item)}
+                    itemIconLike.setOnClickListener{listener.onItemLike(item)}
+
+                    val isLiked = item.isLiked
+                    if (isLiked) itemIconLike.setImageResource(R.drawable.ic_like_dark)
+                    else itemIconLike.setImageResource(R.drawable.ic_like)
+
+                    val date = item.createdAt.substring(0, 10)
                     val df: DateFormat = SimpleDateFormat("yyyy-MM-dd")
                     val dateFormat: DateFormat = SimpleDateFormat("dd MMMM yyyy")
                     val newDate: String = dateFormat.format(df.parse(date))
@@ -33,15 +39,19 @@ class ArticleHomeAdapter(private val listener: OnItemClickListener) : RecyclerVi
                     Glide.with(thumbnail)
                         .load(valuesThumbnail)
                         .into(thumbnail)
-                    val valuesProfile = item.thumbnail
+                    val valuesProfile = item.author.profilePicture
                     val profile = itemProfilePicture
-                    Glide.with(profile)
-                        .load(valuesProfile)
-                        .into(profile)
+                    if (valuesProfile == "https://parenting-lite-api.intern.paninti.com/storage/images/default-profile.png"){
+                        profile.setImageResource(R.drawable.img_profile_default_picture)
+                    } else {
+                        Glide.with(profile)
+                            .load(valuesProfile)
+                            .into(profile)
+                    }
                     itemTitle.text = item.title
                     itemTime.text = newDate
                     itemFullName.text = item.author.fullName
-                    itemLike.text = " ${item.like}"
+                    itemLike.text = "${item.like} Suka"
                 }
             }
         }

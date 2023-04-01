@@ -18,6 +18,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -26,6 +27,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.pklparentinghub.R
 import com.example.pklparentinghub.databinding.FragmentCreateArticleBinding
+import com.example.pklparentinghub.ui.main.condition.CancelCreateArticle
 import java.io.IOException
 import java.io.InputStream
 
@@ -37,41 +39,27 @@ class FragmentCreateArticle : Fragment() {
     private val REQUEST_CODE_PERMISSIONS = 101
     private val REQUEST_CODE_SELECT_IMAGE = 102
 
-    private lateinit var values: String
     private var selectedImageUri: Uri? = null
 
     private var isNullTitle = false
-    var validTitle = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCreateArticleBinding.inflate(inflater, container, false)
-
-        initUploadImage()
-        btnContinueOnClick()
-        checkTitle()
-
         return binding.root
     }
 
-    private fun binding(){
-        val valuesThumbnail = selectedImageUri?.toString()!!
-        val valuesTitle = binding.etTitleArticle.text.toString()
-        val action = FragmentCreateArticleDirections.actionToFragmentCreateArticle2(valuesTitle, valuesThumbnail)
-        findNavController().navigate(action)
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.ivUploadImage.setImageURI(selectedImageUri)
 
-    private fun btnContinueOnClick() {
-        binding.btnContinue.setOnClickListener{
-            validationTrue()
-            validateGambar()
-        }
-    }
-
-    private fun validationTrue(){
-        if(isNullTitle() && validTitle && validateGambar()) binding()
+        initUploadImage()
+        btnContinueOnClick()
+        btnBackOnClick()
+        onBackPressed()
+        checkTitle()
     }
 
     private fun checkTitle(){
@@ -99,7 +87,7 @@ class FragmentCreateArticle : Fragment() {
     }
 
     private fun nullTitle(): Boolean {
-        binding.tilTitleArticle.error = getString(R.string.null_title)
+        binding.tilTitleArticle.error = getString(R.string.error_text_null_title)
         binding.etTitleArticle.setBackgroundResource(R.drawable.bg_white_red_outline)
         return false
     }
@@ -107,32 +95,25 @@ class FragmentCreateArticle : Fragment() {
     private fun clearTitle(){
         binding.tilTitleArticle.isErrorEnabled = false
         binding.etTitleArticle.setBackgroundResource(R.drawable.slr_outline_button_border)
-        validTitle = true
     }
 
-    private fun initUploadImage() {
-        binding.btnUploadImage.setOnClickListener {
-            selectImageFromGallery(REQUEST_CODE_SELECT_IMAGE)
-            //handlePhotoPickerLaunch()
-        }
-    }
 
     @SuppressLint("ResourceAsColor")
     private fun validateGambar(): Boolean {
         return if (selectedImageUri == null){
-            binding.tvErrorCover.text =  getString(R.string.null_cover)
+            binding.tvErrorCover.text =  getString(R.string.error_text_null_cover)
             binding.ivUploadImage.strokeColor = ColorStateList.valueOf(Color.RED)
             false
         } else {
             val checkSize = isImageFileSize(requireContext(), selectedImageUri!!)
             return if (!checkSize){
-                binding.tvErrorCover.text = "Size Gambar harus dibawah 2MB"
+                binding.tvErrorCover.text = getString(R.string.error_text_max_size_image)
                 binding.ivUploadImage.strokeColor = ColorStateList.valueOf(Color.RED)
                 false
             } else {
                 val checkType = isImageFileType(selectedImageUri!!)
                 if (!checkType){
-                    binding.tvErrorCover.text = "Tipe Gambar harus JPG/PNG"
+                    binding.tvErrorCover.text = getString(R.string.error_text_image_type)
                     binding.ivUploadImage.strokeColor = ColorStateList.valueOf(Color.RED)
                     false
                 } else {
@@ -144,21 +125,9 @@ class FragmentCreateArticle : Fragment() {
         }
     }
 
-    private fun isPhotoPickerAvailable(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-    }
-
-    private fun handlePhotoPickerLaunch() {
-        if (isPhotoPickerAvailable()) {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        }
-    }
-
-    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        if (uri != null) {
-            Log.d("PhotoPicker", "Selected URI: $uri")
-        } else {
-            Log.d("PhotoPicker", "No media selected")
+    private fun initUploadImage() {
+        binding.btnUploadImage.setOnClickListener {
+            selectImageFromGallery(REQUEST_CODE_SELECT_IMAGE)
         }
     }
 
@@ -231,6 +200,48 @@ class FragmentCreateArticle : Fragment() {
         val contentResolver = context?.contentResolver
         val type = contentResolver?.getType(uri)
         return type == "image/jpeg" || type == "image/png"
+    }
+
+    private fun btnBackOnClick() {
+        binding.topAppBar.setNavigationOnClickListener {
+            validationNull()
+        }
+    }
+
+    private fun onBackPressed(){
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                validationNull()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this.viewLifecycleOwner, callback)
+    }
+
+    private fun validationNull(){
+        if(!isNullTitle() && !validateGambar()) {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+        else findNavController().navigate(FragmentCreateArticleDirections.actionFragmentCreateArticleToCancelCreateArticle())
+    }
+
+    private fun btnContinueOnClick() {
+        binding.btnContinue.setOnClickListener{
+            validationTrue()
+            validateGambar()
+        }
+    }
+
+    private fun validationTrue(){
+        if(isNullTitle() && validateGambar()) next()
+    }
+
+    private fun next(){
+        val valuesTitle = binding.etTitleArticle.text.toString()
+        val valuesThumbnail = selectedImageUri.toString()
+        val action = FragmentCreateArticleDirections.actionToFragmentCreateArticle2(valuesTitle = valuesTitle, valuesThumbnail = valuesThumbnail)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

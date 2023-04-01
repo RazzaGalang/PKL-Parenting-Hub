@@ -20,6 +20,9 @@
                 android:name="valuesThumbnail"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_fragmentCreateArticle_to_cancelCreateArticle"
+            app:destination="@id/cancelCreateArticle" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCreateArticle2"
@@ -30,4 +33,8 @@
             android:id="@+id/action_to_fragmentCreateArticle"
             app:destination="@id/fragmentCreateArticle" />
     </fragment>
+    <dialog
+        android:id="@+id/cancelCreateArticle"
+        android:name="com.example.pklparentinghub.ui.main.condition.CancelCreateArticle"
+        android:label="CancelCreateArticle" />
 </navigation>

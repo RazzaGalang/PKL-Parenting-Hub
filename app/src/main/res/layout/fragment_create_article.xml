@@ -61,7 +61,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvUploadImage"
         android:layout_width="@dimen/zero_dp"
-        android:layout_height="@dimen/add_article_height"
+        android:layout_height="@dimen/article_detail_height"
         android:layout_margin="@dimen/screen_margin"
         app:cardCornerRadius="@dimen/normal_radius"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/add_image_article"
+                android:text="@string/article_add_cover"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 app:iconTint="@color/white"
@@ -107,7 +107,7 @@
         android:layout_height="@dimen/zero_dp"
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginHorizontal="@dimen/large_margin"
-        android:textAppearance="@style/TextAppearance.Validation"
+        android:textAppearance="@style/TextAppearance.Caption"
         android:textColor="@color/error30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,17 +119,18 @@
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/screen_margin"
-        android:hint="@string/title_article"
+        android:hint="@string/article_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvErrorCover"
-        app:placeholderText="@string/add_title_article">
+        app:placeholderText="@string/article_add_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etTitleArticle"
             style="@style/Widget.ParentingHub.TextInputEditText.FilledBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLength="80"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,7 +140,7 @@
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/screen_margin"
-        android:text="@string/continue_article"
+        android:text="@string/article_continue"
         android:textAllCaps="false"
         android:padding="12dp"
         android:textColor="@color/white"

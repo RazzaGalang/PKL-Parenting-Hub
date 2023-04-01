@@ -5,6 +5,6 @@
     <item
         android:id="@+id/editArticle"
         android:icon="@drawable/ic_more"
-        android:title="@string/edit_article"
+        android:title="@string/article_edit"
         app:showAsAction="ifRoom"/>
 </menu>

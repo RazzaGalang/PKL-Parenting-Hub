@@ -29,10 +29,11 @@ class SplashScreenFragment : Fragment() {
                     .access
                     .collect { token ->
                         val emptyString = ""
-                        if (token == emptyString)
+                        if (token == emptyString){
                             findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToAuthOnBoardingFragment())
-                        else
+                        } else {
                             findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToMainActivity())
+                        }
                     }
             }
         }, 3000)

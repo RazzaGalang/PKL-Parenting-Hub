@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.pklparentinghub.R
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.data.model.userDetail.CompleteProfileRequest
@@ -42,6 +43,7 @@ class CompleteProfileBiodataFragment : Fragment() {
     private lateinit var requestFileProfilePicture : MultipartBody.Part
     private lateinit var requestFileBannerPicture : MultipartBody.Part
 
+    private val emptyString = ""
     private lateinit var valuesUsername : String
     private lateinit var valuesFullname : String
     private lateinit var valuesBirthday : String
@@ -76,11 +78,39 @@ class CompleteProfileBiodataFragment : Fragment() {
         initGetUserDetail()
         setupViewModel()
         setupObserve()
+        initView()
+    }
+
+    private fun initView() {
+        binding.apply {
+            ivBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
 
     private fun initSubmitButton () {
         binding.completeProfileBiodataNavigationButton.setOnClickListener {
-            setupProfilePicturePath()
+            if (isDateError()) {
+                isDateError()
+            } else {
+                setupSubmitData()
+            }
+        }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun isDateError() : Boolean{
+        binding.apply {
+            return if (completeProfileBiodataOutputDate.text.toString() == emptyString){
+                completeProfileBiodataButtonInputDate.setStrokeColorResource(R.color.error30)
+                completeProfileBiodataButtonInputDate.setTextColor(requireContext().getColor(R.color.error30))
+                true
+            } else {
+                completeProfileBiodataButtonInputDate.setStrokeColorResource(R.color.primary50)
+                completeProfileBiodataButtonInputDate.setTextColor(requireContext().getColor(R.color.primary50))
+                false
+            }
         }
     }
 
@@ -165,6 +195,7 @@ class CompleteProfileBiodataFragment : Fragment() {
                     Status.SUCCESS -> {
                         Log.e(TAG, "setupSubmitData: UPDATE SUCCESS" )
                         findNavController().navigate(CompleteProfileBiodataFragmentDirections.actionCompleteProfileBiodataFragmentToMainActivity())
+                        requireActivity().finish()
                     }
                     Status.ERROR -> {
                         Log.e(TAG, "setupSubmitData: UPDATE ERROR" )
@@ -269,6 +300,7 @@ class CompleteProfileBiodataFragment : Fragment() {
                 valuesBirthday = "$dayOfMonth-${monthOfYear+1}-$year"
                 val outputBirthday = "$dayOfMonth/${monthOfYear+1}/$year"
                 binding.completeProfileBiodataOutputDate.setText(" $outputBirthday")
+                isDateError()
             },
             year,
             month,

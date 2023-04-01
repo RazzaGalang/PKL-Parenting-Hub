@@ -2,12 +2,10 @@ package com.example.pklparentinghub.ui.main.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.view.*
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +21,7 @@ import com.example.pklparentinghub.ui.base.ArticleAllViewModelFactory
 import com.example.pklparentinghub.ui.main.adapter.ArticleHomeSliderAdapter
 import com.example.pklparentinghub.ui.main.viewmodel.ArticleAllViewModel
 import com.example.pklparentinghub.utils.AccessManager
+import com.example.pklparentinghub.utils.Status
 import com.example.pklparentinghub.utils.Status.*
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -76,6 +75,11 @@ class MainHomeFragment : Fragment(), ArticleHomeSliderAdapter.OnItemClickListene
         )[ArticleAllViewModel::class.java]
     }
 
+    private fun showLoading(loading: Boolean) {
+        binding.articleSliderLoading.isVisible = loading
+        binding.articleSlider.isVisible = !loading
+    }
+
     private fun requestWithToken() {
         lifecycleScope.launchWhenCreated {
             AccessManager(requireContext())
@@ -83,6 +87,7 @@ class MainHomeFragment : Fragment(), ArticleHomeSliderAdapter.OnItemClickListene
                 .collect { token ->
                     viewModel.getArticleAll(token, 3, "", true, false).observe(viewLifecycleOwner, Observer {
                         it?.let { resource ->
+                            showLoading(resource.status == Status.LOADING)
                             when (resource.status) {
                                 SUCCESS -> {
                                     resource.data?.let { article -> adapter.items = article.data.article }

@@ -12,8 +12,8 @@ import com.example.pklparentinghub.data.model.register.RegisterResponse
 import com.example.pklparentinghub.data.model.userContent.UserContentResponse
 import com.example.pklparentinghub.data.model.userDetail.CompleteProfileRequest
 import com.example.pklparentinghub.data.model.userDetail.UserDetailResponse
-import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import com.example.pklparentinghub.data.model.userFileUpload.UserFileUploadResponse
+import com.example.pklparentinghub.data.model.userFollower.UserFollowRequest
 import com.example.pklparentinghub.data.model.userFollower.UserFollowerResponse
 import com.example.pklparentinghub.data.model.userFollowing.UserFollowingResponse
 import com.example.pklparentinghub.utils.Const
@@ -40,7 +40,7 @@ interface ApiService {
     @POST(Const.Network.LOGOUT)
     suspend fun postLogout(
         @Header("Authorization") token: String
-    ): Response<JsonObject> //Tambah Model
+    ): Response<JsonObject>
 
     @Headers("Accept: application/json")
     @PUT(Const.Network.User.USER_EDIT)
@@ -130,12 +130,22 @@ interface ApiService {
     @Headers("Accept: application/json")
     @POST(Const.Network.Article.ARTICLE_POST)
     suspend fun postArticle(
+        @Header("Authorization") token: String,
         @Body request: ArticleRequest
     ): Response<ArticleResponse>
 
+    @Multipart
     @Headers("Accept: application/json")
     @POST(Const.Network.Article.IMAGE_UPLOAD)
     suspend fun postImage(
-        @Part filename : MultipartBody.Part
+        @Header("Authorization") token: String,
+        @Part image : MultipartBody.Part
     ): Response<ImageResponse>
+
+    @Headers("Accept: application/json")
+    @GET(Const.Network.Article.ARTICLE_ALL)
+    suspend fun getArticleSearch(
+        @Header("Authorization") token: String,
+        @Query("search") search: String
+    ) : ArticleResponse
 }

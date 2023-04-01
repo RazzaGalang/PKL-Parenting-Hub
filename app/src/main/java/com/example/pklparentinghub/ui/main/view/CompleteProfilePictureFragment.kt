@@ -6,11 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -56,7 +59,7 @@ class CompleteProfilePictureFragment : Fragment() {
 
     private fun initInsertPicture(){
         binding.completeProfilePictureInsertPicture.setOnClickListener {
-            selectImageFromGallery(REQUEST_CODE_SELECT_PROFILE)
+            handlePhotoPickerLaunch()
         }
     }
 
@@ -106,6 +109,26 @@ class CompleteProfilePictureFragment : Fragment() {
         }
     }
 
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            binding.completeProfilePictureInsertPicture.setImageURI(uri)
+            selectedImageUri = uri
+        } else {
+            selectedImageUri = null
+        }
+    }
+
+    private fun isPhotoPickerAvailable(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+    }
+
+    private fun handlePhotoPickerLaunch() {
+        if (isPhotoPickerAvailable())
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        else
+            selectImageFromGallery(REQUEST_CODE_SELECT_PROFILE)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -133,16 +156,6 @@ class CompleteProfilePictureFragment : Fragment() {
                 startActivityForResult(intent, REQUEST_CODE_SELECT_PROFILE)
             }
         }
-    }
-
-    private fun getPathFromMediaStore(context: Context, uri: Uri): String? {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = context.contentResolver.query(uri, projection, null, null, null)
-        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor?.moveToFirst()
-        val path = columnIndex?.let { cursor.getString(it) }
-        cursor?.close()
-        return path
     }
 
     private fun getImageFileSize(contentUri: Uri, context: Context): Long {
@@ -180,6 +193,4 @@ class CompleteProfilePictureFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

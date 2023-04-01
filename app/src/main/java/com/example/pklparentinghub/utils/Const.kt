@@ -32,8 +32,6 @@ object Const {
             const val ARTICLE_POST = PREFIX + "articles"
             const val IMAGE_UPLOAD = PREFIX + "articles/upload"
         }
-
     }
-
 }
 
