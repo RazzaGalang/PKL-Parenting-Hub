@@ -1,24 +1,24 @@
-package com.example.pklparentinghub.ui.main.adapter
+package com.example.pklparentinghub
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pklparentinghub.data.model.profile.ProfileModel
-import com.example.pklparentinghub.databinding.ItemArticleProfileBinding
+import com.example.pklparentinghub.databinding.ItemArthicleProfileBinding
 
-class ProfileArtichleAdapter: RecyclerView.Adapter<ProfileArtichleAdapter.ProfileViewHolder>() {
-    inner class ProfileViewHolder(private val binding: ItemArticleProfileBinding) :
+class ProfileArthicleAdapter: RecyclerView.Adapter<ProfileArthicleAdapter.ProfileViewHolder>() {
+    inner class ProfileViewHolder(private val binding: ItemArthicleProfileBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProfileModel) {
             binding.apply{
                 itemProfilePicture.setImageResource(item.ivProfile)
-                itemFullName.text = item.username
-                itemTitle.text = item.desc
-                itemLike.text = item.like
-                itemTime.text = item.date
-                itemCover.setImageResource(item.default)
+                itemProfileUsername.text = item.username
+                itemProfileDescription.text = item.desc
+//                itemProfileIconLike.(item.icLike)
+                itemProfileLike.text = item.like
+                itemProfileDate.text = item.date
+                itemProfileDefaultCover.setImageResource(item.default)
             }
         }
     }
@@ -35,7 +35,7 @@ class ProfileArtichleAdapter: RecyclerView.Adapter<ProfileArtichleAdapter.Profil
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun onBindViewHolder(holder: ProfileArtichleAdapter.ProfileViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProfileArthicleAdapter.ProfileViewHolder, position: Int) {
         holder.bind(differ.currentList[position])
         holder.setIsRecyclable(true)
     }
@@ -45,8 +45,8 @@ class ProfileArtichleAdapter: RecyclerView.Adapter<ProfileArtichleAdapter.Profil
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ProfileArtichleAdapter.ProfileViewHolder {
-        val listArtichleBinding = ItemArticleProfileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    ): ProfileArthicleAdapter.ProfileViewHolder {
+        val listArtichleBinding = ItemArthicleProfileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProfileViewHolder(listArtichleBinding)
     }
 }

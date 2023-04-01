@@ -8,4 +8,6 @@ class AuthRepository(private val apiHelper: ApiHelper) {
     suspend fun requestLogin(request: LoginRequest) = apiHelper.requestLogin(request)
 
     suspend fun requestRegister(request: RegisterRequest) = apiHelper.requestRegister(request)
+
+    suspend fun requestLogut(token: String) = apiHelper.requestLogout(token = token)
 }

@@ -8,6 +8,6 @@ data class UserContentResponse(
     val `data`: Data,
     @SerializedName("message")
     val message: String,
-    @SerializedName("status")
+    @SerializedName("statuse")
     val status: String
 )

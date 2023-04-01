@@ -1,4 +1,4 @@
-package com.example.pklparentinghub.data.model.profile
+package com.example.pklparentinghub
 
 data class ProfileConnectionModel(
     val ivProfile : Int,

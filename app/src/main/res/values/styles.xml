@@ -6,9 +6,16 @@
         <item name="strokeColor">@color/white</item>
     </style>
 
-    <style name="card" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="strokeWidth">2dp</item>
-        <item name="strokeColor">@color/grey</item>
+    <style name="buttonFollow" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:checkable" >true</item>
+        <item name="android:textColor">@color/slr_button_follow_text</item>
+        <item name="backgroundTint">@color/slr_button_follow_background</item>
+    </style>
+
+    <style name="buttonFollowing" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:checkable"> true</item>
+        <item name="android:textColor">@color/slr_button_following_text</item>
+        <item name="backgroundTint">@color/slr_button_following_background</item>
     </style>
 
     <style name="Widget.ParentingHub.TextInputLayout.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">

@@ -152,76 +152,73 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <View
-            android:id="@+id/shimmerMiniProfilePicture"
-            android:layout_width="@dimen/avatar_height"
-            android:layout_height="@dimen/avatar_height"
-            android:layout_marginHorizontal="@dimen/screen_margin"
-            android:layout_marginVertical="@dimen/screen_margin"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:id="@+id/shimmerItemProfilePicture"
+            android:layout_width="@dimen/large_margin"
+            android:layout_height="@dimen/large_margin"
+            android:layout_margin="@dimen/screen_margin"
             android:background="@drawable/shimmer_circle_shape"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/shimmerDividerArticle" />
 
         <View
-            android:id="@+id/shimmerArticleDisplayName"
+            android:id="@+id/shimmerFullName"
             android:layout_width="100dp"
             android:layout_height="12dp"
-            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_margin="@dimen/normal_margin"
             android:background="@drawable/shimmer_rounded_side"
-            app:layout_constraintBottom_toBottomOf="@id/shimmerMiniProfilePicture"
-            app:layout_constraintStart_toEndOf="@+id/shimmerMiniProfilePicture"
-            app:layout_constraintTop_toTopOf="@+id/shimmerMiniProfilePicture" />
+            app:layout_constraintBottom_toBottomOf="@+id/shimmerItemProfilePicture"
+            app:layout_constraintStart_toEndOf="@+id/shimmerItemProfilePicture"
+            app:layout_constraintTop_toTopOf="@+id/shimmerItemProfilePicture" />
 
         <View
             android:id="@+id/shimmerArticleTitleFirst"
             android:layout_width="@dimen/zero_dp"
-            android:layout_height="12dp"
+            android:layout_height="15dp"
             android:layout_marginHorizontal="@dimen/screen_margin"
             android:layout_marginVertical="@dimen/normal_margin"
             android:background="@drawable/shimmer_rounded_side"
-            app:layout_constraintEnd_toStartOf="@+id/shimmerImageArticle"
+            app:layout_constraintEnd_toStartOf="@+id/shimmerArticleCover"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shimmerMiniProfilePicture" />
+            app:layout_constraintTop_toBottomOf="@+id/shimmerItemProfilePicture" />
 
         <View
             android:id="@+id/shimmerArticleTitleSecond"
             android:layout_width="@dimen/zero_dp"
-            android:layout_height="12dp"
+            android:layout_height="15dp"
             android:layout_marginHorizontal="@dimen/screen_margin"
             android:layout_marginVertical="@dimen/normal_margin"
             android:background="@drawable/shimmer_rounded_side"
-            app:layout_constraintEnd_toStartOf="@+id/shimmerImageArticle"
+            app:layout_constraintEnd_toStartOf="@+id/shimmerArticleCover"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTitleFirst" />
 
         <View
-            android:id="@+id/shimmerLikeArticle"
+            android:id="@+id/shimmerArticleLike"
+            android:background="@drawable/shimmer_rounded_side"
+            android:layout_width="100dp"
+            android:layout_height="12dp"
+            android:layout_margin="@dimen/screen_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTitleSecond" />
+
+        <View
+            android:id="@+id/shimmerArticleTime"
             android:layout_width="100dp"
             android:layout_height="12dp"
             android:layout_margin="@dimen/screen_margin"
             android:background="@drawable/shimmer_rounded_side"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/shimmerArticleTitleSecond" />
+            app:layout_constraintEnd_toStartOf="@+id/shimmerArticleCover"
+            app:layout_constraintTop_toBottomOf="@+id/shimmerArticleTitleSecond" />
 
         <View
-            android:id="@+id/shimmerTimeArticle"
+            android:id="@id/shimmerArticleCover"
             android:layout_width="100dp"
-            android:layout_height="12dp"
-            android:background="@drawable/shimmer_rounded_side"
-            app:layout_constraintBottom_toBottomOf="@+id/shimmerLikeArticle"
-            app:layout_constraintEnd_toEndOf="@+id/shimmerArticleTitleSecond" />
-
-        <View
-            android:id="@+id/shimmerImageArticle"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:layout_marginHorizontal="@dimen/screen_margin"
+            android:layout_height="100dp"
+            android:layout_margin="@dimen/screen_margin"
             android:background="@drawable/shimmer_rounded_corner"
-            app:layout_constraintBottom_toBottomOf="@+id/shimmerLikeArticle"
+            app:layout_constraintBottom_toBottomOf="@+id/shimmerArticleTime"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/shimmerMiniProfilePicture" />
-
+            app:layout_constraintTop_toBottomOf="@id/shimmerDividerArticle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
