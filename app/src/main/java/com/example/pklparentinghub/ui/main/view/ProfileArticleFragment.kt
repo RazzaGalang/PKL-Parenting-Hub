@@ -138,6 +138,17 @@ class ProfileArticleFragment : Fragment(), ProfileArticleAdapter.OnItemClickList
                                                     adapter.items = response?.body()?.data?.articles!!
                                                 }
                                             }
+                                            if (adapter.items.isEmpty()){
+                                                binding.ivEmptyState.isVisible = true
+                                                binding.tvEmptyState.isVisible = true
+                                                binding.shimmerRecycler.isVisible = false
+                                                binding.shimmerRecycler.isVisible = false
+                                            } else {
+                                                binding.ivEmptyState.isVisible = false
+                                                binding.tvEmptyState.isVisible = false
+                                                binding.shimmerRecycler.isVisible = true
+                                                binding.shimmerRecycler.isVisible = false
+                                            }
                                         }
                                         Status.LOADING -> {
                                         }

@@ -1,7 +1,7 @@
 package com.example.pklparentinghub.utils
 
 object Const {
-    const val CONST_BASE_URL = "https://d3c3-114-122-102-207.ap.ngrok.io"
+    const val CONST_BASE_URL = "https://parenting-lite-api.intern.paninti.com/"
 
     const val PREFIX = "api/"
 

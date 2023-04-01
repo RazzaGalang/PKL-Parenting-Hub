@@ -93,15 +93,6 @@ class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClick
                                         binding.apply {
                                         }
                                     }
-                                    if (adapter.items.isEmpty()){
-                                        binding.clFollowers.isVisible = true
-                                        binding.profileFollowersRecycler.isVisible = false
-                                        binding.shimmerRecycler.isVisible = false
-                                    } else {
-                                        binding.clFollowers.isVisible = false
-                                        binding.profileFollowersRecycler.isVisible = true
-                                        binding.shimmerRecycler.isVisible = false
-                                    }
                                     setupObserver()
                                 }
                                 Status.LOADING -> {
@@ -156,6 +147,17 @@ class ProfileFollowersFragment : Fragment(), ProfileFollowersAdapter.OnItemClick
                                            adapter.items = response?.body()?.data?.user!!
                                        }
                                    }
+                                    if (adapter.items.isEmpty()){
+                                        binding.ivEmptyState.isVisible = true
+                                        binding.tvEmptyState.isVisible = true
+                                        binding.profileFollowersRecycler.isVisible = false
+                                        binding.shimmerRecycler.isVisible = false
+                                    } else {
+                                        binding.ivEmptyState.isVisible = false
+                                        binding.tvEmptyState.isVisible = false
+                                        binding.profileFollowersRecycler.isVisible = true
+                                        binding.shimmerRecycler.isVisible = false
+                                    }
                                 }
                                 Status.LOADING -> {
                                 }

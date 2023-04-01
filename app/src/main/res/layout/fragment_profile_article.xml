@@ -21,4 +21,34 @@
         tools:listitem="@layout/item_shimmer_article_profile"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clArticle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_article_empty"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Belum Ada Artikel yang Dibuat"
+            android:layout_marginTop="@dimen/screen_margin"
+            app:layout_constraintTop_toBottomOf="@id/ivEmptyState"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Body4"
+            android:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

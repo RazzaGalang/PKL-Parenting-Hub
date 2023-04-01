@@ -46,10 +46,6 @@ class ApiHelper (private val apiService: ApiService) {
         latest = latest
     )
 
-    suspend fun requestArticle(request: ArticleRequest) = apiService.postArticle(request)
-
-    suspend fun postImage(filename: MultipartBody.Part) = apiService.postImage(filename)
-
     suspend fun getArticleDetail(token: String, articleId: Int) = apiService.getArticleDetail(token = token, articleId = articleId)
 
     suspend fun getUserFollower(token: String, userId: Int) = apiService.getUserFollower(token = token, userId = userId)
@@ -65,8 +61,6 @@ class ApiHelper (private val apiService: ApiService) {
     suspend fun requestArticle(token: String, request: ArticleRequest) = apiService.postArticle(token, request)
 
     suspend fun postImage(token: String, image: MultipartBody.Part) = apiService.postImage(token = token, image = image)
-
-    suspend fun getArticleDetail(token: String, articleId: Int) = apiService.getArticleDetail(token = token, articleId = articleId)
 
     suspend fun getArticleSearch(
         token: String,

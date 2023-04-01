@@ -149,11 +149,13 @@ class ProfileFollowingFragment : Fragment(), ProfileFollowingAdapter.OnItemClick
                                                     }
                                                 }
                                                 if (adapter.items.isEmpty()){
-                                                    binding.clFollowing.isVisible = true
+                                                    binding.ivEmptyState.isVisible = true
+                                                    binding.tvEmptyState.isVisible = true
                                                     binding.profileFollowingRecycler.isVisible = false
                                                     binding.shimmerRecycler.isVisible = false
                                                 } else {
-                                                    binding.clFollowing.isVisible = false
+                                                    binding.ivEmptyState.isVisible = false
+                                                    binding.tvEmptyState.isVisible = false
                                                     binding.profileFollowingRecycler.isVisible = true
                                                     binding.shimmerRecycler.isVisible = false
                                                 }
