@@ -28,9 +28,10 @@ object Const {
             const val USER_LIKE = PREFIX + "articles/{param}/like"
             const val ARTICLE_ALL = PREFIX + "articles"
             const val ARTICLE_DETAIL = PREFIX + "articles/{param}"
-            const val ARTICLE_BANNER = PREFIX + "articles/banner"
             const val ARTICLE_POST = PREFIX + "articles"
             const val IMAGE_UPLOAD = PREFIX + "articles/upload"
+            const val ARTICLE_DELETE = PREFIX + "articles/{param}"
+            const val ARTICLE_EDIT = PREFIX + "articles/{param}"
         }
     }
 }

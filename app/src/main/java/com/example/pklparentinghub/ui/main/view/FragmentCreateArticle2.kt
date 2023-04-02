@@ -19,9 +19,9 @@ import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.api.RetrofitBuilder
 import com.example.pklparentinghub.data.model.articleData.ArticleRequest
 import com.example.pklparentinghub.databinding.FragmentCreateArticle2Binding
-import com.example.pklparentinghub.ui.base.CreateArticleViewModelFactory
+import com.example.pklparentinghub.ui.base.ArticleCreateViewModelFactory
 import com.example.pklparentinghub.ui.base.ImageUploadViewModelFactory
-import com.example.pklparentinghub.ui.main.viewmodel.CreateArticleViewModel
+import com.example.pklparentinghub.ui.main.viewmodel.ArticleCreateViewModel
 import com.example.pklparentinghub.ui.main.viewmodel.ImageUploadViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
@@ -32,7 +32,7 @@ import java.io.File
 
 class FragmentCreateArticle2 : Fragment() {
 
-    private lateinit var viewModel : CreateArticleViewModel
+    private lateinit var viewModel : ArticleCreateViewModel
     private lateinit var imageViewModel : ImageUploadViewModel
 
     private var _binding: FragmentCreateArticle2Binding? = null
@@ -51,8 +51,8 @@ class FragmentCreateArticle2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpPath()
         setupViewModel()
+        setUpPath()
         btnContinue()
         onBackPressed()
         onBackClick()
@@ -85,8 +85,8 @@ class FragmentCreateArticle2 : Fragment() {
 
     private fun setupViewModel (){
         viewModel = ViewModelProvider(
-            this, CreateArticleViewModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
-        )[CreateArticleViewModel::class.java]
+            this, ArticleCreateViewModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
+        )[ArticleCreateViewModel::class.java]
 
         imageViewModel = ViewModelProvider(
             this, ImageUploadViewModelFactory(ApiHelper(RetrofitBuilder.getRetrofit()))
@@ -101,13 +101,11 @@ class FragmentCreateArticle2 : Fragment() {
                         it.let { item ->
                             filename = item.data?.body()?.data?.filename!!
                         }
-                        Toast.makeText(requireContext(), "Bismillah success", Toast.LENGTH_LONG).show()
                     }
                     Status.ERROR -> {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
                     Status.LOADING -> {
-                        Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -145,7 +143,7 @@ class FragmentCreateArticle2 : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        Toast.makeText(requireContext(), "Aamiin", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Artikel Berhasil di Upload", Toast.LENGTH_SHORT).show()
                         val intent = Intent(requireContext(), MainActivity::class.java)
                         startActivity(intent)
                         requireActivity().finish()
@@ -154,7 +152,6 @@ class FragmentCreateArticle2 : Fragment() {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
                     Status.LOADING -> {
-                        Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

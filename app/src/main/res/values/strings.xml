@@ -67,8 +67,8 @@
     <string name="error_text_confirm_password">* Konfirmasi Password tidak sesuai</string>
     <string name="error_text_null_title">* Judul Artikel Wajib Diisi</string>
     <string name="error_text_null_cover">* Foto Sampul Wajib Diunggah</string>
-    <string name="error_text_null_article">Artikel wajib diisi</string>
-    <string name="error_text_min_article">Artikel minimal berisi 400 karakter</string>
+    <string name="error_text_null_article">Konten Artikel wajib diisi</string>
+    <string name="error_text_min_article">Konten Artikel minimal berisi 400 karakter</string>
     <string name="error_text_max_size_image">* Size Gambar harus dibawah 2MB</string>
     <string name="error_text_image_type">* Tipe Gambar harus JPG/PNG</string>
     <string name="error_text_lost_connection">Koneksi Internet Tidak Terhubung!</string>
@@ -78,10 +78,11 @@
     <string name="article_add_title">Masukkan Judul Artikel</string>
     <string name="article_add_article">Tulis Artikelmu Disini..</string>
     <string name="article_title">Judul Artikel</string>
+    <string name="article_content">Konten Artikel</string>
     <string name="article_continue">Lanjut</string>
     <string name="article_upload">Unggah Artikel</string>
     <string name="article_another">Artikel Lainnya</string>
-    <string name="article_edit">Edit Artikel</string>
+    <string name="article_edit">Edit Konten Artikel</string>
     <string name="article_delete">Hapus Artikel</string>
     <string name="article_search">Cari Artikel</string>
     <string name="article_search_here">Cari di sini..</string>

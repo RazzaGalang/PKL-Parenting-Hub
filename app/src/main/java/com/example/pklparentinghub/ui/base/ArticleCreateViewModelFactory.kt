@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.pklparentinghub.data.api.ApiHelper
 import com.example.pklparentinghub.data.repository.ArticleRepository
-import com.example.pklparentinghub.ui.main.viewmodel.CreateArticleViewModel
+import com.example.pklparentinghub.ui.main.viewmodel.ArticleCreateViewModel
 
-class CreateArticleViewModelFactory (private val apiHelper: ApiHelper) : ViewModelProvider.Factory {
+class ArticleCreateViewModelFactory (private val apiHelper: ApiHelper) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CreateArticleViewModel::class.java)) {
-            return CreateArticleViewModel(ArticleRepository(apiHelper)) as T
+        if (modelClass.isAssignableFrom(ArticleCreateViewModel::class.java)) {
+            return ArticleCreateViewModel(ArticleRepository(apiHelper)) as T
         }
         throw IllegalArgumentException("Unknown class name")
     }
