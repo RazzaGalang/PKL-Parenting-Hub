@@ -155,9 +155,9 @@
             app:layout_constraintStart_toEndOf="@+id/mainProfileFollowing"
             app:layout_constraintTop_toBottomOf="@+id/mainProfileDescription" />
 
-        <com.google.android.material.divider.MaterialDivider
+        <View
             android:id="@+id/mainProfileDivider"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/screen_margin"
             app:layout_constraintStart_toStartOf="parent"
@@ -177,7 +177,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mainProfileViewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/zero_dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
