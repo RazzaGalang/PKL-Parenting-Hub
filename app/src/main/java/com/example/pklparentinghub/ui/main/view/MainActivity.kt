@@ -16,7 +16,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loadFragment(MainHomeFragment())
+        var fragment: String
+        fragment = intent.getStringExtra("fragment").toString()
+
+        if(fragment.isEmpty()){
+            loadFragment(MainHomeFragment())
+        } else if(fragment == "search"){
+            loadFragment(FragmentSearchArticle())
+        } else loadFragment(MainHomeFragment())
+
+
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {

@@ -18,30 +18,73 @@
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:navigationIcon="@drawable/ic_back">
+            android:background="@color/white">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_logo_m" />
-
-                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/ivBack"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/normal_margin"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:text="@string/app_name_parenting_hub"
-                    android:textAppearance="@style/TextAppearance.Body1"
-                    android:textColor="@color/primary50" />
-            </LinearLayout>
+                    android:layout_marginHorizontal="@dimen/small_margin"
+                    android:gravity="end"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_logo_m" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/normal_margin"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="@string/app_name_parenting_hub"
+                        android:textAppearance="@style/TextAppearance.Body1"
+                        android:textColor="@color/primary50" />
+                </LinearLayout>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/screen_margin"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_more"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/screen_margin"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -137,7 +180,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider"
-                tools:text="@string/example_article"/>
+                tools:text="@string/example_article" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider2"
@@ -175,11 +218,11 @@
                     android:id="@+id/itemLike"
                     android:layout_width="@dimen/zero_dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/normal_margin"
                     android:textAppearance="@style/TextAppearance.Body2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/itemIconLike"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="@dimen/normal_margin"
                     tools:text="@string/example_like" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -216,7 +259,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvAnotherArticle"
-                tools:listitem="@layout/item_article_profile"/>
+                tools:listitem="@layout/item_article_profile" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -226,9 +269,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero_dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -248,8 +291,8 @@
                 android:id="@+id/shimmerArticleTitleFirst"
                 android:layout_width="@dimen/zero_dp"
                 android:layout_height="@dimen/subtitle_3_line_height"
-                android:layout_marginVertical="@dimen/medium_margin"
                 android:layout_marginHorizontal="@dimen/screen_margin"
+                android:layout_marginVertical="@dimen/medium_margin"
                 android:background="@drawable/shimmer_rounded_side"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -291,8 +334,8 @@
                 android:layout_height="@dimen/body_2_line_height"
                 android:layout_margin="@dimen/screen_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticleTitleSecond"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticleTitleSecond" />
 
             <View
                 android:id="@+id/shimmerArticleDivider"
@@ -310,9 +353,9 @@
                 android:layout_height="@dimen/validation_line_height"
                 android:layout_margin="@dimen/screen_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticleDivider"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticleDivider" />
 
             <View
                 android:id="@+id/shimmerArticle2"
@@ -321,9 +364,9 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/small_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticle1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle1" />
 
             <View
                 android:id="@+id/shimmerArticle3"
@@ -332,9 +375,9 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/small_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticle2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle2" />
 
             <View
                 android:id="@+id/shimmerArticle4"
@@ -343,8 +386,8 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/small_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticle3"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle3" />
 
             <View
                 android:id="@+id/shimmerArticle5"
@@ -353,9 +396,9 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/normal_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticle4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle4" />
 
             <View
                 android:id="@+id/shimmerArticle6"
@@ -364,9 +407,9 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/small_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticle5"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle5" />
 
             <View
                 android:id="@+id/shimmerArticle7"
@@ -375,8 +418,8 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/small_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticle6"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle6" />
 
             <View
                 android:id="@+id/shimmerArticle8"
@@ -385,9 +428,9 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/normal_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticle7"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle7" />
 
             <View
                 android:id="@+id/shimmerArticle9"
@@ -396,9 +439,9 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/small_margin"
                 android:background="@drawable/shimmer_rounded_side"
-                app:layout_constraintTop_toBottomOf="@id/shimmerArticle8"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerArticle8" />
 
             <View
                 android:id="@+id/shimmerArticleDivider2"
@@ -406,8 +449,8 @@
                 android:layout_height="@dimen/view_height"
                 android:layout_margin="@dimen/screen_margin"
                 android:background="@drawable/shimmer_circle_shape"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/shimmerArticle9" />
 
             <View
@@ -418,7 +461,7 @@
                 android:layout_marginTop="@dimen/normal_margin"
                 android:background="@drawable/shimmer_rounded_side"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shimmerArticleDivider2"/>
+                app:layout_constraintTop_toBottomOf="@+id/shimmerArticleDivider2" />
 
             <View
                 android:id="@+id/shimmerArticleDivider3"
@@ -427,8 +470,8 @@
                 android:layout_marginHorizontal="@dimen/screen_margin"
                 android:layout_marginVertical="@dimen/normal_margin"
                 android:background="@drawable/shimmer_circle_shape"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/shimmerArticleLike" />
 
             <androidx.recyclerview.widget.RecyclerView

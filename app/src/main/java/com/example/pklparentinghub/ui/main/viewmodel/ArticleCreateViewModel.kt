@@ -11,7 +11,7 @@ import com.example.pklparentinghub.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class CreateArticleViewModel (private val articleRepository: ArticleRepository) : ViewModel() {
+class ArticleCreateViewModel (private val articleRepository: ArticleRepository) : ViewModel() {
     private val _articleResult: MutableLiveData<Resource<Response<ArticleResponse>>> = MutableLiveData()
     val articleResult: LiveData<Resource<Response<ArticleResponse>>> get() = _articleResult
 

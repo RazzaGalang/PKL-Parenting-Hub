@@ -63,4 +63,8 @@ class ApiHelper (private val apiService: ApiService) {
         token = token,
         search = search
     )
+
+    suspend fun deleteArticle(token: String, articleId: Int) = apiService.deleteArticle(token = token, articleId = articleId)
+
+    suspend fun editArticle(token: String, articleId: Int, request: ArticleRequest) = apiService.requestEditArticle(token = token, articleId = articleId, request = request)
 }

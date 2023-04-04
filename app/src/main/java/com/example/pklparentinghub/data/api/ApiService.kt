@@ -148,4 +148,21 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("search") search: String
     ) : ArticleResponse
+
+    @HTTP(
+        method = "DELETE",
+        path = Const.Network.Article.ARTICLE_DELETE,
+        hasBody = true
+    )
+    suspend fun deleteArticle(
+        @Header("Authorization") token: String,
+        @Path("param") articleId: Int
+    ): Response<ArticleResponse>
+
+    @PUT(Const.Network.Article.ARTICLE_EDIT)
+    suspend fun requestEditArticle(
+        @Header("Authorization") token: String,
+        @Path("param") articleId: Int,
+        @Body request: ArticleRequest
+    ): Response<ArticleResponse>
 }

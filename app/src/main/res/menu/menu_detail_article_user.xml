@@ -5,6 +5,10 @@
     <item
         android:id="@+id/editArticle"
         android:icon="@drawable/ic_more"
-        android:title="@string/article_edit"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/article_edit" />
+
+    <item
+        android:id="@+id/deleteArticle"
+        android:icon="@drawable/ic_more"
+        android:title="@string/article_delete" />
 </menu>

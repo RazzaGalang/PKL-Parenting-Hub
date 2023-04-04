@@ -35,4 +35,10 @@ class ArticleRepository(private val apiHelper: ApiHelper) {
 
     suspend fun postImage(token: String, image : MultipartBody.Part) =
         apiHelper.postImage(token = token, image = image)
+
+    suspend fun deleteArticle(token: String, articleId: Int) =
+        apiHelper.deleteArticle(token = token, articleId = articleId)
+
+    suspend fun editArticle(token: String, articleId: Int, request: ArticleRequest) = apiHelper.editArticle(token = token, articleId = articleId, request = request)
+
 }

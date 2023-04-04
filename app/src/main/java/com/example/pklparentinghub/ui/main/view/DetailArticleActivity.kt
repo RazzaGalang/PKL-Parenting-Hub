@@ -1,12 +1,9 @@
 package com.example.pklparentinghub.ui.main.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,15 +21,17 @@ import com.example.pklparentinghub.ui.base.ArticleDetailViewModelFactory
 import com.example.pklparentinghub.ui.base.LikeModelFactory
 import com.example.pklparentinghub.ui.main.adapter.ArticleSearchAdapter
 import com.example.pklparentinghub.ui.main.adapter.ShimmerArticleHomeAdapter
+import com.example.pklparentinghub.ui.main.condition.WarningDeleteArticle
 import com.example.pklparentinghub.ui.main.viewmodel.ArticleAllViewModel
 import com.example.pklparentinghub.ui.main.viewmodel.ArticleDetailViewModel
 import com.example.pklparentinghub.ui.main.viewmodel.LikeViewModel
 import com.example.pklparentinghub.utils.AccessManager
 import com.example.pklparentinghub.utils.Status
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.imageview.ShapeableImageView
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+
 
 class DetailArticleActivity : AppCompatActivity(), ArticleSearchAdapter.OnItemClickListener {
 
@@ -47,7 +46,9 @@ class DetailArticleActivity : AppCompatActivity(), ArticleSearchAdapter.OnItemCl
     lateinit var iconLike: ImageView
     lateinit var rvArticle: RecyclerView
     lateinit var rvArticleLoading: RecyclerView
-    lateinit var toolbar: MaterialToolbar
+    lateinit var ivBack: ShapeableImageView
+    lateinit var ivMore: ShapeableImageView
+    lateinit var ivSearch: ShapeableImageView
 
     private lateinit var viewModel: ArticleDetailViewModel
     private lateinit var articleViewModel: ArticleAllViewModel
@@ -70,8 +71,10 @@ class DetailArticleActivity : AppCompatActivity(), ArticleSearchAdapter.OnItemCl
         iconLike = findViewById(R.id.itemIconLike)
         rvArticle = findViewById(R.id.rvArticleAnother)
         rvArticleLoading = findViewById(R.id.rvArticleAnotherLoading)
-        toolbar = findViewById(R.id.topAppBar)
-        articleId = intent.getIntExtra("id", 1)
+        ivMore = findViewById(R.id.ivMore)
+        ivBack = findViewById(R.id.ivBack)
+        ivSearch = findViewById(R.id.ivSearch)
+        articleId = intent.getIntExtra("id", 0)
 
         initListView()
         setupViewModel()
@@ -129,55 +132,87 @@ class DetailArticleActivity : AppCompatActivity(), ArticleSearchAdapter.OnItemCl
             AccessManager(this@DetailArticleActivity)
                 .access
                 .collect { token ->
-                    viewModel.getArticleDetail(token, articleId)
-                        .observe(this@DetailArticleActivity, Observer {
-                            it?.let { resource ->
-                                showLoading(resource.status == Status.LOADING)
-                                when (resource.status) {
-                                    Status.SUCCESS -> {
-                                        resource.data?.data?.let { item ->
+                    lifecycleScope.launchWhenCreated {
+                        AccessManager(this@DetailArticleActivity)
+                            .accessUserId
+                            .collect { userId ->
+                                viewModel.getArticleDetail(token, articleId)
+                                    .observe(this@DetailArticleActivity, Observer {
+                                        it?.let { resource ->
+                                            showLoading(resource.status == Status.LOADING)
+                                            when (resource.status) {
+                                                Status.SUCCESS -> {
+                                                    resource.data?.data?.let { item ->
 
-                                            val isLiked = item.isLiked
-                                            if (isLiked) iconLike.setImageResource(R.drawable.ic_like_dark)
-                                            else iconLike.setImageResource(R.drawable.ic_like)
+                                                        val isLiked = item.isLiked
+                                                        if (isLiked) iconLike.setImageResource(R.drawable.ic_like_dark)
+                                                        else iconLike.setImageResource(R.drawable.ic_like)
 
-                                            val valuesCover = item.thumbnail
-                                            val valuesProfile = item.author.profilePicture
-                                            if (valuesProfile == "https://parenting-lite-api.intern.paninti.com/storage/images/default-profile.png") {
-                                                profile.setImageResource(R.drawable.img_profile_default_picture)
-                                            } else {
-                                                Glide.with(profile)
-                                                    .load(valuesProfile)
-                                                    .into(profile)
+                                                        val valuesCover = item.thumbnail
+                                                        val valuesProfile =
+                                                            item.author.profilePicture
+                                                        if (valuesProfile == "https://parenting-lite-api.intern.paninti.com/storage/images/default-profile.png") {
+                                                            profile.setImageResource(R.drawable.img_profile_default_picture)
+                                                        } else {
+                                                            Glide.with(profile)
+                                                                .load(valuesProfile)
+                                                                .into(profile)
+                                                        }
+                                                        Glide.with(cover)
+                                                            .load(valuesCover)
+                                                            .into(cover)
+                                                        val date = item.createdAt.substring(0, 10)
+                                                        val df: DateFormat =
+                                                            SimpleDateFormat("yyyy-MM-dd")
+                                                        val dateFormat: DateFormat =
+                                                            SimpleDateFormat("dd MMMM yyyy")
+                                                        val newDate: String =
+                                                            dateFormat.format(df.parse(date))
+                                                        val valuesLike = item.like.toString()
+                                                        time.text = newDate
+                                                        title.text = item.title
+                                                        fullName.text = item.author.fullName
+                                                        like.text = "$valuesLike Suka"
+                                                        article.text = item.content
+
+                                                        if (item.author.id == userId) {
+                                                            ivSearch.isVisible = false
+                                                            ivMore.isVisible = true
+                                                            ivMore.setOnClickListener {
+                                                                val popupMenu = PopupMenu(this@DetailArticleActivity, ivMore)
+                                                                popupMenu.menuInflater.inflate(R.menu.menu_detail_article_user, popupMenu.menu)
+                                                                popupMenu.setOnMenuItemClickListener { menuItem ->
+                                                                    when (menuItem.itemId) {
+                                                                        R.id.editArticle -> {
+                                                                            moveToEdit()
+                                                                            true
+                                                                        }
+                                                                        R.id.deleteArticle -> {
+                                                                            val dialog = WarningDeleteArticle(articleId)
+                                                                            dialog.show(supportFragmentManager, "deleteDialog")
+                                                                            true
+                                                                        }
+                                                                        else -> false
+                                                                    }
+                                                                }
+                                                                popupMenu.show()
+                                                            }
+                                                        } else {
+                                                            ivSearch.isVisible = true
+                                                            ivMore.isVisible = false
+                                                            ivSearch.setOnClickListener { moveToSearch() }
+                                                        }
+                                                    }
+                                                }
+                                                Status.ERROR -> {
+                                                    Toast.makeText(this@DetailArticleActivity, it.message, Toast.LENGTH_LONG).show()
+                                                }
+                                                Status.LOADING -> {}
                                             }
-                                            Glide.with(cover)
-                                                .load(valuesCover)
-                                                .into(cover)
-                                            val date = item.createdAt.substring(0, 10)
-                                            val df: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-                                            val dateFormat: DateFormat =
-                                                SimpleDateFormat("dd MMMM yyyy")
-                                            val newDate: String = dateFormat.format(df.parse(date))
-                                            val valuesLike = item.like.toString()
-                                            time.text = newDate
-                                            title.text = item.title
-                                            fullName.text = item.author.fullName
-                                            like.text = "$valuesLike Suka"
-                                            article.text = item.content
-
                                         }
-                                    }
-                                    Status.ERROR -> {
-                                        Toast.makeText(
-                                            this@DetailArticleActivity,
-                                            it.message,
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                    }
-                                    Status.LOADING -> {}
-                                }
+                                    })
                             }
-                        })
+                    }
                 }
         }
     }
@@ -234,8 +269,20 @@ class DetailArticleActivity : AppCompatActivity(), ArticleSearchAdapter.OnItemCl
         }
     }
 
+    private fun moveToSearch() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("fragment", "search")
+        startActivity(intent)
+    }
+
+    private fun moveToEdit(){
+        val intent = Intent(this, EditArticleActivity::class.java)
+        intent.putExtra("id", articleId)
+        startActivity(intent)
+    }
+
     private fun onBackClick() {
-        toolbar.setNavigationOnClickListener {
+        ivBack.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
